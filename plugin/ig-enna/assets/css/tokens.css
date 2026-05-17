@@ -1,0 +1,222 @@
+/* Informagiovani Enna — design tokens */
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,18..30,400..600;1,18..30,400&display=swap');
+
+:root {
+  /* ---------- Color · Brand ---------- */
+  --ig-blue-900: #061a32;
+  --ig-blue-800: #0e2e58;
+  --ig-blue-700: #143f7a;   /* Primary — istituzionale */
+  --ig-blue-600: #1f5aa8;
+  --ig-blue-500: #2c79cf;
+  --ig-blue-300: #93b8e5;
+  --ig-blue-100: #e3edfa;
+  --ig-blue-50:  #f2f7fd;
+
+  --ig-teal-800: #0b5e54;
+  --ig-teal-700: #0f8077;   /* Opportunità · crescita */
+  --ig-teal-600: #14a195;
+  --ig-teal-100: #d4f1ec;
+  --ig-teal-50:  #ecf8f5;
+
+  --ig-amber-800: #8a4f0a;
+  --ig-amber-700: #b2700f;
+  --ig-amber-600: #d28a1c;  /* Scadenze, CTA secondarie */
+  --ig-amber-500: #e8a93a;
+  --ig-amber-100: #fbeac6;
+  --ig-amber-50:  #fdf6e6;
+
+  --ig-red-700:  #a32a20;
+  --ig-red-600:  #c2362b;
+  --ig-red-100:  #f8ddd9;
+  --ig-red-50:   #fdf1ee;
+
+  --ig-green-700: #186e44;
+  --ig-green-600: #1f8a55;
+  --ig-green-100: #d4eddd;
+  --ig-green-50:  #ecf7f0;
+
+  --ig-violet-700: #5638a8;
+  --ig-violet-600: #6e4dc6;
+  --ig-violet-100: #e4dcf7;
+
+  --ig-pink-700:   #a13564;
+  --ig-pink-100:   #f6dde9;
+
+  /* ---------- Color · Neutrali ---------- */
+  --ig-ink-900: #0c1a2c;   /* Testo primario */
+  --ig-ink-800: #16243a;
+  --ig-ink-700: #2c3a4f;
+  --ig-ink-600: #3d4a5e;
+  --ig-ink-500: #5b6779;   /* Testo secondario */
+  --ig-ink-400: #8a94a4;
+  --ig-ink-300: #b7bfcb;
+  --ig-ink-200: #d6dce5;   /* Bordi */
+  --ig-ink-150: #e3e8ee;
+  --ig-ink-100: #eef1f5;   /* Bordi soft */
+  --ig-ink-75:  #f3f5f8;
+  --ig-ink-50:  #f7f8fa;   /* Background app */
+  --ig-paper:   #ffffff;
+
+  /* ---------- Semantic ---------- */
+  --ig-bg:        var(--ig-ink-50);
+  --ig-surface:   var(--ig-paper);
+  --ig-surface-2: var(--ig-ink-75);
+  --ig-border:    var(--ig-ink-200);
+  --ig-border-soft: var(--ig-ink-100);
+  --ig-text:      var(--ig-ink-900);
+  --ig-text-muted:var(--ig-ink-500);
+  --ig-text-soft: var(--ig-ink-400);
+  --ig-primary:   var(--ig-blue-700);
+  --ig-primary-hover: var(--ig-blue-800);
+  --ig-accent:    var(--ig-teal-700);
+
+  /* ---------- Typography ---------- */
+  --ig-font:      'Manrope', -apple-system, 'Segoe UI', system-ui, sans-serif;
+  --ig-font-display: 'Manrope', -apple-system, 'Segoe UI', system-ui, sans-serif;
+  --ig-font-serif: 'Newsreader', Georgia, serif;
+  --ig-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* ---------- Radius ---------- */
+  --ig-radius-xs: 4px;
+  --ig-radius-sm: 6px;
+  --ig-radius-md: 10px;
+  --ig-radius-lg: 14px;
+  --ig-radius-xl: 20px;
+
+  /* ---------- Shadows ---------- */
+  --ig-shadow-xs: 0 1px 2px rgba(12, 26, 44, 0.06);
+  --ig-shadow-sm: 0 1px 3px rgba(12, 26, 44, 0.06), 0 1px 2px rgba(12, 26, 44, 0.04);
+  --ig-shadow-md: 0 4px 12px rgba(12, 26, 44, 0.08), 0 2px 4px rgba(12, 26, 44, 0.04);
+  --ig-shadow-lg: 0 12px 32px rgba(12, 26, 44, 0.10), 0 4px 8px rgba(12, 26, 44, 0.04);
+  --ig-ring: 0 0 0 3px rgba(31, 90, 168, 0.25);
+}
+
+/* ============================================================ */
+/*  Base                                                          */
+/* ============================================================ */
+
+.ig {
+  font-family: var(--ig-font);
+  color: var(--ig-text);
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+.ig *, .ig *::before, .ig *::after { box-sizing: border-box; }
+.ig button { font-family: inherit; cursor: pointer; }
+.ig a { color: var(--ig-primary); text-decoration: none; }
+.ig h1, .ig h2, .ig h3, .ig h4 {
+  font-family: var(--ig-font-display);
+  color: var(--ig-ink-900);
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-wrap: balance;
+}
+.ig p { margin: 0; text-wrap: pretty; }
+.ig svg { display: block; }
+
+/* ============================================================ */
+/*  Buttons                                                       */
+/* ============================================================ */
+.ig-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 44px; padding: 0 18px;
+  border-radius: var(--ig-radius-sm);
+  border: 1px solid transparent;
+  font-size: 15px; font-weight: 600; letter-spacing: -0.005em;
+  white-space: nowrap;
+  transition: background .15s, border-color .15s, box-shadow .15s, color .15s;
+}
+.ig-btn--primary { background: var(--ig-primary); color: white; }
+.ig-btn--primary:hover { background: var(--ig-primary-hover); }
+.ig-btn--secondary { background: var(--ig-paper); color: var(--ig-ink-900); border-color: var(--ig-border); }
+.ig-btn--secondary:hover { background: var(--ig-ink-75); border-color: var(--ig-ink-300); }
+.ig-btn--ghost { background: transparent; color: var(--ig-ink-700); }
+.ig-btn--ghost:hover { background: var(--ig-ink-100); }
+.ig-btn--accent { background: var(--ig-teal-700); color: white; }
+.ig-btn--accent:hover { background: var(--ig-teal-800); }
+.ig-btn--danger { background: var(--ig-red-600); color: white; }
+.ig-btn--sm { height: 34px; padding: 0 12px; font-size: 13px; border-radius: var(--ig-radius-xs); }
+.ig-btn--lg { height: 52px; padding: 0 22px; font-size: 16px; border-radius: var(--ig-radius-md); }
+.ig-btn--icon { width: 38px; height: 38px; padding: 0; justify-content: center; }
+
+/* ============================================================ */
+/*  Badges                                                        */
+/* ============================================================ */
+.ig-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 24px; padding: 0 9px;
+  border-radius: 999px;
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.ig-badge--lavoro      { background: var(--ig-blue-100);   color: var(--ig-blue-800); }
+.ig-badge--formazione  { background: var(--ig-violet-100); color: var(--ig-violet-700); }
+.ig-badge--impresa     { background: var(--ig-teal-100);   color: var(--ig-teal-800); }
+.ig-badge--estero      { background: var(--ig-amber-100);  color: var(--ig-amber-800); }
+.ig-badge--diritti     { background: var(--ig-pink-100);   color: var(--ig-pink-700); }
+.ig-badge--cultura     { background: #ffe7d6;              color: #93421b; }
+.ig-badge--concorso    { background: #d8e8ff;              color: #1b3a8a; }
+.ig-badge--sport       { background: var(--ig-green-100);  color: var(--ig-green-700); }
+.ig-badge--civile      { background: #f3e3d6;              color: #6e3d1a; }
+
+.ig-badge--scad-urgent { background: var(--ig-red-100);    color: var(--ig-red-700); }
+.ig-badge--scad-soon   { background: var(--ig-amber-100);  color: var(--ig-amber-800); }
+.ig-badge--scad-ok     { background: var(--ig-ink-100);    color: var(--ig-ink-700); }
+
+.ig-badge--src-ufficiale { background: var(--ig-green-100); color: var(--ig-green-700); }
+.ig-badge--src-partner   { background: var(--ig-blue-100);  color: var(--ig-blue-800); }
+.ig-badge--src-verificata{ background: var(--ig-amber-100); color: var(--ig-amber-800); }
+
+.ig-badge--state-draft   { background: var(--ig-ink-100);  color: var(--ig-ink-700); }
+.ig-badge--state-review  { background: var(--ig-amber-100); color: var(--ig-amber-800); }
+.ig-badge--state-valid   { background: var(--ig-blue-100); color: var(--ig-blue-800); }
+.ig-badge--state-pub     { background: var(--ig-green-100); color: var(--ig-green-700); }
+.ig-badge--state-exp     { background: var(--ig-red-100);   color: var(--ig-red-700); }
+.ig-badge--state-archive { background: #dbdfe6;             color: #3c4555; }
+.ig-badge--state-update  { background: var(--ig-violet-100); color: var(--ig-violet-700); }
+
+/* ============================================================ */
+/*  Inputs                                                        */
+/* ============================================================ */
+.ig-input, .ig-select, .ig-textarea {
+  display: block; width: 100%;
+  height: 44px; padding: 0 14px;
+  background: var(--ig-paper);
+  border: 1px solid var(--ig-border);
+  border-radius: var(--ig-radius-sm);
+  font-family: inherit; font-size: 15px;
+  color: var(--ig-ink-900);
+  transition: border-color .15s, box-shadow .15s;
+}
+.ig-input::placeholder, .ig-textarea::placeholder { color: var(--ig-ink-400); }
+.ig-input:focus, .ig-select:focus, .ig-textarea:focus {
+  outline: none;
+  border-color: var(--ig-primary);
+  box-shadow: var(--ig-ring);
+}
+.ig-textarea { height: auto; min-height: 100px; padding: 12px 14px; resize: vertical; line-height: 1.5; }
+.ig-label {
+  display: block;
+  font-size: 13px; font-weight: 600;
+  color: var(--ig-ink-700);
+  margin-bottom: 6px;
+}
+
+/* ============================================================ */
+/*  Card                                                          */
+/* ============================================================ */
+.ig-card {
+  background: var(--ig-paper);
+  border: 1px solid var(--ig-border-soft);
+  border-radius: var(--ig-radius-md);
+  box-shadow: var(--ig-shadow-xs);
+}
+
+/* Utilities */
+.ig-mono { font-family: var(--ig-font-mono); font-feature-settings: "tnum"; }
+.ig-num  { font-variant-numeric: tabular-nums; }
+.ig-serif { font-family: var(--ig-font-serif); font-weight: 400; letter-spacing: -0.015em; }

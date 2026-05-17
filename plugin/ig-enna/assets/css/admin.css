@@ -1,0 +1,171 @@
+/* Informagiovani Enna — admin.css (FASE 1 base) */
+
+.ig-enna-admin h1 {
+	font-weight: 700;
+	letter-spacing: -.01em;
+}
+.ig-enna-admin .ig-enna-lead {
+	color: var(--ig-ink-600, #3d4a5e);
+	font-size: 14px;
+	max-width: 720px;
+}
+.ig-enna-admin .ig-enna-notice {
+	background: var(--ig-amber-50, #fdf6e6);
+	border: 1px solid var(--ig-amber-100, #fbeac6);
+	color: var(--ig-amber-800, #8a4f0a);
+	padding: 14px 16px;
+	border-radius: var(--ig-radius-md, 10px);
+	margin: 16px 0;
+	max-width: 720px;
+}
+
+.ig-enna-admin .ig-enna-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+	gap: 14px;
+	margin: 18px 0 8px;
+	max-width: 980px;
+}
+.ig-enna-admin .ig-enna-card {
+	background: var(--ig-surface, #fff);
+	border: 1px solid var(--ig-border-soft, #eef1f5);
+	border-radius: var(--ig-radius-md, 10px);
+	padding: 14px 16px;
+	box-shadow: 0 1px 2px rgba(12,26,44,.05);
+}
+.ig-enna-admin .ig-enna-card-label {
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: .02em;
+	color: var(--ig-ink-500, #5b6779);
+	text-transform: uppercase;
+}
+.ig-enna-admin .ig-enna-card-num {
+	font-size: 28px;
+	font-weight: 700;
+	margin-top: 4px;
+	color: var(--ig-blue-700, #143f7a);
+}
+.ig-enna-admin .ig-enna-list { padding-left: 18px; }
+.ig-enna-admin .ig-enna-list li { margin-bottom: 4px; }
+
+/* ==============================
+ *  Metabox editor (FASE 2)
+ * ============================== */
+.ig-enna-meta-grid p { margin: 0 0 14px; }
+.ig-enna-meta-grid label { display: block; margin-bottom: 4px; font-size: 13px; color: var(--ig-ink-700, #2c3a4f); }
+.ig-enna-meta-grid .description { display: block; margin-top: 4px; color: var(--ig-ink-500, #5b6779); font-size: 12px; }
+.ig-enna-meta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.ig-enna-meta-row > p { margin: 0; }
+.ig-enna-input { font-family: var(--ig-font, inherit); }
+
+/* ==============================
+ *  Badge nelle liste admin
+ * ============================== */
+.ig-enna-badge {
+	display: inline-flex; align-items: center;
+	height: 22px; padding: 0 9px;
+	border-radius: 999px;
+	font-size: 12px; font-weight: 600;
+	white-space: nowrap;
+	border: 1px solid transparent;
+	margin-right: 4px;
+}
+.ig-enna-code {
+	font-family: var(--ig-font-mono, ui-monospace, monospace);
+	font-size: 11px;
+	background: var(--ig-ink-100, #eef1f5);
+	padding: 2px 6px;
+	border-radius: 4px;
+	color: var(--ig-ink-700, #2c3a4f);
+}
+.ig-enna-num { font-variant-numeric: tabular-nums; font-weight: 600; }
+
+/* Stato workflow scheda */
+.ig-enna-badge--state-draft   { background: var(--ig-ink-100,#eef1f5);    color: var(--ig-ink-700,#2c3a4f); }
+.ig-enna-badge--state-review  { background: var(--ig-amber-100,#fbeac6); color: var(--ig-amber-800,#8a4f0a); }
+.ig-enna-badge--state-valid   { background: var(--ig-blue-100,#e3edfa);  color: var(--ig-blue-800,#0e2e58); }
+.ig-enna-badge--state-pub     { background: var(--ig-green-100,#d4eddd); color: var(--ig-green-700,#186e44); }
+.ig-enna-badge--state-update  { background: var(--ig-violet-100,#e4dcf7);color: var(--ig-violet-700,#5638a8); }
+.ig-enna-badge--state-exp     { background: var(--ig-red-100,#f8ddd9);   color: var(--ig-red-700,#a32a20); }
+.ig-enna-badge--state-archive { background: #dbdfe6;                     color: #3c4555; }
+
+/* Aree (allineate al design system del frontend) */
+.ig-enna-badge--area-lavoro     { background: var(--ig-blue-100,#e3edfa);   color: var(--ig-blue-800,#0e2e58); }
+.ig-enna-badge--area-formazione { background: var(--ig-violet-100,#e4dcf7);color: var(--ig-violet-700,#5638a8); }
+.ig-enna-badge--area-impresa    { background: var(--ig-teal-100,#d4f1ec);  color: var(--ig-teal-800,#0b5e54); }
+.ig-enna-badge--area-estero     { background: var(--ig-amber-100,#fbeac6); color: var(--ig-amber-800,#8a4f0a); }
+.ig-enna-badge--area-diritti    { background: var(--ig-pink-100,#f6dde9); color: var(--ig-pink-700,#a13564); }
+.ig-enna-badge--area-cultura    { background: #ffe7d6;                    color: #93421b; }
+.ig-enna-badge--area-concorso   { background: #d8e8ff;                    color: #1b3a8a; }
+.ig-enna-badge--area-civile     { background: var(--ig-green-100,#d4eddd);color: var(--ig-green-700,#186e44); }
+
+/* Urgenza scadenza */
+.ig-enna-badge--urg-urgent { background: var(--ig-red-100,#f8ddd9);   color: var(--ig-red-700,#a32a20); }
+.ig-enna-badge--urg-soon   { background: var(--ig-amber-100,#fbeac6); color: var(--ig-amber-800,#8a4f0a); }
+.ig-enna-badge--urg-ok     { background: var(--ig-ink-100,#eef1f5);   color: var(--ig-ink-700,#2c3a4f); }
+.ig-enna-badge--urg-exp    { background: #dbdfe6;                    color: #3c4555; }
+
+/* Fonti */
+.ig-enna-badge--src-ufficiale  { background: var(--ig-green-100,#d4eddd); color: var(--ig-green-700,#186e44); }
+.ig-enna-badge--src-partner    { background: var(--ig-blue-100,#e3edfa);  color: var(--ig-blue-800,#0e2e58); }
+.ig-enna-badge--src-verificata { background: var(--ig-amber-100,#fbeac6); color: var(--ig-amber-800,#8a4f0a); }
+
+/* Modalità evento */
+.ig-enna-badge--mode-presenza { background: var(--ig-blue-100,#e3edfa);  color: var(--ig-blue-800,#0e2e58); }
+.ig-enna-badge--mode-online   { background: var(--ig-teal-100,#d4f1ec);  color: var(--ig-teal-800,#0b5e54); }
+.ig-enna-badge--mode-misto    { background: var(--ig-violet-100,#e4dcf7);color: var(--ig-violet-700,#5638a8); }
+
+/* Stato evento */
+.ig-enna-badge--evstate-open      { background: var(--ig-green-100,#d4eddd); color: var(--ig-green-700,#186e44); }
+.ig-enna-badge--evstate-full      { background: var(--ig-amber-100,#fbeac6); color: var(--ig-amber-800,#8a4f0a); }
+.ig-enna-badge--evstate-closed    { background: var(--ig-ink-100,#eef1f5);   color: var(--ig-ink-700,#2c3a4f); }
+.ig-enna-badge--evstate-cancelled { background: var(--ig-red-100,#f8ddd9);   color: var(--ig-red-700,#a32a20); }
+.ig-enna-badge--evstate-done      { background: #dbdfe6;                    color: #3c4555; }
+
+/* Ticket / priorità / appuntamenti — admin */
+.ig-enna-badge--tkstate-new      { background: var(--ig-blue-100,#e3edfa);   color: var(--ig-blue-800,#0e2e58); }
+.ig-enna-badge--tkstate-assigned { background: var(--ig-violet-100,#e4dcf7);color: var(--ig-violet-700,#5638a8); }
+.ig-enna-badge--tkstate-work     { background: var(--ig-amber-100,#fbeac6); color: var(--ig-amber-800,#8a4f0a); }
+.ig-enna-badge--tkstate-wait     { background: #f3e3d6;                     color: #6e3d1a; }
+.ig-enna-badge--tkstate-done     { background: var(--ig-green-100,#d4eddd); color: var(--ig-green-700,#186e44); }
+.ig-enna-badge--tkstate-closed   { background: var(--ig-ink-100,#eef1f5);   color: var(--ig-ink-700,#2c3a4f); }
+
+.ig-enna-badge--prio-bassa { background: var(--ig-ink-100,#eef1f5);  color: var(--ig-ink-700,#2c3a4f); }
+.ig-enna-badge--prio-media { background: var(--ig-blue-100,#e3edfa); color: var(--ig-blue-800,#0e2e58); }
+.ig-enna-badge--prio-alta  { background: var(--ig-red-100,#f8ddd9);  color: var(--ig-red-700,#a32a20); }
+
+.ig-enna-badge--apstate-requested { background: var(--ig-blue-100,#e3edfa);   color: var(--ig-blue-800,#0e2e58); }
+.ig-enna-badge--apstate-confirmed { background: var(--ig-green-100,#d4eddd); color: var(--ig-green-700,#186e44); }
+.ig-enna-badge--apstate-cancelled { background: var(--ig-red-100,#f8ddd9);   color: var(--ig-red-700,#a32a20); }
+.ig-enna-badge--apstate-done      { background: var(--ig-ink-100,#eef1f5);   color: var(--ig-ink-700,#2c3a4f); }
+.ig-enna-badge--apstate-no_show   { background: #dbdfe6;                     color: #3c4555; }
+
+/* Tipo partner (admin) */
+.ig-enna-badge--ptype-universita    { background: var(--ig-violet-100,#e4dcf7); color: var(--ig-violet-700,#5638a8); }
+.ig-enna-badge--ptype-ente_pubblico { background: var(--ig-blue-100,#e3edfa);   color: var(--ig-blue-800,#0e2e58); }
+.ig-enna-badge--ptype-camera_comm   { background: var(--ig-teal-100,#d4f1ec);   color: var(--ig-teal-800,#0b5e54); }
+.ig-enna-badge--ptype-azienda       { background: var(--ig-amber-100,#fbeac6);  color: var(--ig-amber-800,#8a4f0a); }
+.ig-enna-badge--ptype-ong           { background: var(--ig-pink-100,#f6dde9);  color: var(--ig-pink-700,#a13564); }
+.ig-enna-badge--ptype-fondazione    { background: var(--ig-green-100,#d4eddd); color: var(--ig-green-700,#186e44); }
+.ig-enna-badge--ptype-altro         { background: var(--ig-ink-100,#eef1f5);   color: var(--ig-ink-700,#2c3a4f); }
+
+/* Tipo percorso (admin) */
+.ig-enna-badge--ptipo-business_plan { background: var(--ig-teal-100,#d4f1ec);   color: var(--ig-teal-800,#0b5e54); }
+.ig-enna-badge--ptipo-microcredito  { background: var(--ig-amber-100,#fbeac6);  color: var(--ig-amber-800,#8a4f0a); }
+.ig-enna-badge--ptipo-resto_al_sud  { background: var(--ig-blue-100,#e3edfa);   color: var(--ig-blue-800,#0e2e58); }
+.ig-enna-badge--ptipo-startup_giov  { background: var(--ig-violet-100,#e4dcf7); color: var(--ig-violet-700,#5638a8); }
+.ig-enna-badge--ptipo-orientamento  { background: var(--ig-ink-100,#eef1f5);   color: var(--ig-ink-700,#2c3a4f); }
+
+/* Detail layout */
+.ig-enna-ticket-detail { display: grid; grid-template-columns: 1fr 320px; gap: 20px; margin-top: 18px; }
+.ig-enna-card-admin { background: #fff; border: 1px solid var(--ig-border-soft,#eef1f5); border-radius: 10px; padding: 18px 20px; box-shadow: 0 1px 2px rgba(12,26,44,.05); }
+.ig-enna-card-admin p { margin: 0 0 12px; }
+.ig-enna-card-admin label { font-size: 13px; }
+.ig-enna-ticket-detail__badges { display: flex; flex-wrap: wrap; gap: 6px; }
+.ig-enna-prose { font-size: 15px; line-height: 1.6; color: var(--ig-ink-700,#2c3a4f); }
+.ig-enna-prose p { margin: 0 0 12px; }
+
+@media (max-width: 980px) {
+	.ig-enna-ticket-detail { grid-template-columns: 1fr; }
+}
