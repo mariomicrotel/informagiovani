@@ -1,5 +1,10 @@
 # Informagiovani Enna Manager
 
+[![PHP lint](https://github.com/mariomicrotel/informagiovani/actions/workflows/php-lint.yml/badge.svg)](https://github.com/mariomicrotel/informagiovani/actions/workflows/php-lint.yml)
+![PHP](https://img.shields.io/badge/PHP-8.0%2B-777BB4?logo=php&logoColor=white)
+![WordPress](https://img.shields.io/badge/WordPress-6.x-21759B?logo=wordpress&logoColor=white)
+![License](https://img.shields.io/badge/license-GPL--2.0--or--later-blue)
+
 Plugin **WordPress custom** in PHP 8.x per la gestione completa dell'Informagiovani del Comune di Enna: schede informative, eventi, ticket, appuntamenti, colloqui, partner, percorsi impresa, area personale utenti, newsletter, report e audit log.
 
 > Implementato a partire dall'handoff visivo di [Claude Design](https://claude.ai/design) e seguendo i requisiti del file [`CLAUDE.md`](./CLAUDE.md): plugin installabile, **non** un tema, **non** una React app, **non** mockup statici.
