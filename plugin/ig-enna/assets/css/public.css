@@ -495,3 +495,336 @@
 .ig-enna-badge--ptipo-resto_al_sud  { background: var(--ig-blue-100, #e3edfa);   color: var(--ig-blue-800, #0e2e58); }
 .ig-enna-badge--ptipo-startup_giov  { background: var(--ig-violet-100, #e4dcf7); color: var(--ig-violet-700, #5638a8); }
 .ig-enna-badge--ptipo-orientamento  { background: var(--ig-ink-100, #eef1f5);   color: var(--ig-ink-700, #2c3a4f); }
+
+/* =====================================
+ *  HOMEPAGE
+ * ===================================== */
+.ig-enna-home { max-width: 1280px; padding: 0 16px 48px; }
+
+/* Eyebrow + section heads */
+.ig-enna-eyebrow {
+	display: inline-block;
+	font-size: 12px; font-weight: 700;
+	letter-spacing: .14em; text-transform: uppercase;
+	color: var(--ig-teal-700, #0f8077);
+	margin-bottom: 10px;
+}
+.ig-enna-eyebrow--light { color: rgba(255,255,255,.78); }
+.ig-enna-section { padding: 60px 0 0; }
+.ig-enna-section__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-bottom: 28px; flex-wrap: wrap; }
+.ig-enna-section__head h2 { font-size: 32px; font-weight: 700; letter-spacing: -.02em; margin: 0; }
+.ig-enna-section__link { font-size: 14px; font-weight: 600; text-decoration: none; }
+
+/* Hero */
+.ig-enna-hero {
+	position: relative; overflow: hidden;
+	color: #fff;
+	background: linear-gradient(135deg, var(--ig-blue-700,#143f7a) 0%, var(--ig-blue-800,#0e2e58) 70%, #08213f 100%);
+	border-radius: var(--ig-radius-lg, 14px);
+	margin-top: 24px;
+}
+.ig-enna-hero__bg { position: absolute; inset: 0; pointer-events: none; }
+.ig-enna-hero__rings { position: absolute; top: -160px; right: -120px; width: 600px; opacity: .08; }
+.ig-enna-hero__glow {
+	position: absolute; bottom: -120px; left: -80px; width: 320px; height: 320px;
+	border-radius: 50%;
+	background: radial-gradient(circle, rgba(232,169,58,.18) 0%, transparent 65%);
+}
+.ig-enna-hero__inner {
+	position: relative; padding: 64px 40px 72px;
+	display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px; align-items: center;
+}
+.ig-enna-hero__chip {
+	display: inline-flex; align-items: center; gap: 8px;
+	background: rgba(232,169,58,.18); color: var(--ig-amber-500,#e8a93a);
+	padding: 6px 12px; border-radius: 999px;
+	font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+	margin-bottom: 22px;
+}
+.ig-enna-hero__title {
+	font-size: 48px; font-weight: 800; line-height: 1.05; letter-spacing: -.025em;
+	color: #fff; margin: 0 0 18px;
+}
+.ig-enna-hero__title em {
+	font-family: var(--ig-font-serif, Georgia, serif);
+	color: var(--ig-amber-500, #e8a93a);
+	font-weight: 500; font-style: italic;
+}
+.ig-enna-hero__lead { font-size: 18px; line-height: 1.5; color: rgba(255,255,255,.78); max-width: 600px; margin: 0 0 30px; }
+
+.ig-enna-hero__search {
+	background: #fff;
+	border-radius: var(--ig-radius-lg, 14px);
+	padding: 8px;
+	display: flex; gap: 6px; align-items: center;
+	box-shadow: 0 24px 64px rgba(6,26,50,.35);
+	max-width: 640px;
+}
+.ig-enna-hero__search input {
+	flex: 1; min-width: 0;
+	height: 48px; padding: 0 14px;
+	border: 0; outline: 0;
+	font-family: inherit; font-size: 16px;
+	color: var(--ig-ink-900, #0c1a2c);
+	background: transparent;
+}
+.ig-enna-hero__search-icon { color: var(--ig-ink-400, #8a94a4); margin-left: 12px; flex: 0 0 auto; }
+.ig-enna-hero__search button { height: 48px; flex: 0 0 auto; }
+
+.ig-enna-hero__suggestions {
+	display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+	margin-top: 16px;
+	font-size: 13px; color: rgba(255,255,255,.65);
+}
+.ig-enna-hero__suggestions a {
+	color: rgba(255,255,255,.85);
+	padding: 4px 10px;
+	border: 1px solid rgba(255,255,255,.2);
+	border-radius: 999px;
+	font-size: 12px;
+	text-decoration: none;
+}
+.ig-enna-hero__suggestions a:hover { background: rgba(255,255,255,.08); }
+.ig-enna-hero__cta { margin-top: 28px; }
+.ig-enna-btn--ghost-light { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.25); color: #fff; }
+.ig-enna-btn--ghost-light:hover { background: rgba(255,255,255,.14); color: #fff; }
+
+.ig-enna-hero__numbers {
+	background: rgba(255,255,255,.06);
+	border: 1px solid rgba(255,255,255,.12);
+	border-radius: 18px;
+	padding: 26px;
+}
+.ig-enna-hero__numbers-label {
+	font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+	color: var(--ig-amber-500, #e8a93a);
+	margin-bottom: 18px;
+}
+.ig-enna-hero__numbers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.ig-enna-hero__num { font-size: 32px; font-weight: 800; color: #fff; letter-spacing: -.02em; line-height: 1; font-variant-numeric: tabular-nums; }
+.ig-enna-hero__num-label { font-size: 12px; color: rgba(255,255,255,.65); margin-top: 6px; }
+.ig-enna-hero__open {
+	margin-top: 20px; padding-top: 16px;
+	border-top: 1px solid rgba(255,255,255,.12);
+	font-size: 12px; color: rgba(255,255,255,.6);
+	display: flex; align-items: center; gap: 8px;
+}
+.ig-enna-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ig-green-600, #1f8a55); display: inline-block; }
+
+@media (max-width: 880px) {
+	.ig-enna-hero__inner { grid-template-columns: 1fr; padding: 40px 24px 56px; gap: 32px; }
+	.ig-enna-hero__title { font-size: 32px; }
+}
+
+/* Quickpaths */
+.ig-enna-quickpaths { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.ig-enna-quickpath {
+	background: #fff;
+	border: 1px solid var(--ig-border-soft, #eef1f5);
+	border-radius: var(--ig-radius-md, 10px);
+	padding: 24px;
+	min-height: 200px;
+	display: flex; flex-direction: column; gap: 12px;
+	text-decoration: none;
+	color: inherit;
+	transition: box-shadow .2s, transform .2s, border-color .2s;
+}
+.ig-enna-quickpath:hover { box-shadow: var(--ig-shadow-md, 0 4px 12px rgba(12,26,44,.08)); transform: translateY(-2px); border-color: var(--ig-border, #d6dce5); }
+.ig-enna-quickpath__head { display: flex; justify-content: space-between; align-items: flex-start; }
+.ig-enna-quickpath__icon {
+	width: 48px; height: 48px;
+	border-radius: 10px;
+	display: flex; align-items: center; justify-content: center;
+	font-size: 22px;
+	background: var(--ig-ink-75, #f3f5f8);
+}
+.ig-enna-quickpath__idx { font-family: var(--ig-font-mono, ui-monospace, monospace); font-size: 12px; color: var(--ig-ink-400, #8a94a4); }
+.ig-enna-quickpath__title { font-size: 19px; font-weight: 700; line-height: 1.25; margin: 0; color: var(--ig-ink-900, #0c1a2c); }
+.ig-enna-quickpath__desc { font-size: 14px; color: var(--ig-ink-500, #5b6779); line-height: 1.5; margin: 0; flex: 1; }
+.ig-enna-quickpath__cta { font-size: 14px; font-weight: 600; }
+.ig-enna-quickpath--lavoro     .ig-enna-quickpath__icon { background: var(--ig-blue-100, #e3edfa);   color: var(--ig-blue-700, #143f7a); }
+.ig-enna-quickpath--lavoro     .ig-enna-quickpath__cta  { color: var(--ig-blue-700, #143f7a); }
+.ig-enna-quickpath--formazione .ig-enna-quickpath__icon { background: var(--ig-violet-100, #e4dcf7);color: var(--ig-violet-700, #5638a8); }
+.ig-enna-quickpath--formazione .ig-enna-quickpath__cta  { color: var(--ig-violet-700, #5638a8); }
+.ig-enna-quickpath--impresa    .ig-enna-quickpath__icon { background: var(--ig-teal-100, #d4f1ec);  color: var(--ig-teal-700, #0f8077); }
+.ig-enna-quickpath--impresa    .ig-enna-quickpath__cta  { color: var(--ig-teal-700, #0f8077); }
+.ig-enna-quickpath--estero     .ig-enna-quickpath__icon { background: var(--ig-amber-100, #fbeac6); color: var(--ig-amber-700, #b2700f); }
+.ig-enna-quickpath--estero     .ig-enna-quickpath__cta  { color: var(--ig-amber-700, #b2700f); }
+.ig-enna-quickpath--concorso   .ig-enna-quickpath__icon { background: #d8e8ff;                     color: #1b3a8a; }
+.ig-enna-quickpath--concorso   .ig-enna-quickpath__cta  { color: #1b3a8a; }
+.ig-enna-quickpath--diritti    .ig-enna-quickpath__icon { background: var(--ig-pink-100, #f6dde9); color: var(--ig-pink-700, #a13564); }
+.ig-enna-quickpath--diritti    .ig-enna-quickpath__cta  { color: var(--ig-pink-700, #a13564); }
+
+@media (max-width: 880px) {
+	.ig-enna-quickpaths { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+	.ig-enna-quickpaths { grid-template-columns: 1fr; }
+}
+
+/* Mini cards opportunità in evidenza */
+.ig-enna-home-opps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.ig-enna-mini-card {
+	background: #fff;
+	border: 1px solid var(--ig-border-soft, #eef1f5);
+	border-radius: var(--ig-radius-md, 10px);
+	padding: 20px;
+	display: flex; flex-direction: column; gap: 10px;
+}
+.ig-enna-mini-card__title { font-size: 16px; font-weight: 700; line-height: 1.3; margin: 4px 0; }
+.ig-enna-mini-card__title a { color: var(--ig-ink-900, #0c1a2c); text-decoration: none; }
+.ig-enna-mini-card__title a:hover { color: var(--ig-primary, #143f7a); }
+.ig-enna-mini-card__excerpt { font-size: 13px; color: var(--ig-ink-500, #5b6779); line-height: 1.5; margin: 0; }
+.ig-enna-mini-card__meta { list-style: none; padding: 0; margin: auto 0 0; display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--ig-ink-500, #5b6779); }
+
+@media (max-width: 1080px) { .ig-enna-home-opps { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px)  { .ig-enna-home-opps { grid-template-columns: 1fr; } }
+
+/* Split section: scadenze + eventi */
+.ig-enna-section--split { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+@media (max-width: 880px) { .ig-enna-section--split { grid-template-columns: 1fr; } }
+
+.ig-enna-split-card {
+	background: #fff;
+	border: 1px solid var(--ig-border-soft, #eef1f5);
+	border-radius: var(--ig-radius-md, 10px);
+	overflow: hidden;
+}
+.ig-enna-split-card__head {
+	display: flex; align-items: center; gap: 12px;
+	padding: 18px 22px;
+	border-bottom: 1px solid var(--ig-border-soft, #eef1f5);
+}
+.ig-enna-split-card__head h3 { font-size: 17px; font-weight: 700; margin: 0; }
+.ig-enna-split-card__head p { margin: 2px 0 0; font-size: 12px; color: var(--ig-ink-500, #5b6779); }
+.ig-enna-split-card__icon {
+	width: 36px; height: 36px; border-radius: 8px;
+	display: flex; align-items: center; justify-content: center; font-size: 18px; flex: 0 0 auto;
+}
+.ig-enna-split-card__icon--amber { background: var(--ig-amber-100, #fbeac6); color: var(--ig-amber-700, #b2700f); }
+.ig-enna-split-card__icon--teal  { background: var(--ig-teal-100, #d4f1ec); color: var(--ig-teal-700, #0f8077); }
+.ig-enna-split-card__more { margin-left: auto; font-size: 13px; font-weight: 600; text-decoration: none; }
+
+.ig-enna-deadlines, .ig-enna-mini-events { list-style: none; padding: 0; margin: 0; }
+.ig-enna-deadlines li, .ig-enna-mini-events li {
+	display: flex; align-items: center; gap: 14px;
+	padding: 14px 22px;
+	border-bottom: 1px solid var(--ig-border-soft, #eef1f5);
+}
+.ig-enna-deadlines li:last-child, .ig-enna-mini-events li:last-child { border-bottom: 0; }
+.ig-enna-deadlines__count {
+	width: 56px; text-align: center; padding: 6px 0;
+	border-radius: 8px; flex: 0 0 auto;
+}
+.ig-enna-deadlines__count--urgent { background: var(--ig-red-100, #f8ddd9);   color: var(--ig-red-700, #a32a20); }
+.ig-enna-deadlines__count--soon   { background: var(--ig-amber-100, #fbeac6); color: var(--ig-amber-800, #8a4f0a); }
+.ig-enna-deadlines__count--ok,
+.ig-enna-deadlines__count--exp    { background: var(--ig-ink-100, #eef1f5);   color: var(--ig-ink-700, #2c3a4f); }
+.ig-enna-deadlines__num { display: block; font-size: 18px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+.ig-enna-deadlines__unit { display: block; font-size: 10px; font-weight: 700; margin-top: 2px; text-transform: uppercase; letter-spacing: .05em; }
+.ig-enna-deadlines__body, .ig-enna-mini-events__body { flex: 1; min-width: 0; }
+.ig-enna-deadlines__title, .ig-enna-mini-events__title { display: block; font-size: 14px; font-weight: 600; color: var(--ig-ink-900, #0c1a2c); text-decoration: none; margin-bottom: 4px; }
+.ig-enna-deadlines__title:hover, .ig-enna-mini-events__title:hover { color: var(--ig-primary, #143f7a); }
+.ig-enna-deadlines__meta, .ig-enna-mini-events__meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font-size: 12px; color: var(--ig-ink-500, #5b6779); }
+
+.ig-enna-mini-events__date {
+	width: 56px; text-align: center; padding: 6px 0;
+	border-radius: 8px; flex: 0 0 auto;
+	background: var(--ig-blue-50, #f2f7fd);
+	border: 1px solid var(--ig-blue-100, #e3edfa);
+	color: var(--ig-blue-700, #143f7a);
+}
+.ig-enna-mini-events__day { display: block; font-size: 20px; font-weight: 800; line-height: 1; }
+.ig-enna-mini-events__month { display: block; font-size: 10px; font-weight: 700; margin-top: 2px; }
+
+/* Come funziona */
+.ig-enna-howit { display: grid; grid-template-columns: 1fr 1.4fr; gap: 56px; padding: 80px 24px 0; align-items: start; }
+@media (max-width: 880px) { .ig-enna-howit { grid-template-columns: 1fr; gap: 32px; } }
+.ig-enna-howit__intro h2 { font-size: 32px; font-weight: 700; letter-spacing: -.02em; line-height: 1.15; margin: 0 0 12px; }
+.ig-enna-howit__intro h2 em { font-family: var(--ig-font-serif, Georgia, serif); font-style: italic; font-weight: 500; color: var(--ig-blue-700, #143f7a); }
+.ig-enna-howit__intro p { font-size: 15px; color: var(--ig-ink-500, #5b6779); line-height: 1.6; margin: 0 0 24px; }
+.ig-enna-howit__steps { list-style: none; padding: 0; margin: 0; }
+.ig-enna-howit__steps li {
+	display: grid; grid-template-columns: 56px 1fr; gap: 18px;
+	padding: 16px 0;
+	border-bottom: 1px solid var(--ig-border-soft, #eef1f5);
+}
+.ig-enna-howit__num {
+	font-family: var(--ig-font-mono, ui-monospace, monospace);
+	font-size: 22px; font-weight: 800;
+	color: var(--ig-blue-700, #143f7a);
+	letter-spacing: -.02em;
+}
+.ig-enna-howit__steps h4 { font-size: 18px; font-weight: 700; margin: 0 0 4px; color: var(--ig-ink-900, #0c1a2c); }
+.ig-enna-howit__steps p  { font-size: 14px; color: var(--ig-ink-500, #5b6779); line-height: 1.55; margin: 0; }
+
+/* CTA orientamento */
+.ig-enna-cta {
+	background: linear-gradient(120deg, var(--ig-teal-800, #0b5e54) 0%, var(--ig-teal-700, #0f8077) 60%, var(--ig-teal-600, #14a195) 100%);
+	border-radius: var(--ig-radius-lg, 14px);
+	padding: 48px 40px;
+	color: #fff;
+	display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center;
+}
+@media (max-width: 880px) { .ig-enna-cta { grid-template-columns: 1fr; padding: 32px 24px; gap: 28px; } }
+.ig-enna-cta h2 { font-size: 32px; font-weight: 700; color: #fff; letter-spacing: -.02em; line-height: 1.15; margin: 0 0 12px; }
+.ig-enna-cta p  { font-size: 16px; color: rgba(255,255,255,.82); line-height: 1.55; margin: 0; max-width: 540px; }
+.ig-enna-cta__actions { display: flex; gap: 10px; margin-top: 22px; flex-wrap: wrap; }
+.ig-enna-cta__actions .ig-enna-btn--secondary { background: #fff; color: var(--ig-teal-800, #0b5e54); border: 0; }
+.ig-enna-cta__modes {
+	background: rgba(255,255,255,.08);
+	border: 1px solid rgba(255,255,255,.15);
+	border-radius: 14px;
+	padding: 22px;
+}
+.ig-enna-cta__modes-label { font-size: 12px; font-weight: 600; color: rgba(255,255,255,.65); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 14px; }
+.ig-enna-cta__modes ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.ig-enna-cta__modes li { display: flex; flex-direction: column; }
+.ig-enna-cta__modes strong { color: #fff; font-weight: 600; font-size: 14px; }
+.ig-enna-cta__modes span { font-size: 12px; color: rgba(255,255,255,.65); }
+
+/* =====================================
+ *  BOOKING (Prenota colloquio)
+ * ===================================== */
+.ig-enna-booking { padding: 32px 16px 48px; }
+.ig-enna-booking__head { margin-bottom: 28px; }
+.ig-enna-booking__head h1 { font-size: 32px; font-weight: 800; letter-spacing: -.02em; margin: 6px 0 8px; }
+.ig-enna-booking__head p { font-size: 15px; color: var(--ig-ink-500, #5b6779); max-width: 680px; margin: 0; }
+.ig-enna-booking__layout { display: grid; grid-template-columns: 1fr 300px; gap: 28px; align-items: start; }
+.ig-enna-booking__form {
+	background: #fff;
+	border: 1px solid var(--ig-border-soft, #eef1f5);
+	border-radius: var(--ig-radius-md, 10px);
+	padding: 28px;
+}
+.ig-enna-booking__side { display: flex; flex-direction: column; gap: 14px; }
+.ig-enna-booking__info {
+	background: #fff;
+	border: 1px solid var(--ig-border-soft, #eef1f5);
+	border-radius: var(--ig-radius-md, 10px);
+	padding: 18px;
+}
+.ig-enna-booking__info h3 { font-size: 15px; font-weight: 700; margin: 0 0 6px; }
+.ig-enna-booking__info p, .ig-enna-booking__info ul { font-size: 13px; color: var(--ig-ink-500, #5b6779); line-height: 1.55; margin: 0; }
+.ig-enna-booking__info ul { padding-left: 18px; }
+
+@media (max-width: 880px) { .ig-enna-booking__layout { grid-template-columns: 1fr; } }
+
+.ig-enna-mode-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ig-enna-mode-option {
+	display: flex; gap: 12px; align-items: center;
+	padding: 14px;
+	border: 1px solid var(--ig-border, #d6dce5);
+	border-radius: 10px;
+	cursor: pointer;
+	background: #fff;
+	transition: border-color .15s, background .15s;
+}
+.ig-enna-mode-option:has(input:checked) { border-color: var(--ig-primary, #143f7a); background: var(--ig-blue-50, #f2f7fd); }
+.ig-enna-mode-option input { margin: 0; }
+.ig-enna-mode-option__icon { font-size: 22px; flex: 0 0 auto; }
+.ig-enna-mode-option__body { display: flex; flex-direction: column; }
+.ig-enna-mode-option__body strong { font-size: 14px; }
+.ig-enna-mode-option__body small { font-size: 12px; color: var(--ig-ink-500, #5b6779); }
+
+.ig-enna-btn--lg { height: 50px; padding: 0 24px; font-size: 16px; }
