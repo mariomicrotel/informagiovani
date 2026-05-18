@@ -81,6 +81,8 @@ class IG_Enna_Newsletter {
 		];
 
 		if ( $existing ) {
+			// Reset created_at per ripartire il TTL del nuovo token.
+			$payload['created_at'] = current_time( 'mysql' );
 			$wpdb->update( $table, $payload, [ 'id' => (int) $existing['id'] ] );
 		} else {
 			$payload['email']      = $email;
@@ -93,6 +95,8 @@ class IG_Enna_Newsletter {
 		return true;
 	}
 
+	const TOKEN_TTL_HOURS = 48;
+
 	public static function confirm( $email, $token ) {
 		global $wpdb;
 		$table = self::table();
@@ -101,6 +105,15 @@ class IG_Enna_Newsletter {
 			$email, $token
 		), ARRAY_A );
 		if ( ! $row ) { return false; }
+		// Token TTL: scaduto se la riga non è ancora confermata e created_at è più vecchio di TOKEN_TTL_HOURS.
+		if ( empty( $row['confirmed'] ) ) {
+			$created = strtotime( (string) $row['created_at'] );
+			if ( $created && ( time() - $created ) > self::TOKEN_TTL_HOURS * HOUR_IN_SECONDS ) {
+				// Invalida il token e segnala scadenza.
+				$wpdb->update( $table, [ 'token' => '' ], [ 'id' => (int) $row['id'] ] );
+				return false;
+			}
+		}
 		$wpdb->update( $table, [ 'confirmed' => 1, 'token' => '' ], [ 'id' => (int) $row['id'] ] );
 		IG_Enna_Audit::log( 'newsletter_confirm', 'newsletter', (int) $row['id'], [ 'email' => $email ] );
 		return true;

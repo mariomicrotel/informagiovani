@@ -34,11 +34,61 @@ class IG_Enna_Appointments {
 		return isset( $s[ $k ] ) ? $s[ $k ] : $k;
 	}
 
+	/**
+	 * Verifica se esiste già uno slot sovrapposto (operatore o utente) attivo.
+	 *
+	 * @return bool true se c'è conflitto.
+	 */
+	public static function has_conflict( $start, $end, $operator_id = 0, $user_id = 0, $exclude_id = 0 ) {
+		global $wpdb;
+		if ( ! $start || ! $end ) { return false; }
+		$table = self::table();
+		// Esclude appuntamenti cancellati / conclusi.
+		$active = "status NOT IN ('cancelled','done','no_show')";
+		$where  = [];
+		$params = [ $start, $end ]; // sovrapposizione: existing.start < new.end AND existing.end > new.start
+		$overlap = "(slot_start < %s AND slot_end > %s)";
+		if ( $operator_id > 0 ) {
+			$where[] = "(operator_id = %d AND {$overlap})";
+			$params[] = (int) $operator_id;
+			$params[] = $end;
+			$params[] = $start;
+		}
+		if ( $user_id > 0 ) {
+			$where[] = "(user_id = %d AND {$overlap})";
+			$params[] = (int) $user_id;
+			$params[] = $end;
+			$params[] = $start;
+		}
+		// Rimuove i 2 placeholder iniziali non usati se nessun ramo è attivo.
+		if ( ! $where ) { return false; }
+		array_shift( $params ); array_shift( $params );
+
+		$sql = "SELECT id FROM {$table} WHERE {$active} AND (" . implode( ' OR ', $where ) . ")";
+		if ( $exclude_id > 0 ) {
+			$sql .= " AND id <> %d";
+			$params[] = (int) $exclude_id;
+		}
+		$sql .= " LIMIT 1";
+		$id = $wpdb->get_var( $wpdb->prepare( $sql, $params ) );
+		return (bool) $id;
+	}
+
 	public static function create( array $data ) {
 		global $wpdb;
 		$start = isset( $data['slot_start'] ) ? sanitize_text_field( $data['slot_start'] ) : '';
 		$end   = isset( $data['slot_end'] )   ? sanitize_text_field( $data['slot_end'] )   : '';
 		if ( ! $start || ! $end ) { return false; }
+		// Verifica ordine cronologico.
+		$ts_start = strtotime( $start );
+		$ts_end   = strtotime( $end );
+		if ( ! $ts_start || ! $ts_end || $ts_end <= $ts_start ) { return false; }
+		// Anti-conflitto: stesso operatore o stesso utente con sovrapposizione.
+		$operator_id = isset( $data['operator_id'] ) ? (int) $data['operator_id'] : 0;
+		$user_id     = isset( $data['user_id'] )     ? (int) $data['user_id']     : 0;
+		if ( self::has_conflict( $start, $end, $operator_id, $user_id ) ) {
+			return false;
+		}
 
 		$mode = isset( $data['mode'] ) ? sanitize_key( $data['mode'] ) : 'presenza';
 		if ( ! array_key_exists( $mode, self::modes() ) ) { $mode = 'presenza'; }

@@ -47,6 +47,7 @@ class IG_Enna_Plugin {
 		IG_Enna_Audit::init();
 		IG_Enna_Newsletter::init();
 		IG_Enna_Notifications::init();
+		IG_Enna_GDPR::init();
 
 		// Asset.
 		IG_Enna_Assets::init();
