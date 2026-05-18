@@ -32,14 +32,16 @@ $base = get_permalink();
 	</header>
 
 	<?php if ( $show_filters ) : ?>
-	<form class="ig-enna-filters" method="get" action="<?php echo esc_url( $base ); ?>">
+	<form class="ig-enna-filters" method="get" action="<?php echo esc_url( $base ); ?>" role="search" aria-label="<?php esc_attr_e( 'Filtri opportunità', 'ig-enna' ); ?>">
 		<div class="ig-enna-filters__search">
-			<input type="search" name="ig_q" value="<?php echo esc_attr( $current_q ); ?>"
+			<label class="screen-reader-text" for="ig-enna-search"><?php esc_html_e( 'Cerca opportunità', 'ig-enna' ); ?></label>
+			<input id="ig-enna-search" type="search" name="ig_q" value="<?php echo esc_attr( $current_q ); ?>"
 				placeholder="<?php esc_attr_e( 'Cerca per titolo o contenuto…', 'ig-enna' ); ?>"
 				class="ig-enna-input ig-enna-input--search" />
 		</div>
 
-		<select name="ig_area" class="ig-enna-select" onchange="this.form.submit()">
+		<label class="screen-reader-text" for="ig-enna-f-area"><?php esc_html_e( 'Area', 'ig-enna' ); ?></label>
+		<select id="ig-enna-f-area" name="ig_area" class="ig-enna-select" aria-label="<?php esc_attr_e( 'Filtra per area', 'ig-enna' ); ?>" onchange="this.form.submit()">
 			<option value=""><?php esc_html_e( 'Tutte le aree', 'ig-enna' ); ?></option>
 			<?php foreach ( $areas as $t ) : ?>
 				<option value="<?php echo esc_attr( $t->slug ); ?>" <?php selected( $current_area, $t->slug ); ?>>
@@ -48,7 +50,8 @@ $base = get_permalink();
 			<?php endforeach; ?>
 		</select>
 
-		<select name="ig_target" class="ig-enna-select" onchange="this.form.submit()">
+		<label class="screen-reader-text" for="ig-enna-f-target"><?php esc_html_e( 'Target', 'ig-enna' ); ?></label>
+		<select id="ig-enna-f-target" name="ig_target" class="ig-enna-select" aria-label="<?php esc_attr_e( 'Filtra per target', 'ig-enna' ); ?>" onchange="this.form.submit()">
 			<option value=""><?php esc_html_e( 'Tutti i target', 'ig-enna' ); ?></option>
 			<?php foreach ( $targets as $t ) : ?>
 				<option value="<?php echo esc_attr( $t->slug ); ?>" <?php selected( $current_target, $t->slug ); ?>>
@@ -57,7 +60,8 @@ $base = get_permalink();
 			<?php endforeach; ?>
 		</select>
 
-		<select name="ig_territorio" class="ig-enna-select" onchange="this.form.submit()">
+		<label class="screen-reader-text" for="ig-enna-f-territ"><?php esc_html_e( 'Territorio', 'ig-enna' ); ?></label>
+		<select id="ig-enna-f-territ" name="ig_territorio" class="ig-enna-select" aria-label="<?php esc_attr_e( 'Filtra per territorio', 'ig-enna' ); ?>" onchange="this.form.submit()">
 			<option value=""><?php esc_html_e( 'Tutti i territori', 'ig-enna' ); ?></option>
 			<?php foreach ( $territori as $t ) : ?>
 				<option value="<?php echo esc_attr( $t->slug ); ?>" <?php selected( $current_territ, $t->slug ); ?>>
@@ -66,7 +70,8 @@ $base = get_permalink();
 			<?php endforeach; ?>
 		</select>
 
-		<select name="ig_urg" class="ig-enna-select" onchange="this.form.submit()">
+		<label class="screen-reader-text" for="ig-enna-f-urg"><?php esc_html_e( 'Scadenza', 'ig-enna' ); ?></label>
+		<select id="ig-enna-f-urg" name="ig_urg" class="ig-enna-select" aria-label="<?php esc_attr_e( 'Filtra per scadenza', 'ig-enna' ); ?>" onchange="this.form.submit()">
 			<option value=""><?php esc_html_e( 'Qualsiasi scadenza', 'ig-enna' ); ?></option>
 			<option value="urgent" <?php selected( $current_urg, 'urgent' ); ?>><?php esc_html_e( 'Urgenti (≤ 7gg)', 'ig-enna' ); ?></option>
 			<option value="soon"   <?php selected( $current_urg, 'soon' );   ?>><?php esc_html_e( 'In scadenza (≤ 21gg)', 'ig-enna' ); ?></option>

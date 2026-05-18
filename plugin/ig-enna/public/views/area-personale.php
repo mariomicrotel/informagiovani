@@ -111,10 +111,11 @@ $notices = IG_Enna_Auth::pop_notices();
 				'profilo'    => __( 'Profilo', 'ig-enna' ),
 			];
 			foreach ( $tabs as $k => $label ) :
-				$cls = $tab === $k ? 'ig-enna-tab is-active' : 'ig-enna-tab';
+				$is_active = ( $tab === $k );
+				$cls = $is_active ? 'ig-enna-tab is-active' : 'ig-enna-tab';
 				$url = esc_url( add_query_arg( 'ig_tab', $k, $base ) );
 				?>
-				<a class="<?php echo esc_attr( $cls ); ?>" href="<?php echo $url; ?>"><?php echo esc_html( $label ); ?></a>
+				<a class="<?php echo esc_attr( $cls ); ?>" href="<?php echo $url; ?>"<?php echo $is_active ? ' aria-current="page"' : ''; ?>><?php echo esc_html( $label ); ?></a>
 			<?php endforeach; ?>
 		</nav>
 

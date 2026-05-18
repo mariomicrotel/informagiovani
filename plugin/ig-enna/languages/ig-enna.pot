@@ -1,0 +1,2377 @@
+# Copyright (C) 2026 Comune di Enna
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Informagiovani Enna Manager 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ig-enna\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-05-18T15:31:51+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: ig-enna\n"
+
+#. Plugin Name of the plugin
+#: ig-enna.php
+msgid "Informagiovani Enna Manager"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: ig-enna.php
+msgid "https://comune.enna.it/"
+msgstr ""
+
+#. Description of the plugin
+#: ig-enna.php
+msgid "Gestione completa dell'Informagiovani del Comune di Enna: schede informative, eventi, ticket, appuntamenti, colloqui, partner, area personale e backend gestionale."
+msgstr ""
+
+#. Author of the plugin
+#: ig-enna.php
+#: public/views/site-footer.php:99
+#: public/views/site-footer.php:117
+msgid "Comune di Enna"
+msgstr ""
+
+#: admin/class-ig-enna-admin-appointments.php:51
+#: admin/class-ig-enna-admin-audit.php:12
+#: admin/class-ig-enna-admin-colloqui.php:41
+#: admin/class-ig-enna-admin-menu.php:132
+#: admin/class-ig-enna-admin-newsletter.php:70
+#: admin/class-ig-enna-admin-report.php:12
+#: admin/class-ig-enna-admin-tickets.php:22
+#: admin/class-ig-enna-admin-tickets.php:93
+#: admin/class-ig-enna-settings.php:89
+msgid "Permesso negato."
+msgstr ""
+
+#: admin/class-ig-enna-admin-appointments.php:59
+#: admin/class-ig-enna-admin-menu.php:61
+#: admin/class-ig-enna-admin-menu.php:62
+#: admin/class-ig-enna-admin-menu.php:142
+msgid "Appuntamenti"
+msgstr ""
+
+#: admin/class-ig-enna-admin-appointments.php:62
+msgid "Appuntamento creato."
+msgstr ""
+
+#: admin/class-ig-enna-admin-appointments.php:65
+msgid "Stato aggiornato."
+msgstr ""
+
+#: admin/class-ig-enna-admin-appointments.php:68
+msgid "Nuovo appuntamento"
+msgstr ""
+
+#: admin/class-ig-enna-admin-appointments.php:75
+#: admin/class-ig-enna-admin-appointments.php:130
+#: admin/class-ig-enna-admin-audit.php:52
+#: admin/class-ig-enna-admin-colloqui.php:62
+#: admin/class-ig-enna-admin-colloqui.php:110
+#: admin/class-ig-enna-admin-newsletter.php:110
+#: admin/class-ig-enna-admin-tickets.php:184
+msgid "Utente"
+msgstr ""
+
+#: admin/class-ig-enna-admin-appointments.php:77
+#: admin/class-ig-enna-admin-colloqui.php:64
+#: includes/class-ig-enna-partner-meta.php:83
+#: includes/class-ig-enna-percorso-meta.php:78
+#: public/views/area-personale.php:216
+#: public/views/area-personale.php:360
+#: public/views/form-booking.php:60
+msgid "— Seleziona —"
+msgstr ""
+
+#: admin/class-ig-enna-admin-appointments.php:84
+#: admin/class-ig-enna-admin-appointments.php:131
+#: admin/class-ig-enna-admin-colloqui.php:111
+#: admin/class-ig-enna-admin-tickets.php:188
+msgid "Operatore"
+msgstr ""
+
+#: admin/class-ig-enna-admin-appointments.php:95
+#: admin/class-ig-enna-admin-colloqui.php:83
+#: admin/class-ig-enna-admin-colloqui.php:109
+#: includes/class-ig-enna-admin-list.php:38
+#: includes/class-ig-enna-evento-meta.php:92
+#: includes/class-ig-enna-gdpr.php:146
+#: includes/class-ig-enna-partner-meta.php:158
+#: includes/class-ig-enna-percorso-meta.php:154
+msgid "Data"
+msgstr ""
+
+#: admin/class-ig-enna-admin-appointments.php:99
+msgid "Dalle"
+msgstr ""
+
+#: admin/class-ig-enna-admin-appointments.php:103
+msgid "Alle"
+msgstr ""
+
+#: admin/class-ig-enna-admin-appointments.php:109
+#: admin/class-ig-enna-admin-appointments.php:132
+#: includes/class-ig-enna-admin-list.php:296
+#: includes/class-ig-enna-evento-meta.php:105
+#: includes/class-ig-enna-gdpr.php:125
+#: public/views/form-booking.php:70
+msgid "Modalità"
+msgstr ""
+
+#: admin/class-ig-enna-admin-appointments.php:118
+#: includes/class-ig-enna-gdpr.php:127
+msgid "Note"
+msgstr ""
+
+#: admin/class-ig-enna-admin-appointments.php:122
+msgid "Crea appuntamento"
+msgstr ""
+
+#: admin/class-ig-enna-admin-appointments.php:125
+msgid "Prossimi appuntamenti"
+msgstr ""
+
+#: admin/class-ig-enna-admin-appointments.php:129
+#: admin/class-ig-enna-admin-audit.php:51
+#: includes/class-ig-enna-admin-list.php:295
+msgid "Quando"
+msgstr ""
+
+#: admin/class-ig-enna-admin-appointments.php:133
+#: admin/class-ig-enna-admin-newsletter.php:108
+#: admin/class-ig-enna-admin-tickets.php:187
+#: admin/class-ig-enna-admin-tickets.php:294
+#: includes/class-ig-enna-admin-list.php:34
+#: includes/class-ig-enna-admin-list.php:300
+#: includes/class-ig-enna-gdpr.php:104
+#: includes/class-ig-enna-gdpr.php:126
+msgid "Stato"
+msgstr ""
+
+#: admin/class-ig-enna-admin-appointments.php:134
+#: admin/class-ig-enna-admin-newsletter.php:112
+msgid "Azioni"
+msgstr ""
+
+#: admin/class-ig-enna-admin-appointments.php:163
+msgid "Aggiorna"
+msgstr ""
+
+#: admin/class-ig-enna-admin-appointments.php:168
+msgid "Nessun appuntamento programmato."
+msgstr ""
+
+#: admin/class-ig-enna-admin-audit.php:28
+#: admin/class-ig-enna-admin-menu.php:122
+#: admin/class-ig-enna-admin-menu.php:123
+#: admin/class-ig-enna-admin-menu.php:150
+msgid "Audit log"
+msgstr ""
+
+#: admin/class-ig-enna-admin-audit.php:32
+msgid "Audit log disabilitato. Abilitalo da Impostazioni → Abilita audit log."
+msgstr ""
+
+#: admin/class-ig-enna-admin-audit.php:38
+msgid "Action (es. ticket.update)"
+msgstr ""
+
+#: admin/class-ig-enna-admin-audit.php:40
+msgid "Qualsiasi oggetto"
+msgstr ""
+
+#: admin/class-ig-enna-admin-audit.php:45
+#: admin/class-ig-enna-admin-tickets.php:176
+#: public/views/list-eventi.php:34
+#: public/views/list-opportunita.php:81
+msgid "Filtra"
+msgstr ""
+
+#: admin/class-ig-enna-admin-audit.php:53
+msgid "Azione"
+msgstr ""
+
+#: admin/class-ig-enna-admin-audit.php:54
+#: admin/class-ig-enna-admin-tickets.php:183
+#: includes/class-ig-enna-gdpr.php:100
+#: public/views/area-personale.php:209
+msgid "Oggetto"
+msgstr ""
+
+#: admin/class-ig-enna-admin-audit.php:55
+#: public/views/card-scheda.php:103
+#: public/views/home.php:212
+msgid "Dettagli"
+msgstr ""
+
+#: admin/class-ig-enna-admin-audit.php:78
+msgid "Nessun evento registrato."
+msgstr ""
+
+#: admin/class-ig-enna-admin-colloqui.php:49
+msgid "Colloqui di orientamento"
+msgstr ""
+
+#: admin/class-ig-enna-admin-colloqui.php:52
+msgid "Colloquio registrato."
+msgstr ""
+
+#: admin/class-ig-enna-admin-colloqui.php:55
+msgid "Registra colloquio"
+msgstr ""
+
+#: admin/class-ig-enna-admin-colloqui.php:71
+#: admin/class-ig-enna-admin-colloqui.php:112
+#: admin/class-ig-enna-admin-tickets.php:185
+#: includes/class-ig-enna-admin-list.php:33
+#: includes/class-ig-enna-admin-list.php:298
+#: includes/class-ig-enna-gdpr.php:102
+#: includes/class-ig-enna-gdpr.php:147
+#: includes/class-ig-enna-partner-meta.php:156
+#: includes/class-ig-enna-taxonomies.php:16
+#: public/views/area-personale.php:214
+#: public/views/list-opportunita.php:43
+msgid "Area"
+msgstr ""
+
+#: admin/class-ig-enna-admin-colloqui.php:73
+#: includes/class-ig-enna-scheda-meta.php:200
+msgid "— Non specificata —"
+msgstr ""
+
+#: admin/class-ig-enna-admin-colloqui.php:87
+#: includes/class-ig-enna-evento-meta.php:97
+#: public/views/list-eventi.php:74
+msgid "Ora"
+msgstr ""
+
+#: admin/class-ig-enna-admin-colloqui.php:93
+msgid "Esito / Note"
+msgstr ""
+
+#: admin/class-ig-enna-admin-colloqui.php:94
+msgid "Riassunto del colloquio…"
+msgstr ""
+
+#: admin/class-ig-enna-admin-colloqui.php:98
+#: admin/class-ig-enna-admin-colloqui.php:114
+msgid "Prossimo passo"
+msgstr ""
+
+#: admin/class-ig-enna-admin-colloqui.php:99
+msgid "Azione successiva concordata…"
+msgstr ""
+
+#: admin/class-ig-enna-admin-colloqui.php:102
+msgid "Salva colloquio"
+msgstr ""
+
+#: admin/class-ig-enna-admin-colloqui.php:105
+msgid "Ultimi colloqui"
+msgstr ""
+
+#: admin/class-ig-enna-admin-colloqui.php:113
+#: includes/class-ig-enna-gdpr.php:148
+msgid "Esito"
+msgstr ""
+
+#: admin/class-ig-enna-admin-colloqui.php:132
+msgid "Nessun colloquio registrato."
+msgstr ""
+
+#: admin/class-ig-enna-admin-menu.php:16
+#: public/views/shortcode-placeholder.php:8
+msgid "Informagiovani Enna"
+msgstr ""
+
+#: admin/class-ig-enna-admin-menu.php:17
+msgid "Informagiovani"
+msgstr ""
+
+#: admin/class-ig-enna-admin-menu.php:27
+#: admin/class-ig-enna-admin-menu.php:28
+msgid "Dashboard"
+msgstr ""
+
+#: admin/class-ig-enna-admin-menu.php:36
+#: admin/class-ig-enna-admin-menu.php:37
+#: includes/class-ig-enna-cpt.php:19
+msgid "Schede informative"
+msgstr ""
+
+#: admin/class-ig-enna-admin-menu.php:44
+#: admin/class-ig-enna-admin-menu.php:45
+#: includes/class-ig-enna-cpt.php:44
+#: includes/class-ig-enna-cpt.php:46
+#: public/views/site-footer.php:66
+#: public/views/site-header.php:64
+msgid "Eventi"
+msgstr ""
+
+#: admin/class-ig-enna-admin-menu.php:52
+#: admin/class-ig-enna-admin-menu.php:53
+#: admin/class-ig-enna-admin-menu.php:138
+#: admin/class-ig-enna-admin-report.php:82
+msgid "Ticket"
+msgstr ""
+
+#: admin/class-ig-enna-admin-menu.php:70
+#: admin/class-ig-enna-admin-menu.php:71
+#: admin/class-ig-enna-admin-menu.php:146
+msgid "Colloqui"
+msgstr ""
+
+#: admin/class-ig-enna-admin-menu.php:79
+#: admin/class-ig-enna-admin-menu.php:80
+#: admin/class-ig-enna-admin-report.php:73
+#: admin/views/dashboard.php:25
+#: includes/class-ig-enna-cpt.php:68
+#: includes/class-ig-enna-cpt.php:69
+#: includes/class-ig-enna-cpt.php:70
+#: includes/class-ig-enna-scheda-meta.php:30
+#: public/views/site-footer.php:88
+msgid "Partner"
+msgstr ""
+
+#: admin/class-ig-enna-admin-menu.php:87
+#: admin/class-ig-enna-admin-menu.php:88
+#: includes/class-ig-enna-cpt.php:88
+msgid "Percorsi Impresa"
+msgstr ""
+
+#: admin/class-ig-enna-admin-menu.php:95
+#: admin/class-ig-enna-admin-menu.php:96
+#: admin/class-ig-enna-admin-report.php:59
+msgid "Report"
+msgstr ""
+
+#: admin/class-ig-enna-admin-menu.php:104
+#: admin/class-ig-enna-admin-menu.php:105
+#: public/views/site-footer.php:86
+msgid "Newsletter"
+msgstr ""
+
+#: admin/class-ig-enna-admin-menu.php:113
+#: admin/class-ig-enna-admin-menu.php:114
+msgid "Impostazioni"
+msgstr ""
+
+#: admin/class-ig-enna-admin-menu.php:138
+msgid "Gestione ticket — disponibile dalla FASE 5."
+msgstr ""
+
+#: admin/class-ig-enna-admin-menu.php:142
+msgid "Gestione appuntamenti sportello — disponibile dalla FASE 5."
+msgstr ""
+
+#: admin/class-ig-enna-admin-menu.php:146
+msgid "Gestione colloqui di orientamento — disponibile dalla FASE 5."
+msgstr ""
+
+#: admin/class-ig-enna-admin-menu.php:150
+msgid "Tracciamento operazioni — disponibile dalla FASE 7."
+msgstr ""
+
+#: admin/class-ig-enna-admin-newsletter.php:25
+#: admin/class-ig-enna-admin-newsletter.php:34
+#: admin/class-ig-enna-admin-tickets.php:25
+#: admin/class-ig-enna-admin-tickets.php:67
+msgid "Sessione scaduta."
+msgstr ""
+
+#: admin/class-ig-enna-admin-newsletter.php:85
+msgid "Newsletter · Iscritti"
+msgstr ""
+
+#: admin/class-ig-enna-admin-newsletter.php:88
+#: admin/class-ig-enna-admin-tickets.php:134
+msgid "Esporta CSV"
+msgstr ""
+
+#: admin/class-ig-enna-admin-newsletter.php:94
+msgid "Iscrizione eliminata."
+msgstr ""
+
+#: admin/class-ig-enna-admin-newsletter.php:98
+#: admin/class-ig-enna-admin-tickets.php:148
+msgid "Tutti"
+msgstr ""
+
+#: admin/class-ig-enna-admin-newsletter.php:99
+msgid "Confermati"
+msgstr ""
+
+#: admin/class-ig-enna-admin-newsletter.php:100
+msgid "Da confermare"
+msgstr ""
+
+#: admin/class-ig-enna-admin-newsletter.php:107
+#: includes/class-ig-enna-gdpr.php:190
+#: includes/class-ig-enna-partner-meta.php:101
+#: public/views/area-personale.php:56
+#: public/views/form-booking.php:34
+#: public/views/form-newsletter.php:22
+#: public/views/home.php:383
+#: public/views/list-partner.php:60
+msgid "Email"
+msgstr ""
+
+#: admin/class-ig-enna-admin-newsletter.php:109
+#: includes/class-ig-enna-gdpr.php:191
+msgid "Interessi"
+msgstr ""
+
+#: admin/class-ig-enna-admin-newsletter.php:111
+msgid "Iscritto il"
+msgstr ""
+
+#: admin/class-ig-enna-admin-newsletter.php:123
+#: includes/class-ig-enna-appointments.php:25
+msgid "Confermato"
+msgstr ""
+
+#: admin/class-ig-enna-admin-newsletter.php:124
+msgid "In attesa"
+msgstr ""
+
+#: admin/class-ig-enna-admin-newsletter.php:131
+msgid "Eliminare?"
+msgstr ""
+
+#: admin/class-ig-enna-admin-newsletter.php:135
+msgid "Elimina"
+msgstr ""
+
+#: admin/class-ig-enna-admin-newsletter.php:141
+msgid "Nessun iscritto."
+msgstr ""
+
+#: admin/class-ig-enna-admin-report.php:61
+msgid "Contenuti"
+msgstr ""
+
+#: admin/class-ig-enna-admin-report.php:64
+#: admin/views/dashboard.php:17
+msgid "Schede pubblicate"
+msgstr ""
+
+#: admin/class-ig-enna-admin-report.php:69
+#: admin/views/dashboard.php:21
+msgid "Eventi pubblicati"
+msgstr ""
+
+#: admin/class-ig-enna-admin-report.php:77
+msgid "Percorsi attivi"
+msgstr ""
+
+#: admin/class-ig-enna-admin-report.php:85
+msgid "Totali"
+msgstr ""
+
+#: admin/class-ig-enna-admin-report.php:89
+msgid "Aperti"
+msgstr ""
+
+#: admin/class-ig-enna-admin-report.php:91
+msgid "new + assigned + work + wait"
+msgstr ""
+
+#: admin/class-ig-enna-admin-report.php:101
+msgid "Utenti & Newsletter"
+msgstr ""
+
+#: admin/class-ig-enna-admin-report.php:104
+msgid "Utenti registrati"
+msgstr ""
+
+#: admin/class-ig-enna-admin-report.php:109
+msgid "Iscritti newsletter"
+msgstr ""
+
+#: admin/class-ig-enna-admin-report.php:115
+msgid "Top schede salvate"
+msgstr ""
+
+#: admin/class-ig-enna-admin-report.php:119
+msgid "Scheda"
+msgstr ""
+
+#: admin/class-ig-enna-admin-report.php:120
+msgid "Salvataggi"
+msgstr ""
+
+#: admin/class-ig-enna-admin-report.php:136
+msgid "Nessun salvataggio registrato."
+msgstr ""
+
+#: admin/class-ig-enna-admin-report.php:139
+msgid "Prossimi eventi"
+msgstr ""
+
+#: admin/class-ig-enna-admin-report.php:154
+msgid "Nessun evento in programma."
+msgstr ""
+
+#: admin/class-ig-enna-admin-tickets.php:131
+msgid "Ticket / Richieste"
+msgstr ""
+
+#: admin/class-ig-enna-admin-tickets.php:140
+msgid "Ticket aggiornato."
+msgstr ""
+
+#: admin/class-ig-enna-admin-tickets.php:143
+msgid "Ticket eliminato."
+msgstr ""
+
+#: admin/class-ig-enna-admin-tickets.php:166
+#: includes/class-ig-enna-admin-list.php:131
+#: includes/class-ig-enna-admin-list.php:158
+#: public/views/list-eventi.php:27
+#: public/views/list-opportunita.php:45
+msgid "Tutte le aree"
+msgstr ""
+
+#: admin/class-ig-enna-admin-tickets.php:182
+msgid "ID"
+msgstr ""
+
+#: admin/class-ig-enna-admin-tickets.php:186
+#: admin/class-ig-enna-admin-tickets.php:302
+#: includes/class-ig-enna-gdpr.php:103
+#: public/views/area-personale.php:222
+msgid "Priorità"
+msgstr ""
+
+#: admin/class-ig-enna-admin-tickets.php:189
+msgid "Creato"
+msgstr ""
+
+#: admin/class-ig-enna-admin-tickets.php:210
+msgid "Nessun ticket trovato."
+msgstr ""
+
+#: admin/class-ig-enna-admin-tickets.php:237
+msgid "Ticket non trovato"
+msgstr ""
+
+#. translators: %d = ticket id
+#: admin/class-ig-enna-admin-tickets.php:256
+#, php-format
+msgid "Ticket R-%d"
+msgstr ""
+
+#: admin/class-ig-enna-admin-tickets.php:259
+msgid "← Tutti i ticket"
+msgstr ""
+
+#: admin/class-ig-enna-admin-tickets.php:275
+msgid "Utente non disponibile"
+msgstr ""
+
+#: admin/class-ig-enna-admin-tickets.php:278
+msgid "SLA:"
+msgstr ""
+
+#: admin/class-ig-enna-admin-tickets.php:310
+msgid "Operatore assegnato"
+msgstr ""
+
+#: admin/class-ig-enna-admin-tickets.php:312
+msgid "— Non assegnato —"
+msgstr ""
+
+#: admin/class-ig-enna-admin-tickets.php:320
+#: public/views/card-scheda.php:111
+msgid "Salva"
+msgstr ""
+
+#: admin/class-ig-enna-admin-tickets.php:324
+msgid "Eliminare il ticket?"
+msgstr ""
+
+#: admin/class-ig-enna-admin-tickets.php:328
+msgid "Elimina ticket"
+msgstr ""
+
+#: admin/class-ig-enna-settings.php:27
+msgid "Generale"
+msgstr ""
+
+#: admin/class-ig-enna-settings.php:29
+msgid "Configurazione di base del plugin."
+msgstr ""
+
+#: admin/class-ig-enna-settings.php:34
+msgid "Nome organizzazione"
+msgstr ""
+
+#: admin/class-ig-enna-settings.php:35
+msgid "Email di contatto"
+msgstr ""
+
+#: admin/class-ig-enna-settings.php:36
+msgid "Abilita registrazione pubblica"
+msgstr ""
+
+#: admin/class-ig-enna-settings.php:37
+msgid "SLA default ticket (ore)"
+msgstr ""
+
+#: admin/class-ig-enna-settings.php:38
+msgid "Abilita audit log"
+msgstr ""
+
+#: admin/class-ig-enna-settings.php:39
+msgid "Elimina dati alla disinstallazione"
+msgstr ""
+
+#: admin/class-ig-enna-settings.php:57
+msgid "Attiva"
+msgstr ""
+
+#: admin/views/dashboard.php:11
+msgid "Informagiovani Enna · Dashboard"
+msgstr ""
+
+#: admin/views/dashboard.php:13
+msgid "Benvenuto. Questa è la base del plugin: la struttura è installata correttamente, le fasi successive aggiungeranno funzionalità."
+msgstr ""
+
+#: admin/views/dashboard.php:29
+msgid "Versione DB"
+msgstr ""
+
+#: admin/views/dashboard.php:34
+msgid "Stato attuale (FASE 1)"
+msgstr ""
+
+#: admin/views/dashboard.php:36
+msgid "Struttura plugin installabile · OK"
+msgstr ""
+
+#: admin/views/dashboard.php:37
+msgid "Ruoli e capability · OK"
+msgstr ""
+
+#: admin/views/dashboard.php:38
+msgid "Tabelle custom · OK"
+msgstr ""
+
+#: admin/views/dashboard.php:39
+msgid "CPT e tassonomie · OK"
+msgstr ""
+
+#: admin/views/dashboard.php:40
+msgid "Menu admin · OK"
+msgstr ""
+
+#: admin/views/dashboard.php:41
+msgid "Pagina impostazioni · OK"
+msgstr ""
+
+#: admin/views/dashboard.php:42
+msgid "Shortcode placeholder · OK"
+msgstr ""
+
+#: admin/views/dashboard.php:45
+msgid "Prossime fasi"
+msgstr ""
+
+#: admin/views/dashboard.php:47
+msgid "FASE 2 — Backend admin schede/eventi (CRUD + badge stato)."
+msgstr ""
+
+#: admin/views/dashboard.php:48
+msgid "FASE 3 — Frontend pubblico (home, lista, dettaglio)."
+msgstr ""
+
+#: admin/views/dashboard.php:49
+msgid "FASE 4 — Area personale utente."
+msgstr ""
+
+#: admin/views/dashboard.php:50
+msgid "FASE 5 — Ticket, appuntamenti, colloqui."
+msgstr ""
+
+#: admin/views/dashboard.php:51
+msgid "FASE 6 — Partner, percorsi impresa."
+msgstr ""
+
+#: admin/views/dashboard.php:52
+msgid "FASE 7 — Report, newsletter, notifiche, export, audit."
+msgstr ""
+
+#: admin/views/settings.php:5
+msgid "Informagiovani Enna · Impostazioni"
+msgstr ""
+
+#: includes/class-ig-enna-admin-list.php:31
+#: includes/class-ig-enna-admin-list.php:294
+#: includes/class-ig-enna-gdpr.php:172
+msgid "Titolo"
+msgstr ""
+
+#: includes/class-ig-enna-admin-list.php:32
+#: public/views/card-scheda.php:69
+msgid "Codice"
+msgstr ""
+
+#: includes/class-ig-enna-admin-list.php:35
+#: public/views/card-scheda.php:77
+#: public/views/list-opportunita.php:73
+#: public/views/single-ig-scheda-content.php:81
+msgid "Scadenza"
+msgstr ""
+
+#: includes/class-ig-enna-admin-list.php:36
+#: includes/class-ig-enna-scheda-meta.php:183
+#: includes/class-ig-enna-taxonomies.php:52
+#: public/views/card-scheda.php:63
+#: public/views/single-ig-scheda-content.php:105
+msgid "Fonte"
+msgstr ""
+
+#: includes/class-ig-enna-admin-list.php:37
+msgid "Autore"
+msgstr ""
+
+#: includes/class-ig-enna-admin-list.php:74
+#: includes/class-ig-enna-scheda-meta.php:16
+msgid "Bozza"
+msgstr ""
+
+#: includes/class-ig-enna-admin-list.php:82
+#: public/class-ig-enna-frontend.php:292
+#: public/views/card-scheda.php:81
+#: public/views/home.php:192
+#: public/views/single-ig-scheda-content.php:83
+msgid "Sempre aperta"
+msgstr ""
+
+#: includes/class-ig-enna-admin-list.php:132
+#: public/views/list-opportunita.php:55
+msgid "Tutti i target"
+msgstr ""
+
+#: includes/class-ig-enna-admin-list.php:133
+#: public/views/list-opportunita.php:65
+msgid "Tutti i territori"
+msgstr ""
+
+#: includes/class-ig-enna-admin-list.php:137
+msgid "Tutti gli stati"
+msgstr ""
+
+#: includes/class-ig-enna-admin-list.php:146
+msgid "Scadenza urgente (≤ 7gg)"
+msgstr ""
+
+#: includes/class-ig-enna-admin-list.php:147
+#: public/views/list-opportunita.php:77
+msgid "In scadenza (≤ 21gg)"
+msgstr ""
+
+#: includes/class-ig-enna-admin-list.php:148
+msgid "Scadute"
+msgstr ""
+
+#: includes/class-ig-enna-admin-list.php:150
+#: public/views/list-opportunita.php:75
+msgid "Qualsiasi scadenza"
+msgstr ""
+
+#: includes/class-ig-enna-admin-list.php:161
+msgid "Tutte le modalità"
+msgstr ""
+
+#: includes/class-ig-enna-admin-list.php:168
+msgid "Qualsiasi stato"
+msgstr ""
+
+#: includes/class-ig-enna-admin-list.php:297
+#: public/views/single-ig-evento-content.php:58
+msgid "Luogo"
+msgstr ""
+
+#: includes/class-ig-enna-admin-list.php:299
+#: includes/class-ig-enna-evento-meta.php:143
+#: public/views/list-eventi.php:84
+#: public/views/single-ig-evento-content.php:66
+msgid "Capienza"
+msgstr ""
+
+#: includes/class-ig-enna-admin-list.php:301
+msgid "Pubblicato"
+msgstr ""
+
+#: includes/class-ig-enna-appointments.php:17
+#: includes/class-ig-enna-evento-meta.php:15
+#: public/views/form-booking.php:74
+#: public/views/home.php:380
+msgid "In presenza"
+msgstr ""
+
+#: includes/class-ig-enna-appointments.php:18
+#: includes/class-ig-enna-evento-meta.php:16
+#: public/views/form-booking.php:75
+msgid "Online"
+msgstr ""
+
+#: includes/class-ig-enna-appointments.php:24
+msgid "Richiesto"
+msgstr ""
+
+#: includes/class-ig-enna-appointments.php:26
+#: includes/class-ig-enna-evento-meta.php:26
+msgid "Annullato"
+msgstr ""
+
+#: includes/class-ig-enna-appointments.php:27
+#: includes/class-ig-enna-evento-meta.php:27
+msgid "Concluso"
+msgstr ""
+
+#: includes/class-ig-enna-appointments.php:28
+msgid "No show"
+msgstr ""
+
+#: includes/class-ig-enna-assets.php:58
+msgid "Caricamento…"
+msgstr ""
+
+#: includes/class-ig-enna-assets.php:59
+msgid "Errore. Riprova."
+msgstr ""
+
+#: includes/class-ig-enna-auth.php:27
+#: public/views/area-personale.php:64
+msgid "Ho letto l'informativa sulla privacy"
+msgstr ""
+
+#: includes/class-ig-enna-auth.php:41
+msgid "La registrazione pubblica non è attiva."
+msgstr ""
+
+#: includes/class-ig-enna-auth.php:45
+#: includes/class-ig-enna-auth.php:102
+#: includes/class-ig-enna-auth.php:127
+#: includes/class-ig-enna-auth.php:156
+#: includes/class-ig-enna-newsletter.php:30
+msgid "Sessione scaduta. Riprova."
+msgstr ""
+
+#: includes/class-ig-enna-auth.php:55
+#: includes/class-ig-enna-newsletter.php:35
+msgid "Email non valida."
+msgstr ""
+
+#: includes/class-ig-enna-auth.php:56
+msgid "La password deve essere di almeno 8 caratteri."
+msgstr ""
+
+#: includes/class-ig-enna-auth.php:57
+#: includes/class-ig-enna-auth.php:184
+msgid "È necessario accettare l'informativa."
+msgstr ""
+
+#: includes/class-ig-enna-auth.php:59
+msgid "Esiste già un account con questa email."
+msgstr ""
+
+#: includes/class-ig-enna-auth.php:110
+msgid "Profilo aggiornato."
+msgstr ""
+
+#: includes/class-ig-enna-auth.php:140
+msgid "Richiesta inviata. Ti risponderemo a breve."
+msgstr ""
+
+#: includes/class-ig-enna-auth.php:142
+msgid "Compila oggetto e messaggio."
+msgstr ""
+
+#: includes/class-ig-enna-auth.php:163
+msgid "Data o ora non valide."
+msgstr ""
+
+#: includes/class-ig-enna-auth.php:179
+msgid "Inserisci nome ed email validi."
+msgstr ""
+
+#: includes/class-ig-enna-auth.php:229
+msgid "Richiesta inviata. Ti contatteremo per confermare lo slot."
+msgstr ""
+
+#: includes/class-ig-enna-auth.php:231
+msgid "Impossibile salvare la richiesta. Riprova."
+msgstr ""
+
+#: includes/class-ig-enna-cpt.php:20
+msgid "Scheda informativa"
+msgstr ""
+
+#: includes/class-ig-enna-cpt.php:21
+msgid "Schede"
+msgstr ""
+
+#: includes/class-ig-enna-cpt.php:22
+msgid "Aggiungi scheda"
+msgstr ""
+
+#: includes/class-ig-enna-cpt.php:23
+msgid "Modifica scheda"
+msgstr ""
+
+#: includes/class-ig-enna-cpt.php:24
+msgid "Cerca schede"
+msgstr ""
+
+#: includes/class-ig-enna-cpt.php:45
+msgid "Evento"
+msgstr ""
+
+#: includes/class-ig-enna-cpt.php:47
+msgid "Aggiungi evento"
+msgstr ""
+
+#: includes/class-ig-enna-cpt.php:48
+msgid "Modifica evento"
+msgstr ""
+
+#: includes/class-ig-enna-cpt.php:89
+#: includes/class-ig-enna-percorso-meta.php:150
+msgid "Percorso"
+msgstr ""
+
+#: includes/class-ig-enna-cpt.php:90
+#: includes/class-ig-enna-percorso-meta.php:206
+#: public/views/area-personale.php:110
+msgid "Percorsi"
+msgstr ""
+
+#: includes/class-ig-enna-evento-meta.php:17
+msgid "Misto"
+msgstr ""
+
+#: includes/class-ig-enna-evento-meta.php:23
+msgid "Iscrizioni aperte"
+msgstr ""
+
+#: includes/class-ig-enna-evento-meta.php:24
+msgid "Posti esauriti"
+msgstr ""
+
+#: includes/class-ig-enna-evento-meta.php:25
+msgid "Iscrizioni chiuse"
+msgstr ""
+
+#: includes/class-ig-enna-evento-meta.php:66
+msgid "Dettagli evento"
+msgstr ""
+
+#: includes/class-ig-enna-evento-meta.php:115
+msgid "Stato iscrizioni"
+msgstr ""
+
+#: includes/class-ig-enna-evento-meta.php:127
+msgid "Luogo / Sala"
+msgstr ""
+
+#: includes/class-ig-enna-evento-meta.php:130
+msgid "es. Sala Cerere · Castello di Lombardia"
+msgstr ""
+
+#: includes/class-ig-enna-evento-meta.php:135
+msgid "URL (per eventi online)"
+msgstr ""
+
+#: includes/class-ig-enna-evento-meta.php:148
+msgid "Target (etichetta)"
+msgstr ""
+
+#: includes/class-ig-enna-evento-meta.php:151
+msgid "es. 18–30 anni"
+msgstr ""
+
+#: includes/class-ig-enna-gdpr.php:17
+#: includes/class-ig-enna-gdpr.php:41
+#: includes/class-ig-enna-gdpr.php:97
+msgid "Ticket Informagiovani"
+msgstr ""
+
+#: includes/class-ig-enna-gdpr.php:21
+#: includes/class-ig-enna-gdpr.php:45
+#: includes/class-ig-enna-gdpr.php:120
+msgid "Appuntamenti Informagiovani"
+msgstr ""
+
+#: includes/class-ig-enna-gdpr.php:25
+#: includes/class-ig-enna-gdpr.php:49
+#: includes/class-ig-enna-gdpr.php:143
+msgid "Colloqui Informagiovani"
+msgstr ""
+
+#: includes/class-ig-enna-gdpr.php:29
+#: includes/class-ig-enna-gdpr.php:53
+#: includes/class-ig-enna-gdpr.php:168
+msgid "Salvataggi Informagiovani"
+msgstr ""
+
+#: includes/class-ig-enna-gdpr.php:33
+#: includes/class-ig-enna-gdpr.php:57
+#: includes/class-ig-enna-gdpr.php:187
+msgid "Newsletter Informagiovani"
+msgstr ""
+
+#: includes/class-ig-enna-gdpr.php:101
+#: public/views/area-personale.php:231
+msgid "Messaggio"
+msgstr ""
+
+#: includes/class-ig-enna-gdpr.php:105
+#: includes/class-ig-enna-gdpr.php:128
+msgid "Creato il"
+msgstr ""
+
+#: includes/class-ig-enna-gdpr.php:123
+msgid "Dal"
+msgstr ""
+
+#: includes/class-ig-enna-gdpr.php:124
+msgid "Al"
+msgstr ""
+
+#: includes/class-ig-enna-gdpr.php:149
+msgid "Next step"
+msgstr ""
+
+#: includes/class-ig-enna-gdpr.php:150
+msgid "Registrato"
+msgstr ""
+
+#: includes/class-ig-enna-gdpr.php:171
+#: includes/class-ig-enna-partner-meta.php:155
+#: includes/class-ig-enna-percorso-meta.php:151
+#: includes/class-ig-enna-scheda-meta.php:118
+#: public/views/single-ig-scheda-content.php:71
+msgid "Tipo"
+msgstr ""
+
+#: includes/class-ig-enna-gdpr.php:173
+msgid "Salvato il"
+msgstr ""
+
+#: includes/class-ig-enna-gdpr.php:192
+msgid "Confermata"
+msgstr ""
+
+#: includes/class-ig-enna-gdpr.php:192
+msgid "Sì"
+msgstr ""
+
+#: includes/class-ig-enna-gdpr.php:192
+msgid "No"
+msgstr ""
+
+#: includes/class-ig-enna-gdpr.php:193
+msgid "Creata il"
+msgstr ""
+
+#: includes/class-ig-enna-gdpr.php:211
+#, php-format
+msgid "%d ticket anonimizzato."
+msgid_plural "%d ticket anonimizzati."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-ig-enna-newsletter.php:44
+msgid "Iscrizione registrata. Riceverai un'email di conferma."
+msgstr ""
+
+#: includes/class-ig-enna-newsletter.php:46
+msgid "Iscrizione non riuscita."
+msgstr ""
+
+#: includes/class-ig-enna-newsletter.php:61
+msgid "Iscrizione confermata."
+msgstr ""
+
+#: includes/class-ig-enna-newsletter.php:61
+msgid "Link di conferma non valido o scaduto."
+msgstr ""
+
+#. translators: %s = nome organizzazione
+#: includes/class-ig-enna-newsletter.php:131
+#, php-format
+msgid "Conferma iscrizione · %s"
+msgstr ""
+
+#: includes/class-ig-enna-newsletter.php:135
+#, php-format
+msgid ""
+"Ciao,\n"
+"\n"
+"per completare l'iscrizione alla newsletter di %1$s clicca sul link qui sotto:\n"
+"\n"
+"%2$s\n"
+"\n"
+"Se non hai richiesto l'iscrizione, ignora questa email.\n"
+"\n"
+"— %1$s"
+msgstr ""
+
+#. translators: %1$s = nome org, %2$d = id ticket
+#: includes/class-ig-enna-notifications.php:28
+#, php-format
+msgid "[%1$s] Nuova richiesta R-%2$d"
+msgstr ""
+
+#: includes/class-ig-enna-notifications.php:32
+#, php-format
+msgid ""
+"È stata aperta una nuova richiesta R-%1$d.\n"
+"\n"
+"Utente: %2$s\n"
+"Oggetto: %3$s\n"
+"Area: %4$s\n"
+"Priorità: %5$s\n"
+"\n"
+"Messaggio:\n"
+"%6$s"
+msgstr ""
+
+#: includes/class-ig-enna-notifications.php:54
+#, php-format
+msgid "[%1$s] Aggiornamento richiesta R-%2$d · %3$s"
+msgstr ""
+
+#: includes/class-ig-enna-notifications.php:58
+#, php-format
+msgid ""
+"Ciao %1$s,\n"
+"\n"
+"lo stato della tua richiesta R-%2$d (\"%3$s\") è cambiato in: %4$s.\n"
+"\n"
+"Puoi consultare la richiesta nella tua area personale.\n"
+"\n"
+"— %5$s"
+msgstr ""
+
+#: includes/class-ig-enna-partner-meta.php:15
+msgid "Università / ITS"
+msgstr ""
+
+#: includes/class-ig-enna-partner-meta.php:16
+msgid "Ente pubblico"
+msgstr ""
+
+#: includes/class-ig-enna-partner-meta.php:17
+msgid "Camera di Commercio"
+msgstr ""
+
+#: includes/class-ig-enna-partner-meta.php:18
+msgid "Azienda"
+msgstr ""
+
+#: includes/class-ig-enna-partner-meta.php:19
+msgid "ONG / Terzo settore"
+msgstr ""
+
+#: includes/class-ig-enna-partner-meta.php:20
+msgid "Fondazione / ITS Academy"
+msgstr ""
+
+#: includes/class-ig-enna-partner-meta.php:21
+msgid "Altro"
+msgstr ""
+
+#: includes/class-ig-enna-partner-meta.php:61
+msgid "Dettagli partner"
+msgstr ""
+
+#: includes/class-ig-enna-partner-meta.php:81
+msgid "Tipo ente"
+msgstr ""
+
+#: includes/class-ig-enna-partner-meta.php:90
+msgid "Area di competenza"
+msgstr ""
+
+#: includes/class-ig-enna-partner-meta.php:91
+msgid "es. Formazione tecnica, Impresa, ..."
+msgstr ""
+
+#: includes/class-ig-enna-partner-meta.php:97
+msgid "Sito web"
+msgstr ""
+
+#: includes/class-ig-enna-partner-meta.php:108
+#: public/views/area-personale.php:355
+#: public/views/home.php:382
+#: public/views/list-partner.php:66
+msgid "Telefono"
+msgstr ""
+
+#: includes/class-ig-enna-partner-meta.php:112
+msgid "Indirizzo"
+msgstr ""
+
+#: includes/class-ig-enna-partner-meta.php:154
+#: public/views/area-personale.php:49
+#: public/views/area-personale.php:337
+msgid "Nome"
+msgstr ""
+
+#: includes/class-ig-enna-partner-meta.php:157
+msgid "Contatti"
+msgstr ""
+
+#: includes/class-ig-enna-percorso-meta.php:16
+msgid "Business Plan"
+msgstr ""
+
+#: includes/class-ig-enna-percorso-meta.php:17
+msgid "Microcredito"
+msgstr ""
+
+#: includes/class-ig-enna-percorso-meta.php:18
+#: public/views/home.php:74
+msgid "Resto al Sud"
+msgstr ""
+
+#: includes/class-ig-enna-percorso-meta.php:19
+msgid "Start-up giovanile"
+msgstr ""
+
+#: includes/class-ig-enna-percorso-meta.php:20
+msgid "Orientamento"
+msgstr ""
+
+#: includes/class-ig-enna-percorso-meta.php:50
+msgid "Dettagli percorso"
+msgstr ""
+
+#: includes/class-ig-enna-percorso-meta.php:58
+msgid "Utenti assegnati"
+msgstr ""
+
+#: includes/class-ig-enna-percorso-meta.php:76
+msgid "Tipo percorso"
+msgstr ""
+
+#: includes/class-ig-enna-percorso-meta.php:85
+#: includes/class-ig-enna-percorso-meta.php:152
+#: includes/class-ig-enna-scheda-meta.php:150
+#: public/views/area-personale.php:297
+#: public/views/single-ig-scheda-content.php:59
+msgid "Durata"
+msgstr ""
+
+#: includes/class-ig-enna-percorso-meta.php:86
+msgid "es. 8 settimane · 4 incontri"
+msgstr ""
+
+#: includes/class-ig-enna-percorso-meta.php:91
+msgid "Referente / Tutor"
+msgstr ""
+
+#: includes/class-ig-enna-percorso-meta.php:96
+msgid "Fasi del percorso"
+msgstr ""
+
+#: includes/class-ig-enna-percorso-meta.php:97
+msgid ""
+"Una fase per riga. Esempio:\n"
+"Ideazione\n"
+"Business Model Canvas\n"
+"Piano finanziario\n"
+"Presentazione finale"
+msgstr ""
+
+#: includes/class-ig-enna-percorso-meta.php:98
+msgid "Una fase per riga."
+msgstr ""
+
+#: includes/class-ig-enna-percorso-meta.php:106
+msgid "Utenti che stanno seguendo questo percorso. Modifica l'assegnazione dalla scheda dell'utente."
+msgstr ""
+
+#: includes/class-ig-enna-percorso-meta.php:114
+msgid "Nessun utente assegnato."
+msgstr ""
+
+#: includes/class-ig-enna-percorso-meta.php:153
+msgid "Utenti"
+msgstr ""
+
+#: includes/class-ig-enna-percorso-meta.php:203
+msgid "Percorsi impresa assegnati"
+msgstr ""
+
+#: includes/class-ig-enna-percorso-meta.php:217
+msgid "Nessun percorso disponibile. Creane uno dalla voce Percorsi."
+msgstr ""
+
+#: includes/class-ig-enna-rest.php:64
+msgid "Devi accedere per usare questa funzione."
+msgstr ""
+
+#: includes/class-ig-enna-rest.php:73
+msgid "Scheda non trovata."
+msgstr ""
+
+#: includes/class-ig-enna-rest.php:107
+msgid "Dati non validi."
+msgstr ""
+
+#: includes/class-ig-enna-roles.php:19
+msgid "Responsabile IG"
+msgstr ""
+
+#: includes/class-ig-enna-roles.php:29
+msgid "Operatore Informagiovani"
+msgstr ""
+
+#: includes/class-ig-enna-roles.php:42
+msgid "Editor Schede IG"
+msgstr ""
+
+#: includes/class-ig-enna-roles.php:54
+msgid "Partner IG"
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:17
+msgid "Da verificare"
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:18
+msgid "Validata"
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:19
+msgid "Pubblicata"
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:20
+msgid "Da aggiornare"
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:21
+#: public/class-ig-enna-frontend.php:295
+msgid "Scaduta"
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:22
+msgid "Archiviata"
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:29
+msgid "Ufficiale"
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:31
+msgid "Verificata"
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:74
+msgid "Dettagli scheda"
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:82
+msgid "Stato e fonte"
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:103
+msgid "Codice scheda"
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:108
+msgid "Identificativo univoco visualizzato nelle liste pubbliche e admin."
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:112
+msgid "Sintesi breve"
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:114
+msgid "Una o due frasi per le anteprime (max 280 caratteri)."
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:121
+msgid "es. Tirocinio, Concorso, Bando impresa, Bonus…"
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:127
+msgid "Scadenza (data)"
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:130
+msgid "Lascia vuoto per \"Sempre aperta\"."
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:133
+msgid "Etichetta scadenza"
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:136
+msgid "es. 17 marzo 2026 · 12:00"
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:143
+#: public/views/single-ig-scheda-content.php:55
+msgid "Contributo"
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:146
+msgid "es. 550–700€ al mese"
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:153
+msgid "es. 2–12 mesi"
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:171
+msgid "Stato workflow"
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:179
+msgid "Stato editoriale interno (badge nella lista)."
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:186
+msgid "es. Invitalia, INDIRE, Comune di Enna"
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:191
+msgid "URL fonte"
+msgstr ""
+
+#: includes/class-ig-enna-scheda-meta.php:198
+msgid "Classe fonte"
+msgstr ""
+
+#: includes/class-ig-enna-taxonomies.php:15
+msgid "Aree tematiche"
+msgstr ""
+
+#: includes/class-ig-enna-taxonomies.php:27
+#: includes/class-ig-enna-taxonomies.php:28
+#: public/views/card-scheda.php:51
+#: public/views/list-opportunita.php:53
+#: public/views/single-ig-evento-content.php:70
+msgid "Target"
+msgstr ""
+
+#: includes/class-ig-enna-taxonomies.php:39
+msgid "Territori"
+msgstr ""
+
+#: includes/class-ig-enna-taxonomies.php:40
+#: public/views/list-opportunita.php:63
+#: public/views/single-ig-scheda-content.php:67
+msgid "Territorio"
+msgstr ""
+
+#: includes/class-ig-enna-taxonomies.php:51
+msgid "Fonti"
+msgstr ""
+
+#: includes/class-ig-enna-tickets.php:17
+msgid "Nuovo"
+msgstr ""
+
+#: includes/class-ig-enna-tickets.php:18
+msgid "Assegnato"
+msgstr ""
+
+#: includes/class-ig-enna-tickets.php:19
+msgid "In lavorazione"
+msgstr ""
+
+#: includes/class-ig-enna-tickets.php:20
+msgid "In attesa utente"
+msgstr ""
+
+#: includes/class-ig-enna-tickets.php:21
+msgid "Evaso"
+msgstr ""
+
+#: includes/class-ig-enna-tickets.php:22
+msgid "Chiuso"
+msgstr ""
+
+#: includes/class-ig-enna-tickets.php:28
+msgid "Bassa"
+msgstr ""
+
+#: includes/class-ig-enna-tickets.php:29
+msgid "Media"
+msgstr ""
+
+#: includes/class-ig-enna-tickets.php:30
+msgid "Alta"
+msgstr ""
+
+#: includes/helpers.php:33
+#: public/views/site-footer.php:61
+#: public/views/site-header.php:60
+msgid "Lavoro"
+msgstr ""
+
+#: includes/helpers.php:34
+#: public/views/site-footer.php:62
+#: public/views/site-header.php:61
+msgid "Formazione"
+msgstr ""
+
+#: includes/helpers.php:35
+msgid "Fare Impresa"
+msgstr ""
+
+#: includes/helpers.php:36
+msgid "Estero & Mobilità"
+msgstr ""
+
+#: includes/helpers.php:37
+msgid "Diritti"
+msgstr ""
+
+#: includes/helpers.php:38
+msgid "Cultura"
+msgstr ""
+
+#: includes/helpers.php:39
+msgid "Servizio Civile"
+msgstr ""
+
+#: includes/helpers.php:40
+#: public/views/site-footer.php:65
+msgid "Concorsi"
+msgstr ""
+
+#: public/class-ig-enna-frontend.php:298
+msgid "Oggi"
+msgstr ""
+
+#: public/class-ig-enna-frontend.php:300
+#, php-format
+msgid "%d giorno"
+msgid_plural "%d giorni"
+msgstr[0] ""
+msgstr[1] ""
+
+#: public/views/area-personale.php:22
+#: public/views/site-header.php:102
+msgid "Accedi"
+msgstr ""
+
+#: public/views/area-personale.php:26
+msgid "Email o username"
+msgstr ""
+
+#: public/views/area-personale.php:27
+#: public/views/area-personale.php:59
+msgid "Password"
+msgstr ""
+
+#: public/views/area-personale.php:28
+msgid "Entra"
+msgstr ""
+
+#: public/views/area-personale.php:35
+msgid "Hai dimenticato la password?"
+msgstr ""
+
+#: public/views/area-personale.php:42
+msgid "Registrati"
+msgstr ""
+
+#: public/views/area-personale.php:52
+#: public/views/area-personale.php:340
+msgid "Cognome"
+msgstr ""
+
+#: public/views/area-personale.php:67
+msgid "Crea account"
+msgstr ""
+
+#. translators: %s = nome utente
+#: public/views/area-personale.php:87
+#, php-format
+msgid "Ciao, %s"
+msgstr ""
+
+#. translators: %d = percentuale completamento profilo
+#: public/views/area-personale.php:93
+#, php-format
+msgid "Profilo completato al %d%%"
+msgstr ""
+
+#: public/views/area-personale.php:100
+msgid "Esci"
+msgstr ""
+
+#: public/views/area-personale.php:104
+msgid "Sezioni area personale"
+msgstr ""
+
+#: public/views/area-personale.php:107
+msgid "Panoramica"
+msgstr ""
+
+#: public/views/area-personale.php:108
+msgid "Salvati"
+msgstr ""
+
+#: public/views/area-personale.php:109
+msgid "Richieste"
+msgstr ""
+
+#: public/views/area-personale.php:111
+msgid "Profilo"
+msgstr ""
+
+#: public/views/area-personale.php:126
+msgid "Opportunità salvate"
+msgstr ""
+
+#: public/views/area-personale.php:130
+msgid "Completamento profilo"
+msgstr ""
+
+#: public/views/area-personale.php:143
+msgid "Richieste aperte"
+msgstr ""
+
+#: public/views/area-personale.php:146
+msgid "Vai alle richieste"
+msgstr ""
+
+#: public/views/area-personale.php:153
+msgid "Ultime opportunità salvate"
+msgstr ""
+
+#: public/views/area-personale.php:170
+#: public/views/area-personale.php:193
+msgid "Nessuna opportunità salvata"
+msgstr ""
+
+#: public/views/area-personale.php:171
+msgid "Sfoglia le opportunità e clicca \"Salva\" sulla card per ritrovarle qui."
+msgstr ""
+
+#: public/views/area-personale.php:194
+msgid "Inizia a esplorare le opportunità dell'Informagiovani."
+msgstr ""
+
+#: public/views/area-personale.php:204
+msgid "Nuova richiesta"
+msgstr ""
+
+#: public/views/area-personale.php:235
+#: public/views/form-booking.php:101
+msgid "Invia richiesta"
+msgstr ""
+
+#: public/views/area-personale.php:238
+msgid "Le mie richieste"
+msgstr ""
+
+#: public/views/area-personale.php:266
+msgid "Nessuna richiesta inviata"
+msgstr ""
+
+#: public/views/area-personale.php:267
+msgid "Usa il form sopra per scrivere allo sportello."
+msgstr ""
+
+#: public/views/area-personale.php:301
+msgid "Tutor"
+msgstr ""
+
+#: public/views/area-personale.php:307
+msgid "Fasi"
+msgstr ""
+
+#: public/views/area-personale.php:323
+msgid "Nessun percorso attivo"
+msgstr ""
+
+#: public/views/area-personale.php:324
+msgid "I percorsi vengono assegnati dagli operatori dopo un colloquio di orientamento."
+msgstr ""
+
+#: public/views/area-personale.php:335
+msgid "Dati anagrafici"
+msgstr ""
+
+#: public/views/area-personale.php:346
+msgid "Età"
+msgstr ""
+
+#: public/views/area-personale.php:349
+msgid "Città"
+msgstr ""
+
+#: public/views/area-personale.php:358
+msgid "Status"
+msgstr ""
+
+#: public/views/area-personale.php:370
+msgid "Interessi e competenze"
+msgstr ""
+
+#: public/views/area-personale.php:371
+msgid "Aree di interesse (separate da virgola)"
+msgstr ""
+
+#: public/views/area-personale.php:374
+msgid "Competenze (separate da virgola)"
+msgstr ""
+
+#: public/views/area-personale.php:377
+msgid "Lingue conosciute"
+msgstr ""
+
+#: public/views/area-personale.php:381
+msgid "Studi"
+msgstr ""
+
+#: public/views/area-personale.php:383
+msgid "Titolo di studio"
+msgstr ""
+
+#: public/views/area-personale.php:386
+msgid "Anno"
+msgstr ""
+
+#: public/views/area-personale.php:389
+msgid "Voto"
+msgstr ""
+
+#: public/views/area-personale.php:396
+msgid "Confermo di aver letto l'informativa sulla privacy"
+msgstr ""
+
+#: public/views/area-personale.php:399
+msgid "Salva profilo"
+msgstr ""
+
+#: public/views/card-scheda.php:57
+#: public/views/list-eventi.php:77
+msgid "Dove"
+msgstr ""
+
+#: public/views/card-scheda.php:112
+msgid "Salvata"
+msgstr ""
+
+#: public/views/form-booking.php:18
+msgid "Sportello orientamento · gratuito"
+msgstr ""
+
+#: public/views/form-booking.php:19
+#: public/views/home.php:87
+#: public/views/home.php:343
+#: public/views/home.php:367
+#: public/views/site-footer.php:80
+msgid "Prenota un colloquio"
+msgstr ""
+
+#: public/views/form-booking.php:20
+msgid "Inviaci una richiesta indicando data preferita e modalità. Un operatore ti contatterà per confermare lo slot."
+msgstr ""
+
+#: public/views/form-booking.php:29
+msgid "I tuoi dati"
+msgstr ""
+
+#: public/views/form-booking.php:31
+msgid "Nome e cognome"
+msgstr ""
+
+#: public/views/form-booking.php:38
+msgid "Telefono (facoltativo)"
+msgstr ""
+
+#: public/views/form-booking.php:46
+#, php-format
+msgid "Stai prenotando come %s. Confermeremo via email."
+msgstr ""
+
+#: public/views/form-booking.php:53
+msgid "Quando ti va bene?"
+msgstr ""
+
+#: public/views/form-booking.php:55
+msgid "Data preferita"
+msgstr ""
+
+#: public/views/form-booking.php:58
+msgid "Fascia oraria"
+msgstr ""
+
+#: public/views/form-booking.php:74
+#: public/views/home.php:380
+msgid "Sportello in Piazza Garibaldi, 1"
+msgstr ""
+
+#: public/views/form-booking.php:75
+#: public/views/home.php:381
+msgid "Google Meet o Zoom · 30 min"
+msgstr ""
+
+#: public/views/form-booking.php:90
+msgid "Di cosa vuoi parlare?"
+msgstr ""
+
+#: public/views/form-booking.php:91
+msgid "Argomento (facoltativo)"
+msgstr ""
+
+#: public/views/form-booking.php:92
+msgid "Es. cerco un tirocinio nel settore turistico, vorrei aprire un'attività…"
+msgstr ""
+
+#: public/views/form-booking.php:97
+msgid "Ho letto l'informativa sulla privacy e acconsento al trattamento dei dati."
+msgstr ""
+
+#: public/views/form-booking.php:107
+msgid "Sportello fisico"
+msgstr ""
+
+#: public/views/form-booking.php:111
+msgid "Contatti diretti"
+msgstr ""
+
+#: public/views/form-booking.php:116
+msgid "Cosa aspettarti"
+msgstr ""
+
+#: public/views/form-booking.php:118
+msgid "Conferma entro 48 ore lavorative"
+msgstr ""
+
+#: public/views/form-booking.php:119
+msgid "Durata indicativa: 30 minuti"
+msgstr ""
+
+#: public/views/form-booking.php:120
+msgid "Gratuito · senza vincolo"
+msgstr ""
+
+#: public/views/form-newsletter.php:15
+msgid "Iscriviti alla newsletter"
+msgstr ""
+
+#: public/views/form-newsletter.php:16
+msgid "Ricevi via email le nuove opportunità nelle aree che ti interessano."
+msgstr ""
+
+#: public/views/form-newsletter.php:27
+msgid "Aree di interesse"
+msgstr ""
+
+#: public/views/form-newsletter.php:36
+msgid "Iscrivimi"
+msgstr ""
+
+#: public/views/home.php:45
+msgid "Servizio del Comune di Enna"
+msgstr ""
+
+#: public/views/home.php:49
+msgid "Il punto di accesso alle <em>opportunità</em> per i giovani di Enna"
+msgstr ""
+
+#: public/views/home.php:56
+msgid "Lavoro, formazione, impresa, estero, concorsi, eventi e servizi utili — verificati dagli operatori dello sportello, in un'unica piattaforma."
+msgstr ""
+
+#: public/views/home.php:64
+msgid "Cerca lavoro, corsi, concorsi, bonus, eventi…"
+msgstr ""
+
+#: public/views/home.php:65
+msgid "Cerca"
+msgstr ""
+
+#: public/views/home.php:69
+msgid "Ricerche popolari:"
+msgstr ""
+
+#: public/views/home.php:72
+msgid "Servizio civile"
+msgstr ""
+
+#: public/views/home.php:73
+msgid "Erasmus+"
+msgstr ""
+
+#: public/views/home.php:75
+msgid "Concorsi Enna"
+msgstr ""
+
+#: public/views/home.php:76
+msgid "Bonus cultura"
+msgstr ""
+
+#: public/views/home.php:93
+#: public/views/home.php:94
+msgid "Lo sportello in numeri"
+msgstr ""
+
+#: public/views/home.php:98
+msgid "Opportunità attive"
+msgstr ""
+
+#: public/views/home.php:102
+msgid "Giovani registrati"
+msgstr ""
+
+#: public/views/home.php:106
+msgid "Eventi in calendario"
+msgstr ""
+
+#: public/views/home.php:110
+msgid "Risposta ticket"
+msgstr ""
+
+#: public/views/home.php:115
+msgid "Sportello aperto · Lun-Ven 9:00-13:00 / 15:00-17:30"
+msgstr ""
+
+#: public/views/home.php:125
+msgid "Da dove vuoi partire?"
+msgstr ""
+
+#: public/views/home.php:126
+msgid "Percorsi rapidi"
+msgstr ""
+
+#: public/views/home.php:130
+msgid "Esplora tutti i servizi →"
+msgstr ""
+
+#: public/views/home.php:138
+msgid "Cerco lavoro"
+msgstr ""
+
+#: public/views/home.php:138
+msgid "Offerte, CPI, tirocini retribuiti e accompagnamento alla candidatura."
+msgstr ""
+
+#: public/views/home.php:139
+msgid "Voglio formarmi"
+msgstr ""
+
+#: public/views/home.php:139
+msgid "Corsi, borse di studio, ITS, dottorati e percorsi professionalizzanti."
+msgstr ""
+
+#: public/views/home.php:140
+msgid "Voglio aprire un'impresa"
+msgstr ""
+
+#: public/views/home.php:140
+msgid "Business plan, microcredito, bandi giovani e accompagnamento dedicato."
+msgstr ""
+
+#: public/views/home.php:141
+msgid "Voglio andare all'estero"
+msgstr ""
+
+#: public/views/home.php:141
+msgid "Erasmus+, Corpo Europeo di Solidarietà, work&travel e mobilità internazionale."
+msgstr ""
+
+#: public/views/home.php:142
+msgid "Cerco un concorso"
+msgstr ""
+
+#: public/views/home.php:142
+msgid "Concorsi di Comune, Regione, Stato ed enti partecipati a misura di NEET."
+msgstr ""
+
+#: public/views/home.php:143
+msgid "Ho bisogno di un servizio"
+msgstr ""
+
+#: public/views/home.php:143
+msgid "Salute, casa, diritti, supporto psicologico, residenza, ISEE e bonus."
+msgstr ""
+
+#: public/views/home.php:157
+msgid "Esplora →"
+msgstr ""
+
+#: public/views/home.php:168
+msgid "Aggiornate dagli operatori"
+msgstr ""
+
+#: public/views/home.php:169
+msgid "Opportunità in evidenza"
+msgstr ""
+
+#: public/views/home.php:172
+msgid "Vedi tutte →"
+msgstr ""
+
+#. translators: %s = days
+#: public/views/home.php:197
+#, php-format
+msgid "Scade tra %s giorno"
+msgid_plural "Scade tra %s giorni"
+msgstr[0] ""
+msgstr[1] ""
+
+#: public/views/home.php:228
+msgid "Scadenze imminenti"
+msgstr ""
+
+#: public/views/home.php:229
+msgid "Non perdere queste opportunità"
+msgstr ""
+
+#: public/views/home.php:232
+msgid "Tutte →"
+msgstr ""
+
+#: public/views/home.php:247
+msgid "giorni"
+msgstr ""
+
+#. translators: %s = formatted date
+#: public/views/home.php:258
+#, php-format
+msgid "Scade il %s"
+msgstr ""
+
+#: public/views/home.php:274
+msgid "Eventi prossimi"
+msgstr ""
+
+#: public/views/home.php:275
+msgid "Sportello e partner del territorio"
+msgstr ""
+
+#: public/views/home.php:278
+msgid "Calendario →"
+msgstr ""
+
+#: public/views/home.php:303
+msgid "Info"
+msgstr ""
+
+#: public/views/home.php:315
+msgid "In 4 passi"
+msgstr ""
+
+#: public/views/home.php:317
+msgid "Come funziona il <em>servizio</em>"
+msgstr ""
+
+#: public/views/home.php:319
+msgid "Da un'idea generica a un percorso costruito su misura con i tuoi operatori dello sportello. Tutto in un'unica piattaforma, gratuita e pubblica."
+msgstr ""
+
+#: public/views/home.php:321
+msgid "Crea il tuo profilo"
+msgstr ""
+
+#: public/views/home.php:329
+msgid "Cerca un'opportunità"
+msgstr ""
+
+#: public/views/home.php:330
+msgid "Esplora schede informative su lavoro, corsi, concorsi e bandi filtrate per età, interessi e territorio."
+msgstr ""
+
+#: public/views/home.php:336
+msgid "Salva ciò che ti interessa"
+msgstr ""
+
+#: public/views/home.php:337
+msgid "Tieni traccia di scadenze, requisiti e documenti. Ricevi promemoria automatici prima della chiusura."
+msgstr ""
+
+#: public/views/home.php:344
+msgid "Parla con un operatore in presenza, in videochiamata o al telefono. Lo sportello è gratuito."
+msgstr ""
+
+#: public/views/home.php:350
+msgid "Costruisci il tuo percorso"
+msgstr ""
+
+#: public/views/home.php:351
+msgid "Insieme agli operatori definisci obiettivi, azioni e tappe. Tieni tutto nella tua area personale."
+msgstr ""
+
+#: public/views/home.php:361
+msgid "Orientamento personalizzato"
+msgstr ""
+
+#: public/views/home.php:362
+msgid "Hai bisogno di un confronto?"
+msgstr ""
+
+#: public/views/home.php:363
+msgid "Parla con uno dei nostri operatori. Insieme analizziamo la tua situazione, definiamo un percorso e ti accompagniamo nelle candidature."
+msgstr ""
+
+#: public/views/home.php:372
+msgid "Invia una richiesta"
+msgstr ""
+
+#: public/views/home.php:378
+msgid "Modalità colloquio"
+msgstr ""
+
+#: public/views/home.php:381
+msgid "Videochiamata"
+msgstr ""
+
+#: public/views/home.php:383
+msgid "Risposta entro 48 ore"
+msgstr ""
+
+#: public/views/list-eventi.php:14
+msgid "Eventi in programma"
+msgstr ""
+
+#: public/views/list-eventi.php:18
+#, php-format
+msgid "%d evento"
+msgid_plural "%d eventi"
+msgstr[0] ""
+msgstr[1] ""
+
+#: public/views/list-eventi.php:79
+#: public/views/single-ig-evento-content.php:62
+msgid "Link"
+msgstr ""
+
+#: public/views/list-eventi.php:93
+msgid "Nessun evento in programma"
+msgstr ""
+
+#: public/views/list-eventi.php:94
+msgid "Torna a trovarci: pubblichiamo continuamente nuovi eventi."
+msgstr ""
+
+#: public/views/list-opportunita.php:22
+msgid "Opportunità e servizi"
+msgstr ""
+
+#. translators: %d = number of results
+#: public/views/list-opportunita.php:27
+#, php-format
+msgid "%d risultato"
+msgid_plural "%d risultati"
+msgstr[0] ""
+msgstr[1] ""
+
+#: public/views/list-opportunita.php:35
+msgid "Filtri opportunità"
+msgstr ""
+
+#: public/views/list-opportunita.php:37
+msgid "Cerca opportunità"
+msgstr ""
+
+#: public/views/list-opportunita.php:39
+msgid "Cerca per titolo o contenuto…"
+msgstr ""
+
+#: public/views/list-opportunita.php:44
+msgid "Filtra per area"
+msgstr ""
+
+#: public/views/list-opportunita.php:54
+msgid "Filtra per target"
+msgstr ""
+
+#: public/views/list-opportunita.php:64
+msgid "Filtra per territorio"
+msgstr ""
+
+#: public/views/list-opportunita.php:74
+msgid "Filtra per scadenza"
+msgstr ""
+
+#: public/views/list-opportunita.php:76
+msgid "Urgenti (≤ 7gg)"
+msgstr ""
+
+#: public/views/list-opportunita.php:78
+msgid "Sempre aperte"
+msgstr ""
+
+#: public/views/list-opportunita.php:85
+msgid "Reset"
+msgstr ""
+
+#: public/views/list-opportunita.php:99
+msgid "Paginazione"
+msgstr ""
+
+#: public/views/list-opportunita.php:115
+msgid "Nessuna opportunità trovata"
+msgstr ""
+
+#: public/views/list-opportunita.php:116
+msgid "Prova a modificare i filtri o ad ampliare il periodo di scadenza."
+msgstr ""
+
+#: public/views/list-partner.php:12
+msgid "I nostri partner"
+msgstr ""
+
+#: public/views/list-partner.php:16
+#, php-format
+msgid "%d partner"
+msgid_plural "%d partner"
+msgstr[0] ""
+msgstr[1] ""
+
+#: public/views/list-partner.php:52
+msgid "Sito"
+msgstr ""
+
+#: public/views/list-partner.php:72
+msgid "Sede"
+msgstr ""
+
+#: public/views/list-partner.php:82
+msgid "Nessun partner pubblicato"
+msgstr ""
+
+#: public/views/list-partner.php:83
+msgid "L'elenco dei partner verrà aggiornato a breve."
+msgstr ""
+
+#: public/views/single-ig-evento-content.php:47
+#: public/views/single-ig-scheda-content.php:45
+msgid "Descrizione"
+msgstr ""
+
+#: public/views/single-ig-evento-content.php:55
+msgid "Informazioni"
+msgstr ""
+
+#: public/views/single-ig-scheda-content.php:52
+msgid "In sintesi"
+msgstr ""
+
+#: public/views/single-ig-scheda-content.php:63
+msgid "A chi è rivolta"
+msgstr ""
+
+#: public/views/single-ig-scheda-content.php:109
+msgid "Vai alla fonte"
+msgstr ""
+
+#: public/views/site-footer.php:16
+#: public/views/site-header.php:40
+msgid "Informagiovani Enna — home"
+msgstr ""
+
+#: public/views/site-footer.php:26
+msgid "Sportello orientamento del Comune di Enna per giovani tra i 15 e i 35 anni. Gratuito, verificato, sempre aggiornato."
+msgstr ""
+
+#: public/views/site-footer.php:43
+msgid "Piazza Garibaldi, 1 · 94100 Enna"
+msgstr ""
+
+#: public/views/site-footer.php:50
+msgid "Servizi"
+msgstr ""
+
+#: public/views/site-footer.php:60
+msgid "Tutte le opportunità"
+msgstr ""
+
+#: public/views/site-footer.php:63
+#: public/views/site-header.php:62
+msgid "Fare impresa"
+msgstr ""
+
+#: public/views/site-footer.php:64
+#: public/views/site-header.php:63
+msgid "Estero"
+msgstr ""
+
+#: public/views/site-footer.php:77
+msgid "Sportello"
+msgstr ""
+
+#: public/views/site-footer.php:83
+#: public/views/site-header.php:91
+#: public/views/site-header.php:124
+msgid "Area personale"
+msgstr ""
+
+#: public/views/site-footer.php:90
+msgid "Orari"
+msgstr ""
+
+#: public/views/site-footer.php:92
+msgid "Lun–Ven"
+msgstr ""
+
+#: public/views/site-footer.php:101
+msgid "Sito istituzionale"
+msgstr ""
+
+#: public/views/site-footer.php:102
+msgid "Privacy Policy"
+msgstr ""
+
+#: public/views/site-footer.php:103
+msgid "Note legali"
+msgstr ""
+
+#: public/views/site-footer.php:104
+#: public/views/site-header.php:30
+msgid "Accessibilità"
+msgstr ""
+
+#: public/views/site-footer.php:105
+msgid "Cookie policy"
+msgstr ""
+
+#: public/views/site-footer.php:120
+msgid "Dati aggiornati dagli operatori dello sportello"
+msgstr ""
+
+#: public/views/site-header.php:18
+msgid "Servizio per i giovani"
+msgstr ""
+
+#: public/views/site-header.php:28
+msgid "Salta al contenuto"
+msgstr ""
+
+#: public/views/site-header.php:36
+msgid "Navigazione principale"
+msgstr ""
+
+#: public/views/site-header.php:59
+msgid "Opportunità"
+msgstr ""
+
+#: public/views/site-header.php:81
+#: public/views/site-header.php:121
+msgid "Prenota colloquio"
+msgstr ""
+
+#: public/views/site-header.php:107
+msgid "Apri menu"
+msgstr ""
