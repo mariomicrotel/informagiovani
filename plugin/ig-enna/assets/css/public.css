@@ -12,7 +12,7 @@
 .ig-enna a { color: var(--ig-primary, #143f7a); }
 .ig-enna h1, .ig-enna h2, .ig-enna h3, .ig-enna h4 {
 	font-family: var(--ig-font-display, inherit);
-	color: var(--ig-ink-900, #0c1a2c);
+	color: #c93030;
 	letter-spacing: -0.01em;
 	margin: 0;
 	text-wrap: balance;
@@ -54,10 +54,14 @@
 	white-space: nowrap; cursor: pointer; text-decoration: none;
 	transition: background .15s, border-color .15s, color .15s;
 }
-.ig-enna-btn--primary   { background: var(--ig-primary, #143f7a); color: #fff; }
-.ig-enna-btn--primary:hover { background: var(--ig-primary-hover, #0e2e58); color: #fff; }
-.ig-enna-btn--secondary { background: #fff; color: var(--ig-ink-900, #0c1a2c); border-color: var(--ig-border, #d6dce5); }
-.ig-enna-btn--secondary:hover { background: var(--ig-ink-75, #f3f5f8); }
+.ig-enna-btn--primary,
+.ig-enna .ig-enna-btn--primary   { background: var(--ig-primary, #143f7a); color: #fff; }
+.ig-enna-btn--primary:hover,
+.ig-enna .ig-enna-btn--primary:hover { background: #c93030; color: #fff; }
+.ig-enna-btn--secondary,
+.ig-enna .ig-enna-btn--secondary { background: #fff; color: var(--ig-ink-900, #0c1a2c); border-color: var(--ig-border, #d6dce5); }
+.ig-enna-btn--secondary:hover,
+.ig-enna .ig-enna-btn--secondary:hover { background: var(--ig-ink-75, #f3f5f8); color: var(--ig-ink-900, #0c1a2c); }
 .ig-enna-btn--ghost     { background: transparent; color: var(--ig-ink-700, #2c3a4f); }
 .ig-enna-btn--ghost:hover { background: var(--ig-ink-100, #eef1f5); }
 .ig-enna-btn--sm { height: 34px; padding: 0 12px; font-size: 13px; }
