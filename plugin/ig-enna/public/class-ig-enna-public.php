@@ -22,6 +22,7 @@ class IG_Enna_Public {
 		// 'wp' fires after main query + after 'init' (shortcode registration).
 		add_action( 'wp',          [ __CLASS__, 'detect_page_type' ] );
 		add_action( 'wp_body_open', [ __CLASS__, 'inject_header' ], 5 );
+		add_action( 'wp_footer',    [ __CLASS__, 'inject_footer' ], 5 );
 	}
 
 	/**
@@ -78,6 +79,36 @@ class IG_Enna_Public {
 		$me     = $logged ? wp_get_current_user() : null;
 
 		include IG_ENNA_DIR . 'public/views/site-header.php';
+	}
+
+	/**
+	 * Inietta footer personalizzato prima che il tema stampi il suo.
+	 */
+	public static function inject_footer() {
+		if ( ! self::$plugin_page ) {
+			return;
+		}
+
+		$org   = ig_enna_get_setting( 'org_name', 'Informagiovani Enna' );
+		$phone = '0935 40 04 00';
+		$email = ig_enna_get_setting( 'contact_email', '' );
+		$home  = home_url( '/' );
+
+		$url_for = function ( $slugs, $fallback = '' ) {
+			foreach ( (array) $slugs as $slug ) {
+				$p = get_page_by_path( $slug );
+				if ( $p ) { return get_permalink( $p ); }
+			}
+			return $fallback;
+		};
+
+		$url_opp        = $url_for( [ 'lista-opportunita', 'opportunita' ], home_url( '/opportunita/' ) );
+		$url_eventi     = $url_for( [ 'lista-eventi', 'eventi' ],           home_url( '/eventi/' ) );
+		$url_area       = $url_for( [ 'area-personale' ],                   wp_login_url( $home ) );
+		$url_colloquio  = $url_for( [ 'prenota-colloquio', 'colloquio' ],   '' );
+		$url_newsletter = $url_for( [ 'iscriviti', 'newsletter' ],          '' );
+
+		include IG_ENNA_DIR . 'public/views/site-footer.php';
 	}
 
 	public static function body_class( $classes ) {

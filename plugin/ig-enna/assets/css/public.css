@@ -963,14 +963,98 @@
 }
 
 /* ============================================================
+ *  SITE FOOTER
+ * ============================================================ */
+
+.ig-enna-footer {
+	background: var(--ig-ink-900, #0c1a2c);
+	color: rgba(255,255,255,.65);
+	font-size: 14px;
+	margin-top: 0;
+}
+.ig-enna-footer__inner {
+	max-width: 1280px; margin: 0 auto; padding: 56px 24px 40px;
+	display: grid;
+	grid-template-columns: 1.6fr 1fr 1fr 1fr;
+	gap: 40px;
+}
+@media (max-width: 900px) {
+	.ig-enna-footer__inner { grid-template-columns: 1fr 1fr; gap: 32px; padding: 40px 20px 28px; }
+}
+@media (max-width: 560px) {
+	.ig-enna-footer__inner { grid-template-columns: 1fr; gap: 24px; }
+}
+
+/* Brand */
+.ig-enna-footer__logo-link {
+	display: inline-flex; align-items: center; gap: 10px;
+	text-decoration: none; color: #fff; margin-bottom: 16px;
+}
+.ig-enna-footer__logo-box {
+	width: 38px; height: 38px; flex: 0 0 auto;
+	background: var(--ig-primary, #143f7a);
+	border-radius: 8px;
+	display: flex; align-items: center; justify-content: center;
+	color: #fff;
+}
+.ig-enna-footer__org { font-weight: 700; font-size: 15px; color: #fff; line-height: 1.15; }
+.ig-enna-footer__city { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.5); }
+.ig-enna-footer__desc {
+	font-size: 13px; line-height: 1.6;
+	color: rgba(255,255,255,.55); margin: 0 0 20px;
+	max-width: 300px;
+}
+.ig-enna-footer__contacts { display: flex; flex-direction: column; gap: 8px; }
+.ig-enna-footer__contact-link {
+	display: inline-flex; align-items: center; gap: 7px;
+	color: rgba(255,255,255,.6); text-decoration: none;
+	font-size: 13px; transition: color .15s;
+}
+.ig-enna-footer__contact-link:hover { color: #fff; }
+
+/* Columns */
+.ig-enna-footer__col-title {
+	font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+	color: rgba(255,255,255,.4); margin: 0 0 14px;
+}
+.ig-enna-footer__links {
+	list-style: none; margin: 0; padding: 0;
+	display: flex; flex-direction: column; gap: 8px;
+}
+.ig-enna-footer__links a {
+	color: rgba(255,255,255,.65); text-decoration: none;
+	font-size: 14px; transition: color .15s;
+}
+.ig-enna-footer__links a:hover { color: #fff; }
+.ig-enna-footer__hours {
+	font-size: 13px; color: rgba(255,255,255,.55);
+	line-height: 1.6; margin: 0;
+}
+
+/* Bottom bar */
+.ig-enna-footer__bottom {
+	border-top: 1px solid rgba(255,255,255,.08);
+}
+.ig-enna-footer__bottom-inner {
+	max-width: 1280px; margin: 0 auto; padding: 16px 24px;
+	display: flex; justify-content: space-between; align-items: center; gap: 16px;
+	font-size: 12px; color: rgba(255,255,255,.35);
+	flex-wrap: wrap;
+}
+.ig-enna-footer__bottom-inner a { color: rgba(255,255,255,.5); text-decoration: none; }
+.ig-enna-footer__bottom-inner a:hover { color: rgba(255,255,255,.8); }
+
+/* ============================================================
  *  THEME COMPAT — ig-enna-home-page / ig-enna-booking-page
  *  Rimuove spaziature e titolo pagina che il tema (TT25 e simili)
  *  inserisce prima del contenuto shortcode.
  * ============================================================ */
 
-/* Nasconde il header TT25 su tutte le pagine plugin (sostituito dal nostro) */
+/* Nasconde header e footer TT25 su tutte le pagine plugin (sostituiti dai nostri) */
 .ig-enna-plugin-page header.wp-block-template-part,
-.ig-enna-plugin-page .wp-block-template-part[data-slug="header"] { display: none !important; }
+.ig-enna-plugin-page .wp-block-template-part[data-slug="header"],
+.ig-enna-plugin-page footer.wp-block-template-part,
+.ig-enna-plugin-page .wp-block-template-part[data-slug="footer"] { display: none !important; }
 .ig-enna-plugin-page .wp-site-blocks { padding-top: 0 !important; }
 
 /* Azzeramento margine/padding del main e del suo inner group */
