@@ -44,10 +44,31 @@
 		});
 	}
 
+	/* Hamburger sitenav */
+	function initHamburger() {
+		var btn    = document.querySelector('.ig-enna-sitenav__hamburger');
+		var drawer = document.getElementById('ig-enna-sitenav-mobile');
+		if (!btn || !drawer) return;
+		btn.addEventListener('click', function () {
+			var open = btn.getAttribute('aria-expanded') === 'true';
+			btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+			if (open) { drawer.setAttribute('hidden', ''); }
+			else      { drawer.removeAttribute('hidden'); }
+		});
+		/* Chiude il drawer se si ridimensiona oltre 900px */
+		window.addEventListener('resize', function () {
+			if (window.innerWidth > 900) {
+				btn.setAttribute('aria-expanded', 'false');
+				drawer.setAttribute('hidden', '');
+			}
+		});
+	}
+
 	ready(function () {
 		var btns = document.querySelectorAll('.ig-enna-save-btn');
 		for (var i = 0; i < btns.length; i++) {
 			btns[i].addEventListener('click', onSaveClick);
 		}
+		initHamburger();
 	});
 })();

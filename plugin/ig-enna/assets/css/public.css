@@ -830,10 +830,148 @@
 .ig-enna-btn--lg { height: 50px; padding: 0 24px; font-size: 16px; }
 
 /* ============================================================
+ *  SITE HEADER — topbar + sitenav
+ * ============================================================ */
+
+.ig-enna-site-header { position: relative; z-index: 500; }
+
+/* Topbar */
+.ig-enna-topbar {
+	background: var(--ig-ink-900, #0c1a2c);
+	color: rgba(255,255,255,.6);
+	font-size: 12px;
+}
+.ig-enna-topbar__inner {
+	max-width: 1280px; margin: 0 auto; padding: 0 24px;
+	height: 36px;
+	display: flex; align-items: center; justify-content: space-between;
+	gap: 16px;
+}
+.ig-enna-topbar__left { display: flex; align-items: center; gap: 8px; }
+.ig-enna-topbar__right { display: flex; align-items: center; gap: 8px; }
+.ig-enna-topbar__sep { opacity: .3; }
+.ig-enna-topbar__link {
+	color: rgba(255,255,255,.6);
+	text-decoration: none;
+	display: inline-flex; align-items: center; gap: 5px;
+	transition: color .15s;
+}
+.ig-enna-topbar__link:hover { color: #fff; }
+
+/* Sitenav */
+.ig-enna-sitenav {
+	background: #fff;
+	border-bottom: 1px solid var(--ig-border-soft, #eef1f5);
+	box-shadow: 0 1px 0 rgba(12,26,44,.06);
+	position: sticky; top: 0; z-index: 400;
+}
+.admin-bar .ig-enna-sitenav { top: 32px; }
+@media (max-width: 782px) { .admin-bar .ig-enna-sitenav { top: 46px; } }
+
+.ig-enna-sitenav__inner {
+	max-width: 1280px; margin: 0 auto; padding: 0 24px;
+	height: 68px;
+	display: flex; align-items: center; gap: 24px;
+}
+
+/* Brand */
+.ig-enna-sitenav__brand {
+	display: flex; align-items: center; gap: 10px;
+	text-decoration: none; flex: 0 0 auto;
+}
+.ig-enna-sitenav__logo-box {
+	width: 40px; height: 40px;
+	background: var(--ig-primary, #143f7a);
+	border-radius: 9px;
+	display: flex; align-items: center; justify-content: center;
+	color: #fff; flex: 0 0 auto;
+}
+.ig-enna-sitenav__org {
+	font-weight: 700; font-size: 16px;
+	color: var(--ig-ink-900, #0c1a2c); line-height: 1.15;
+}
+.ig-enna-sitenav__city {
+	font-size: 10px; font-weight: 700;
+	letter-spacing: .1em; text-transform: uppercase;
+	color: var(--ig-ink-500, #5b6779);
+}
+
+/* Nav links */
+.ig-enna-sitenav__nav {
+	display: flex; align-items: center; gap: 2px;
+	list-style: none; margin: 0; padding: 0; flex: 1;
+}
+.ig-enna-sitenav__link {
+	display: block; padding: 7px 11px;
+	border-radius: 6px;
+	font-size: 14px; font-weight: 500;
+	color: var(--ig-ink-700, #2d3a4a);
+	text-decoration: none; white-space: nowrap;
+	transition: background .15s, color .15s;
+}
+.ig-enna-sitenav__link:hover { background: var(--ig-ink-75, #f3f5f8); color: var(--ig-ink-900, #0c1a2c); }
+.ig-enna-sitenav__link--active { color: var(--ig-primary, #143f7a); font-weight: 600; }
+.ig-enna-sitenav__link--cta {
+	background: var(--ig-primary, #143f7a); color: #fff !important;
+	margin-left: 6px; padding: 7px 14px;
+}
+.ig-enna-sitenav__link--cta:hover { background: var(--ig-primary-hover, #0e2e58) !important; }
+
+/* Actions */
+.ig-enna-sitenav__actions {
+	display: flex; align-items: center; gap: 8px; flex: 0 0 auto;
+}
+.ig-enna-sitenav__area-link {
+	font-size: 14px; font-weight: 500;
+	color: var(--ig-ink-700, #2d3a4a); text-decoration: none;
+	padding: 7px 10px; border-radius: 6px;
+	transition: color .15s, background .15s;
+}
+.ig-enna-sitenav__area-link:hover { color: var(--ig-primary, #143f7a); background: var(--ig-ink-75, #f3f5f8); }
+.ig-enna-sitenav__login-btn { height: 38px; padding: 0 16px; font-size: 14px; }
+
+/* Hamburger (visibile solo mobile) */
+.ig-enna-sitenav__hamburger {
+	display: none; background: none; border: none; cursor: pointer;
+	padding: 6px; border-radius: 6px; color: var(--ig-ink-900, #0c1a2c);
+}
+.ig-enna-sitenav__hamburger:hover { background: var(--ig-ink-75, #f3f5f8); }
+
+/* Mobile drawer */
+.ig-enna-sitenav__mobile {
+	border-top: 1px solid var(--ig-border-soft, #eef1f5);
+	padding: 12px 24px 16px;
+	background: #fff;
+}
+.ig-enna-sitenav__mobile ul { list-style: none; margin: 0; padding: 0; }
+.ig-enna-sitenav__mobile-link {
+	display: block; padding: 11px 4px;
+	border-bottom: 1px solid var(--ig-border-soft, #eef1f5);
+	font-size: 15px; font-weight: 500;
+	color: var(--ig-ink-800, #1a2636); text-decoration: none;
+}
+.ig-enna-sitenav__mobile-link:hover { color: var(--ig-primary, #143f7a); }
+
+@media (max-width: 900px) {
+	.ig-enna-sitenav__nav,
+	.ig-enna-sitenav__area-link { display: none; }
+	.ig-enna-sitenav__hamburger { display: flex; }
+}
+@media (max-width: 480px) {
+	.ig-enna-topbar__left span:not(:first-child),
+	.ig-enna-topbar__sep { display: none; }
+}
+
+/* ============================================================
  *  THEME COMPAT — ig-enna-home-page / ig-enna-booking-page
  *  Rimuove spaziature e titolo pagina che il tema (TT25 e simili)
  *  inserisce prima del contenuto shortcode.
  * ============================================================ */
+
+/* Nasconde il header TT25 su tutte le pagine plugin (sostituito dal nostro) */
+.ig-enna-plugin-page header.wp-block-template-part,
+.ig-enna-plugin-page .wp-block-template-part[data-slug="header"] { display: none !important; }
+.ig-enna-plugin-page .wp-site-blocks { padding-top: 0 !important; }
 
 /* Azzeramento margine/padding del main e del suo inner group */
 .ig-enna-home-page main.wp-block-group,
@@ -847,9 +985,15 @@
 }
 
 /* Nasconde il titolo pagina generato dal tema */
-.ig-enna-home-page h1.wp-block-post-title,
-.ig-enna-home-page .page-title,
-.ig-enna-home-page .entry-title { display: none !important; }
+.ig-enna-plugin-page h1.wp-block-post-title,
+.ig-enna-plugin-page .page-title,
+.ig-enna-plugin-page .entry-title { display: none !important; }
+
+/* Riduci anche padding nelle altre pagine plugin */
+.ig-enna-plugin-page:not(.ig-enna-home-page) main.wp-block-group { margin-top: 0 !important; }
+.ig-enna-plugin-page:not(.ig-enna-home-page) main > .wp-block-group {
+	padding-top: var(--wp--preset--spacing--40, 1rem) !important;
+}
 
 /* Rimuove i vincoli di max-width dal wrapper .ig-enna sulla home:
    le sezioni interne gestiscono la propria larghezza. */
