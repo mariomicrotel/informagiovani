@@ -828,3 +828,55 @@
 .ig-enna-mode-option__body small { font-size: 12px; color: var(--ig-ink-500, #5b6779); }
 
 .ig-enna-btn--lg { height: 50px; padding: 0 24px; font-size: 16px; }
+
+/* ============================================================
+ *  THEME COMPAT — ig-enna-home-page / ig-enna-booking-page
+ *  Rimuove spaziature e titolo pagina che il tema (TT25 e simili)
+ *  inserisce prima del contenuto shortcode.
+ * ============================================================ */
+
+/* Azzeramento margine/padding del main e del suo inner group */
+.ig-enna-home-page main.wp-block-group,
+.ig-enna-home-page main[class*="wp-block"] {
+	margin-top: 0 !important;
+}
+.ig-enna-home-page main > .wp-block-group,
+.ig-enna-home-page main > [class*="wp-block-group"] {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+}
+
+/* Nasconde il titolo pagina generato dal tema */
+.ig-enna-home-page h1.wp-block-post-title,
+.ig-enna-home-page .page-title,
+.ig-enna-home-page .entry-title { display: none !important; }
+
+/* Rimuove i vincoli di max-width dal wrapper .ig-enna sulla home:
+   le sezioni interne gestiscono la propria larghezza. */
+.ig-enna-home-page .ig-enna.ig-enna-home {
+	max-width: none;
+	padding: 0;
+	margin: 0;
+}
+.ig-enna-home .ig-enna-section,
+.ig-enna-home .ig-enna-howit,
+.ig-enna-home .ig-enna-cta-block {
+	max-width: 1280px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 24px;
+	padding-right: 24px;
+}
+.ig-enna-home .ig-enna-hero {
+	border-radius: 0;
+	margin-top: 0;
+}
+
+/* Booking page: rimuove solo l'eccesso di padding del tema */
+.ig-enna-booking-page main.wp-block-group { margin-top: 0 !important; }
+.ig-enna-booking-page main > .wp-block-group {
+	padding-top: var(--ig-space-lg, 32px) !important;
+	padding-bottom: var(--ig-space-lg, 32px) !important;
+}
+.ig-enna-booking-page h1.wp-block-post-title,
+.ig-enna-booking-page .entry-title { display: none !important; }
