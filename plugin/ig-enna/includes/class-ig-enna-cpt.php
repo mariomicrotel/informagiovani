@@ -12,6 +12,32 @@ class IG_Enna_CPT {
 		self::register_evento();
 		self::register_partner();
 		self::register_percorso();
+		self::register_news();
+	}
+
+	private static function register_news() {
+		$labels = [
+			'name'          => __( 'News',          'ig-enna' ),
+			'singular_name' => __( 'News',          'ig-enna' ),
+			'menu_name'     => __( 'News',          'ig-enna' ),
+			'add_new_item'  => __( 'Aggiungi news', 'ig-enna' ),
+			'edit_item'     => __( 'Modifica news', 'ig-enna' ),
+			'search_items'  => __( 'Cerca news',    'ig-enna' ),
+		];
+
+		register_post_type( 'ig_news', [
+			'labels'          => $labels,
+			'public'          => true,
+			'show_ui'         => true,
+			'show_in_menu'    => false,
+			'show_in_rest'    => true,
+			'menu_icon'       => 'dashicons-megaphone',
+			'has_archive'     => 'news',
+			'rewrite'         => [ 'slug' => 'news', 'with_front' => false ],
+			'supports'        => [ 'title', 'editor', 'excerpt', 'thumbnail', 'author', 'revisions' ],
+			'capability_type' => 'post',
+			'map_meta_cap'    => true,
+		] );
 	}
 
 	private static function register_scheda() {

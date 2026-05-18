@@ -92,6 +92,14 @@ class IG_Enna_Admin_Menu {
 
 		add_submenu_page(
 			self::SLUG,
+			__( 'News', 'ig-enna' ),
+			__( 'News', 'ig-enna' ),
+			$cap,
+			'edit.php?post_type=ig_news'
+		);
+
+		add_submenu_page(
+			self::SLUG,
 			__( 'Report', 'ig-enna' ),
 			__( 'Report', 'ig-enna' ),
 			'ig_enna_view_reports',

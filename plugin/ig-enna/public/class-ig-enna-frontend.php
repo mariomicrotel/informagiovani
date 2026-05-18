@@ -27,7 +27,49 @@ class IG_Enna_Frontend {
 			IG_Enna_Assets::enqueue_public();
 			return self::render_single_evento( get_post(), $content );
 		}
+		if ( is_singular( 'ig_news' ) ) {
+			IG_Enna_Assets::enqueue_public();
+			return self::render_single_news( get_post(), $content );
+		}
 		return $content;
+	}
+
+	private static function render_single_news( $post, $original_content ) {
+		ob_start();
+		$ig_post = $post;
+		$ig_content = $original_content;
+		include IG_ENNA_DIR . 'public/views/single-ig-news-content.php';
+		return ob_get_clean();
+	}
+
+	public static function render_news_list( $atts = [] ) {
+		$atts = shortcode_atts( [
+			'per_page' => 9,
+		], $atts, 'ig_enna_news' );
+
+		$paged = max( 1, isset( $_GET['ig_page'] ) ? (int) $_GET['ig_page'] : 1 );
+		$args  = [
+			'post_type'      => 'ig_news',
+			'post_status'    => 'publish',
+			'posts_per_page' => max( 1, (int) $atts['per_page'] ),
+			'paged'          => $paged,
+			'orderby'        => 'date',
+			'order'          => 'DESC',
+		];
+		if ( ! empty( $_GET['ig_area'] ) ) {
+			$args['tax_query'] = [ [
+				'taxonomy' => 'ig_area',
+				'field'    => 'slug',
+				'terms'    => [ sanitize_title( wp_unslash( $_GET['ig_area'] ) ) ],
+			] ];
+		}
+		$query = new WP_Query( $args );
+
+		IG_Enna_Assets::enqueue_public();
+		ob_start();
+		include IG_ENNA_DIR . 'public/views/list-news.php';
+		wp_reset_postdata();
+		return ob_get_clean();
 	}
 
 	private static function render_single_scheda( $post, $original_content ) {

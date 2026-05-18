@@ -15,6 +15,11 @@ class IG_Enna_Shortcodes {
 		add_shortcode( 'ig_enna_newsletter',    [ __CLASS__, 'sc_newsletter' ] );
 		add_shortcode( 'ig_enna_home',          [ __CLASS__, 'sc_home' ] );
 		add_shortcode( 'ig_enna_prenota_colloquio', [ __CLASS__, 'sc_booking' ] );
+		add_shortcode( 'ig_enna_news',          [ __CLASS__, 'sc_news' ] );
+	}
+
+	public static function sc_news( $atts = [], $content = '' ) {
+		return IG_Enna_Frontend::render_news_list( (array) $atts );
 	}
 
 	public static function sc_home( $atts = [], $content = '' ) {

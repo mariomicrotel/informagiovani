@@ -8,7 +8,7 @@ defined( 'ABSPATH' ) || exit;
 class IG_Enna_Taxonomies {
 
 	public static function register() {
-		$post_types = [ 'ig_scheda', 'ig_evento' ];
+		$post_types = [ 'ig_scheda', 'ig_evento', 'ig_news' ];
 
 		register_taxonomy( 'ig_area', $post_types, [
 			'labels'            => [
