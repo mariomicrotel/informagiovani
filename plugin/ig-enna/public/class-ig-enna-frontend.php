@@ -123,6 +123,69 @@ class IG_Enna_Frontend {
 	 *  LISTA EVENTI
 	 * ===================================================== */
 
+	/* =====================================================
+	 *  HOMEPAGE
+	 * ===================================================== */
+
+	public static function render_home( $atts = [] ) {
+		IG_Enna_Assets::enqueue_public();
+
+		// Opportunità in evidenza: 4 più recenti pubblicate.
+		$hero_opps = new WP_Query( [
+			'post_type'      => 'ig_scheda',
+			'post_status'    => 'publish',
+			'posts_per_page' => 4,
+			'orderby'        => 'date',
+			'order'          => 'DESC',
+		] );
+
+		// Scadenze imminenti: 5 con deadline più vicina.
+		$today = current_time( 'Y-m-d' );
+		$deadlines = new WP_Query( [
+			'post_type'      => 'ig_scheda',
+			'post_status'    => 'publish',
+			'posts_per_page' => 5,
+			'meta_key'       => '_ig_enna_deadline',
+			'orderby'        => 'meta_value',
+			'order'          => 'ASC',
+			'meta_query'     => [ [ 'key' => '_ig_enna_deadline', 'value' => $today, 'compare' => '>=', 'type' => 'DATE' ] ],
+		] );
+
+		// Eventi prossimi: 4.
+		$events = new WP_Query( [
+			'post_type'      => 'ig_evento',
+			'post_status'    => 'publish',
+			'posts_per_page' => 4,
+			'meta_key'       => '_ig_enna_event_date',
+			'orderby'        => 'meta_value',
+			'order'          => 'ASC',
+			'meta_query'     => [ [ 'key' => '_ig_enna_event_date', 'value' => $today, 'compare' => '>=', 'type' => 'DATE' ] ],
+		] );
+
+		// KPI per il box numeri.
+		$kpi = [
+			'opportunita_attive' => (int) wp_count_posts( 'ig_scheda' )->publish,
+			'giovani_registrati' => (int) count_users()['avail_roles']['subscriber'] ?? 0,
+			'sla_ore'            => (int) ig_enna_get_setting( 'default_sla_hours', 48 ),
+		];
+
+		ob_start();
+		include IG_ENNA_DIR . 'public/views/home.php';
+		wp_reset_postdata();
+		return ob_get_clean();
+	}
+
+	/* =====================================================
+	 *  PRENOTA COLLOQUIO
+	 * ===================================================== */
+
+	public static function render_booking( $atts = [] ) {
+		IG_Enna_Assets::enqueue_public();
+		ob_start();
+		include IG_ENNA_DIR . 'public/views/form-booking.php';
+		return ob_get_clean();
+	}
+
 	public static function render_partner_list( $atts = [] ) {
 		$atts = shortcode_atts( [
 			'tipo'     => '',

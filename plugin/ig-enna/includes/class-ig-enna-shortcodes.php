@@ -13,6 +13,16 @@ class IG_Enna_Shortcodes {
 		add_shortcode( 'ig_enna_eventi',        [ __CLASS__, 'sc_eventi' ] );
 		add_shortcode( 'ig_enna_partner',       [ __CLASS__, 'sc_partner' ] );
 		add_shortcode( 'ig_enna_newsletter',    [ __CLASS__, 'sc_newsletter' ] );
+		add_shortcode( 'ig_enna_home',          [ __CLASS__, 'sc_home' ] );
+		add_shortcode( 'ig_enna_prenota_colloquio', [ __CLASS__, 'sc_booking' ] );
+	}
+
+	public static function sc_home( $atts = [], $content = '' ) {
+		return IG_Enna_Frontend::render_home( (array) $atts );
+	}
+
+	public static function sc_booking( $atts = [], $content = '' ) {
+		return IG_Enna_Frontend::render_booking( (array) $atts );
 	}
 
 	public static function sc_partner( $atts = [], $content = '' ) {

@@ -10,12 +10,14 @@ class IG_Enna_Auth {
 	const REGISTER_NONCE = 'ig_enna_register';
 	const PROFILE_NONCE  = 'ig_enna_profile';
 	const TICKET_NONCE   = 'ig_enna_ticket';
+	const BOOKING_NONCE  = 'ig_enna_booking';
 
 	public static function init() {
 		// Handler form (POST) prima che WP scriva headers.
 		add_action( 'init', [ __CLASS__, 'handle_register' ] );
 		add_action( 'init', [ __CLASS__, 'handle_profile' ] );
 		add_action( 'init', [ __CLASS__, 'handle_ticket' ] );
+		add_action( 'init', [ __CLASS__, 'handle_booking' ] );
 
 		// Assegna ruolo di default ai nuovi utenti registrati.
 		add_action( 'register_form', [ __CLASS__, 'add_consent_to_default_form' ] );
@@ -140,6 +142,95 @@ class IG_Enna_Auth {
 			self::add_notice( 'error', __( 'Compila oggetto e messaggio.', 'ig-enna' ) );
 		}
 		wp_safe_redirect( add_query_arg( 'ig_tab', 'richieste', get_permalink() ) );
+		exit;
+	}
+
+	/**
+	 * Handler POST per prenotazione colloquio dal frontend pubblico.
+	 */
+	public static function handle_booking() {
+		if ( empty( $_POST['ig_enna_action'] ) || $_POST['ig_enna_action'] !== 'booking_create' ) {
+			return;
+		}
+		if ( ! isset( $_POST['_ig_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_ig_nonce'] ) ), self::BOOKING_NONCE ) ) {
+			self::add_notice( 'error', __( 'Sessione scaduta. Riprova.', 'ig-enna' ) );
+			return;
+		}
+
+		$date = isset( $_POST['date'] ) ? sanitize_text_field( wp_unslash( $_POST['date'] ) ) : '';
+		$time = isset( $_POST['time'] ) ? sanitize_text_field( wp_unslash( $_POST['time'] ) ) : '';
+		if ( ! preg_match( '/^\d{4}-\d{2}-\d{2}$/', $date ) || ! preg_match( '/^\d{2}:\d{2}$/', $time ) ) {
+			self::add_notice( 'error', __( 'Data o ora non valide.', 'ig-enna' ) );
+			return;
+		}
+
+		$mode = isset( $_POST['mode'] ) ? sanitize_key( wp_unslash( $_POST['mode'] ) ) : 'presenza';
+		if ( ! array_key_exists( $mode, IG_Enna_Appointments::modes() ) ) { $mode = 'presenza'; }
+
+		$user_id = get_current_user_id();
+		$guest_name  = isset( $_POST['guest_name'] )  ? sanitize_text_field( wp_unslash( $_POST['guest_name'] ) )  : '';
+		$guest_email = isset( $_POST['guest_email'] ) ? sanitize_email( wp_unslash( $_POST['guest_email'] ) )     : '';
+		$guest_phone = isset( $_POST['guest_phone'] ) ? sanitize_text_field( wp_unslash( $_POST['guest_phone'] ) ) : '';
+		$topic       = isset( $_POST['topic'] )       ? sanitize_textarea_field( wp_unslash( $_POST['topic'] ) )   : '';
+		$consent     = ! empty( $_POST['ig_consent_priv'] );
+
+		if ( ! $user_id ) {
+			if ( ! $guest_name || ! is_email( $guest_email ) ) {
+				self::add_notice( 'error', __( 'Inserisci nome ed email validi.', 'ig-enna' ) );
+				return;
+			}
+		}
+		if ( ! $consent ) {
+			self::add_notice( 'error', __( 'È necessario accettare l\'informativa.', 'ig-enna' ) );
+			return;
+		}
+
+		$notes_lines = [];
+		if ( ! $user_id ) {
+			$notes_lines[] = sprintf( '%s · %s', $guest_name, $guest_email );
+			if ( $guest_phone ) {
+				$notes_lines[] = $guest_phone;
+			}
+		}
+		if ( $topic ) {
+			$notes_lines[] = $topic;
+		}
+
+		$id = IG_Enna_Appointments::create( [
+			'user_id'     => $user_id,
+			'operator_id' => 0,
+			'slot_start'  => $date . ' ' . $time . ':00',
+			'slot_end'    => $date . ' ' . $time . ':00',
+			'mode'        => $mode,
+			'status'      => 'requested',
+			'notes'       => implode( "\n", $notes_lines ),
+		] );
+
+		if ( $id ) {
+			IG_Enna_Audit::log( 'appointment_request', 'appointment', $id, [
+				'mode'  => $mode,
+				'guest' => $user_id ? null : $guest_email,
+			] );
+
+			// Notifica staff.
+			$org   = ig_enna_get_setting( 'org_name', 'Informagiovani Enna' );
+			$staff = ig_enna_get_setting( 'contact_email', '' ) ?: get_option( 'admin_email' );
+			wp_mail(
+				$staff,
+				sprintf( '[%s] Nuova richiesta colloquio · %s', $org, $date . ' ' . $time ),
+				sprintf(
+					"Nuova richiesta di colloquio.\n\nQuando: %s alle %s\nModalità: %s\nUtente: %s\n\nNote:\n%s",
+					$date, $time, $mode,
+					$user_id ? wp_get_current_user()->display_name . ' · ' . wp_get_current_user()->user_email : $guest_name . ' · ' . $guest_email,
+					implode( "\n", $notes_lines )
+				)
+			);
+
+			self::add_notice( 'success', __( 'Richiesta inviata. Ti contatteremo per confermare lo slot.', 'ig-enna' ) );
+		} else {
+			self::add_notice( 'error', __( 'Impossibile salvare la richiesta. Riprova.', 'ig-enna' ) );
+		}
+		wp_safe_redirect( remove_query_arg( [ 'ig_enna_action', '_ig_nonce' ] ) );
 		exit;
 	}
 
