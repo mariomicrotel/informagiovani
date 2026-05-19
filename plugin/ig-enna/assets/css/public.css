@@ -1271,6 +1271,19 @@ body.ig-enna-plugin-page {
 .ig-enna-context .entry-meta,
 .ig-enna-context .entry-footer { display: none !important; }
 
+/* Byline "Scritto da X in Y" del tema TT25: quando autore/termini sono
+   vuoti i blocchi interni non vengono renderizzati, quindi i selettori
+   :has(post-author-name) sopra non scattano. Cattura il wp-block-group
+   posizionalmente: è il gruppo immediatamente PRIMA del wp-block-post-content
+   e/o subito DOPO il wp-block-post-title. */
+.ig-enna-context .wp-block-group:has(+ .wp-block-post-content),
+.ig-enna-context .wp-block-post-title + .wp-block-group,
+.ig-enna-context h1.wp-block-post-title + .wp-block-group,
+/* Variante: il group è la PRIMA cosa dentro article, prima del nostro contenuto. */
+.ig-enna-context article > .wp-block-group:first-of-type:has(+ .wp-block-post-content),
+/* Variante senza wrapper article: dentro main, gruppo prima del nostro contenuto. */
+.ig-enna-context main > .wp-block-group:has(+ .wp-block-post-content) { display: none !important; }
+
 /* ===== Titolo single CPT plugin ===== */
 .ig-enna-single__title {
 	font-size: 36px;
