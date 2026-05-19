@@ -14,13 +14,7 @@ $year = gmdate( 'Y' );
 		<!-- Colonna brand -->
 		<div class="ig-enna-footer__brand">
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="ig-enna-footer__logo-link" aria-label="<?php esc_attr_e( 'Informagiovani Enna — home', 'ig-enna' ); ?>">
-				<div class="ig-enna-footer__logo-box" aria-hidden="true">
-					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 20 2 20"/></svg>
-				</div>
-				<div>
-					<div class="ig-enna-footer__org">Informagiovani</div>
-					<div class="ig-enna-footer__city">ENNA</div>
-				</div>
+				<img src="<?php echo esc_url( IG_ENNA_URL . 'assets/images/logo.png' ); ?>" alt="<?php esc_attr_e( 'Informagiovani Enna', 'ig-enna' ); ?>" class="ig-enna-footer__logo-img" width="200" height="68" />
 			</a>
 			<p class="ig-enna-footer__desc">
 				<?php esc_html_e( 'Sportello orientamento del Comune di Enna per giovani tra i 15 e i 35 anni. Gratuito, verificato, sempre aggiornato.', 'ig-enna' ); ?>

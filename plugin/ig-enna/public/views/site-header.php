@@ -38,13 +38,7 @@ defined( 'ABSPATH' ) || exit;
 
 			<!-- Brand -->
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="ig-enna-sitenav__brand" aria-label="<?php esc_attr_e( 'Informagiovani Enna — home', 'ig-enna' ); ?>">
-				<div class="ig-enna-sitenav__logo-box" aria-hidden="true">
-					<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 20 2 20"/></svg>
-				</div>
-				<div class="ig-enna-sitenav__brand-text">
-					<div class="ig-enna-sitenav__org">Informagiovani</div>
-					<div class="ig-enna-sitenav__city">ENNA</div>
-				</div>
+				<img src="<?php echo esc_url( IG_ENNA_URL . 'assets/images/logo.png' ); ?>" alt="<?php esc_attr_e( 'Informagiovani Enna', 'ig-enna' ); ?>" class="ig-enna-sitenav__logo-img" width="220" height="76" />
 			</a>
 
 			<!-- Nav links (desktop) -->

@@ -890,6 +890,14 @@
 	display: flex; align-items: center; justify-content: center;
 	color: #fff; flex: 0 0 auto;
 }
+.ig-enna-sitenav__logo-img {
+	display: block;
+	height: 52px; width: auto; max-width: 240px;
+	object-fit: contain; flex: 0 0 auto;
+}
+@media (max-width: 560px) {
+	.ig-enna-sitenav__logo-img { height: 40px; max-width: 180px; }
+}
 .ig-enna-sitenav__org {
 	font-weight: 700; font-size: 16px;
 	color: var(--ig-ink-900, #0c1a2c); line-height: 1.15;
@@ -1000,6 +1008,14 @@
 	border-radius: 8px;
 	display: flex; align-items: center; justify-content: center;
 	color: #fff;
+}
+.ig-enna-footer__logo-img {
+	display: block;
+	height: 48px; width: auto; max-width: 200px;
+	object-fit: contain;
+	background: #fff;
+	padding: 6px 10px;
+	border-radius: 10px;
 }
 .ig-enna-footer__org { font-weight: 700; font-size: 15px; color: #fff; line-height: 1.15; }
 .ig-enna-footer__city { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.5); }
