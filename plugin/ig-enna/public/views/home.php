@@ -119,7 +119,7 @@ $url_colloquio   = $url_for( [ 'prenota-colloquio', 'colloquio' ],     '' );
 	</section>
 
 	<!-- ===================== PERCORSI RAPIDI ===================== -->
-	<section class="ig-enna-section">
+	<section class="ig-enna-section ig-enna-section--band ig-enna-section--band-blue">
 		<div class="ig-enna-section__head">
 			<div>
 				<div class="ig-enna-eyebrow"><?php esc_html_e( 'Da dove vuoi partire?', 'ig-enna' ); ?></div>
@@ -219,7 +219,7 @@ $url_colloquio   = $url_for( [ 'prenota-colloquio', 'colloquio' ],     '' );
 
 	<!-- ===================== SCADENZE + EVENTI ===================== -->
 	<?php if ( $deadlines->have_posts() || $events->have_posts() ) : ?>
-	<section class="ig-enna-section ig-enna-section--split">
+	<section class="ig-enna-section ig-enna-section--split ig-enna-section--band ig-enna-section--band-warm">
 		<?php if ( $deadlines->have_posts() ) : ?>
 			<div class="ig-enna-split-card">
 				<header class="ig-enna-split-card__head">
@@ -310,7 +310,7 @@ $url_colloquio   = $url_for( [ 'prenota-colloquio', 'colloquio' ],     '' );
 	<?php endif; ?>
 
 	<!-- ===================== COME FUNZIONA ===================== -->
-	<section class="ig-enna-section ig-enna-howit">
+	<section class="ig-enna-section ig-enna-howit ig-enna-section--band ig-enna-section--band-sky">
 		<div class="ig-enna-howit__intro">
 			<div class="ig-enna-eyebrow"><?php esc_html_e( 'In 4 passi', 'ig-enna' ); ?></div>
 			<h2><?php
