@@ -15,7 +15,11 @@ class IG_Enna_Public {
 	private const PLUGIN_SHORTCODES = [
 		'ig_enna_home', 'ig_enna_prenota_colloquio', 'ig_enna_opportunita',
 		'ig_enna_eventi', 'ig_enna_partner', 'ig_enna_newsletter', 'ig_enna_area_personale',
+		'ig_enna_news',
 	];
+
+	/** CPT i cui single e archivi mostrano l'header/footer plugin. */
+	private const PLUGIN_CPTS = [ 'ig_scheda', 'ig_evento', 'ig_news' ];
 
 	public static function init() {
 		add_filter( 'body_class', [ __CLASS__, 'body_class' ] );
@@ -29,12 +33,14 @@ class IG_Enna_Public {
 	 * Imposta flag statici dopo che la query è pronta e gli shortcode sono registrati.
 	 */
 	public static function detect_page_type() {
+		// CPT singles e archivi del plugin: marcali subito, indipendentemente
+		// dal fatto che $page sia un WP_Post (es. archivi non hanno un post).
+		if ( is_singular( self::PLUGIN_CPTS ) || is_post_type_archive( self::PLUGIN_CPTS ) ) {
+			self::$plugin_page = true;
+		}
+
 		$page = get_queried_object();
 		if ( ! ( $page instanceof WP_Post ) ) {
-			// CPT singles e archivi del plugin.
-			if ( is_singular( [ 'ig_scheda', 'ig_evento' ] ) || is_post_type_archive( [ 'ig_scheda', 'ig_evento' ] ) ) {
-				self::$plugin_page = true;
-			}
 			return;
 		}
 		self::$home_page    = has_shortcode( $page->post_content, 'ig_enna_home' );
@@ -112,7 +118,7 @@ class IG_Enna_Public {
 	}
 
 	public static function body_class( $classes ) {
-		if ( is_singular( [ 'ig_scheda', 'ig_evento', 'ig_partner' ] ) || is_post_type_archive( [ 'ig_scheda', 'ig_evento' ] ) ) {
+		if ( is_singular( [ 'ig_scheda', 'ig_evento', 'ig_news', 'ig_partner' ] ) || is_post_type_archive( self::PLUGIN_CPTS ) ) {
 			$classes[] = 'ig-enna-context';
 		}
 		if ( self::$plugin_page )  { $classes[] = 'ig-enna-plugin-page'; }
