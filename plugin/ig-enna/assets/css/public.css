@@ -1012,6 +1012,10 @@ a.ig-enna-badge:focus-visible,
 	transition: color .15s;
 }
 .ig-enna-topbar__link:hover { color: #fff; }
+.ig-enna-topbar__item {
+	color: rgba(255,255,255,.7);
+	display: inline-flex; align-items: center; gap: 5px;
+}
 
 /* Sitenav */
 .ig-enna-sitenav {

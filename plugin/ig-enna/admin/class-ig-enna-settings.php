@@ -37,9 +37,26 @@ class IG_Enna_Settings {
 		self::add_field( 'default_sla_hours',           __( 'SLA default ticket (ore)', 'ig-enna' ),  'number'  );
 		self::add_field( 'enable_audit_log',            __( 'Abilita audit log', 'ig-enna' ),    'checkbox' );
 		self::add_field( 'delete_data_on_uninstall',    __( 'Elimina dati alla disinstallazione', 'ig-enna' ), 'checkbox' );
+
+		// ===== Topbar pubblica =====
+		add_settings_section(
+			'ig_enna_topbar',
+			__( 'Topbar pubblica', 'ig-enna' ),
+			function () {
+				echo '<p>' . esc_html__( 'Contenuti della barra utility in cima a tutte le pagine pubbliche: orari (a sinistra), telefono e indirizzo (a destra).', 'ig-enna' ) . '</p>';
+			},
+			self::PAGE_SLUG
+		);
+
+		self::add_field( 'hours',               __( 'Orari di apertura', 'ig-enna' ),     'text',     'ig_enna_topbar' );
+		self::add_field( 'topbar_show_hours',   __( 'Mostra orari a sinistra', 'ig-enna' ), 'checkbox', 'ig_enna_topbar' );
+		self::add_field( 'phone',               __( 'Telefono', 'ig-enna' ),               'text',     'ig_enna_topbar' );
+		self::add_field( 'topbar_show_phone',   __( 'Mostra telefono a destra', 'ig-enna' ), 'checkbox', 'ig_enna_topbar' );
+		self::add_field( 'address',             __( 'Indirizzo', 'ig-enna' ),              'text',     'ig_enna_topbar' );
+		self::add_field( 'topbar_show_address', __( 'Mostra indirizzo a destra', 'ig-enna' ), 'checkbox', 'ig_enna_topbar' );
 	}
 
-	private static function add_field( $key, $label, $type ) {
+	private static function add_field( $key, $label, $type, $section = 'ig_enna_general' ) {
 		add_settings_field(
 			'ig_enna_field_' . $key,
 			esc_html( $label ),
@@ -80,7 +97,7 @@ class IG_Enna_Settings {
 				}
 			},
 			self::PAGE_SLUG,
-			'ig_enna_general'
+			$section
 		);
 	}
 

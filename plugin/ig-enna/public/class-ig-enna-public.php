@@ -63,9 +63,14 @@ class IG_Enna_Public {
 		}
 		IG_Enna_Assets::enqueue_public();
 
-		$org   = ig_enna_get_setting( 'org_name', 'Informagiovani Enna' );
-		$phone = '0935 40 04 00';
-		$home  = home_url( '/' );
+		$org           = ig_enna_get_setting( 'org_name', 'Informagiovani Enna' );
+		$phone         = ig_enna_get_setting( 'phone',   '0935 40 04 00' );
+		$address       = ig_enna_get_setting( 'address', 'Piazza Garibaldi, 1 · 94100 Enna' );
+		$hours         = ig_enna_get_setting( 'hours',   'Lun-Ven · 9:00-13:00 / 15:00-17:30' );
+		$show_phone    = (bool) ig_enna_get_setting( 'topbar_show_phone',   1 );
+		$show_address  = (bool) ig_enna_get_setting( 'topbar_show_address', 1 );
+		$show_hours    = (bool) ig_enna_get_setting( 'topbar_show_hours',   1 );
+		$home          = home_url( '/' );
 
 		$url_for = function ( $slugs, $fallback = '' ) {
 			foreach ( (array) $slugs as $slug ) {
@@ -96,7 +101,7 @@ class IG_Enna_Public {
 		}
 
 		$org   = ig_enna_get_setting( 'org_name', 'Informagiovani Enna' );
-		$phone = '0935 40 04 00';
+		$phone = ig_enna_get_setting( 'phone', '0935 40 04 00' );
 		$email = ig_enna_get_setting( 'contact_email', '' );
 		$home  = home_url( '/' );
 

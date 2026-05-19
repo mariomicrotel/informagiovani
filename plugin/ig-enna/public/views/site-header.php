@@ -13,21 +13,31 @@ defined( 'ABSPATH' ) || exit;
 	<div class="ig-enna-topbar">
 		<div class="ig-enna-topbar__inner">
 			<span class="ig-enna-topbar__left">
-				<span><?php echo esc_html( $org ); ?></span>
-				<span class="ig-enna-topbar__sep" aria-hidden="true">·</span>
-				<span><?php esc_html_e( 'Servizio per i giovani', 'ig-enna' ); ?></span>
+				<?php if ( $show_hours && $hours ) : ?>
+					<span class="ig-enna-topbar__item">
+						<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+						<?php echo esc_html( $hours ); ?>
+					</span>
+				<?php else : ?>
+					<span class="ig-enna-topbar__item"><?php echo esc_html( $org ); ?></span>
+				<?php endif; ?>
 			</span>
 			<div class="ig-enna-topbar__right">
-				<?php if ( $phone ) : ?>
+				<?php if ( $show_phone && $phone ) : ?>
 					<a href="tel:<?php echo esc_attr( preg_replace( '/\s+/', '', $phone ) ); ?>" class="ig-enna-topbar__link">
 						<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.57 12 19.79 19.79 0 0 1 1.5 3.38 2 2 0 0 1 3.46 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.37a16 16 0 0 0 6 6l.8-.8a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16a2 2 0 0 1 .5.92z"></path></svg>
 						<?php echo esc_html( $phone ); ?>
 					</a>
 				<?php endif; ?>
-				<span class="ig-enna-topbar__sep" aria-hidden="true">·</span>
-				<a href="#contenuto" class="ig-enna-topbar__link"><?php esc_html_e( 'Salta al contenuto', 'ig-enna' ); ?></a>
-				<span class="ig-enna-topbar__sep" aria-hidden="true">·</span>
-				<a href="#" class="ig-enna-topbar__link ig-enna-topbar__a11y"><?php esc_html_e( 'Accessibilità', 'ig-enna' ); ?></a>
+				<?php if ( $show_phone && $phone && $show_address && $address ) : ?>
+					<span class="ig-enna-topbar__sep" aria-hidden="true">·</span>
+				<?php endif; ?>
+				<?php if ( $show_address && $address ) : ?>
+					<span class="ig-enna-topbar__item">
+						<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+						<?php echo esc_html( $address ); ?>
+					</span>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>

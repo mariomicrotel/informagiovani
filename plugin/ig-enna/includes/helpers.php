@@ -98,6 +98,13 @@ function ig_enna_default_settings() {
 		'default_sla_hours'         => 48,
 		'enable_audit_log'          => 1,
 		'delete_data_on_uninstall'  => 0,
+		// Topbar pubblica.
+		'phone'                     => '0935 40 04 00',
+		'address'                   => 'Piazza Garibaldi, 1 · 94100 Enna',
+		'hours'                     => 'Lun-Ven · 9:00-13:00 / 15:00-17:30',
+		'topbar_show_phone'         => 1,
+		'topbar_show_address'       => 1,
+		'topbar_show_hours'         => 1,
 	];
 }
 
@@ -118,6 +125,14 @@ function ig_enna_sanitize_settings( $input ) {
 	$out['default_sla_hours']          = isset( $input['default_sla_hours'] ) ? max( 1, (int) $input['default_sla_hours'] ) : $defaults['default_sla_hours'];
 	$out['enable_audit_log']           = ! empty( $input['enable_audit_log'] ) ? 1 : 0;
 	$out['delete_data_on_uninstall']   = ! empty( $input['delete_data_on_uninstall'] ) ? 1 : 0;
+
+	// Topbar pubblica.
+	$out['phone']               = isset( $input['phone'] )   ? sanitize_text_field( $input['phone'] )   : $defaults['phone'];
+	$out['address']             = isset( $input['address'] ) ? sanitize_text_field( $input['address'] ) : $defaults['address'];
+	$out['hours']               = isset( $input['hours'] )   ? sanitize_text_field( $input['hours'] )   : $defaults['hours'];
+	$out['topbar_show_phone']   = ! empty( $input['topbar_show_phone'] )   ? 1 : 0;
+	$out['topbar_show_address'] = ! empty( $input['topbar_show_address'] ) ? 1 : 0;
+	$out['topbar_show_hours']   = ! empty( $input['topbar_show_hours'] )   ? 1 : 0;
 
 	return $out;
 }
