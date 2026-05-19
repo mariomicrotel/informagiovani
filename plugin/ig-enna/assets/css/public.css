@@ -719,89 +719,78 @@
 }
 
 /* Quickpaths */
-/* ===== Percorsi rapidi: una sola immagine di sfondo, 6 card semi-trasparenti ===== */
+/* ===== Percorsi rapidi: ogni card ha la propria immagine di sfondo ===== */
 .ig-enna-quickpaths {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 16px;
-	padding: 20px;
-	border-radius: var(--ig-radius-lg, 16px);
+}
+.ig-enna-quickpath {
+	position: relative;
+	display: flex; flex-direction: column; gap: 10px;
+	padding: 22px 22px 20px;
+	min-height: 240px;
+	border-radius: var(--ig-radius-md, 12px);
+	overflow: hidden;
 	background-color: #143f7a;
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
-	position: relative;
-}
-/* Velo scuro globale sull'immagine per uniformare il contrasto. */
-.ig-enna-quickpaths::before {
-	content: "";
-	position: absolute; inset: 0;
-	background: linear-gradient(180deg, rgba(12,26,44,.25) 0%, rgba(12,26,44,.45) 100%);
-	border-radius: inherit;
-	pointer-events: none;
-}
-.ig-enna-quickpaths > * { position: relative; z-index: 1; }
-
-.ig-enna-quickpath {
-	display: flex; flex-direction: column; gap: 10px;
-	padding: 22px 22px 20px;
-	min-height: 200px;
-	border-radius: var(--ig-radius-md, 12px);
-	background: rgba(12, 26, 44, .42);
-	border: 1px solid rgba(255, 255, 255, .14);
-	backdrop-filter: blur(6px);
-	-webkit-backdrop-filter: blur(6px);
 	color: #fff;
 	text-decoration: none;
-	transition: background .25s, transform .25s, border-color .25s, box-shadow .25s;
+	transition: transform .25s, box-shadow .25s;
 }
+/* Velo scuro per leggibilità del testo bianco. */
+.ig-enna-quickpath::before {
+	content: "";
+	position: absolute; inset: 0;
+	background: linear-gradient(180deg, rgba(12,26,44,.10) 0%, rgba(12,26,44,.55) 60%, rgba(12,26,44,.78) 100%);
+	z-index: 0;
+	transition: background .25s;
+}
+.ig-enna-quickpath > * { position: relative; z-index: 1; }
 .ig-enna-quickpath:hover {
-	background: rgba(12, 26, 44, .58);
-	border-color: rgba(255, 255, 255, .28);
 	transform: translateY(-3px);
 	box-shadow: 0 12px 28px rgba(0,0,0,.25);
+}
+.ig-enna-quickpath:hover::before {
+	background: linear-gradient(180deg, rgba(12,26,44,.05) 0%, rgba(12,26,44,.50) 60%, rgba(12,26,44,.82) 100%);
 }
 
 .ig-enna-quickpath__idx {
 	align-self: flex-end;
 	font-family: var(--ig-font-mono, ui-monospace, monospace);
 	font-size: 11px; font-weight: 700; letter-spacing: .08em;
-	color: rgba(255,255,255,.85);
-	background: rgba(255,255,255,.12);
-	border: 1px solid rgba(255,255,255,.22);
+	color: rgba(255,255,255,.92);
+	background: rgba(255,255,255,.15);
+	border: 1px solid rgba(255,255,255,.25);
 	padding: 3px 9px;
 	border-radius: 999px;
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
 }
 .ig-enna-quickpath__title {
 	font-size: 20px; font-weight: 700;
 	line-height: 1.2;
 	margin: 0;
 	color: #fff;
-	text-shadow: 0 1px 4px rgba(0,0,0,.45);
+	text-shadow: 0 2px 8px rgba(0,0,0,.45);
 	text-wrap: balance;
 }
 .ig-enna-quickpath__desc {
 	font-size: 14px;
-	color: rgba(255,255,255,.85);
+	color: rgba(255,255,255,.92);
 	line-height: 1.5;
 	margin: 0;
 	flex: 1;
+	text-shadow: 0 1px 3px rgba(0,0,0,.5);
 }
 .ig-enna-quickpath__cta {
-	font-size: 14px; font-weight: 600;
+	font-size: 14px; font-weight: 700;
 	color: #fbbf24; /* giallo logo */
+	text-shadow: 0 1px 3px rgba(0,0,0,.5);
 }
 .ig-enna-quickpath:hover .ig-enna-quickpath__cta { color: #fde68a; }
-
-/* Accenti per area: bordo colorato sulla card all'hover. */
-.ig-enna-quickpath--lavoro:hover     { border-left: 4px solid #60a5fa; }
-.ig-enna-quickpath--formazione:hover { border-left: 4px solid #a78bfa; }
-.ig-enna-quickpath--impresa:hover    { border-left: 4px solid #fb923c; }
-.ig-enna-quickpath--estero:hover     { border-left: 4px solid #34d399; }
-.ig-enna-quickpath--concorso:hover   { border-left: 4px solid #facc15; }
-.ig-enna-quickpath--diritti:hover    { border-left: 4px solid #f472b6; }
-.ig-enna-quickpath--cultura:hover    { border-left: 4px solid #c4b5fd; }
-.ig-enna-quickpath--civile:hover     { border-left: 4px solid #5eead4; }
 
 @media (max-width: 880px) {
 	.ig-enna-quickpaths { grid-template-columns: 1fr 1fr; }

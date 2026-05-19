@@ -122,8 +122,7 @@ $url_colloquio   = $url_for( [ 'prenota-colloquio', 'colloquio' ],     '' );
 			<?php endif; ?>
 		</div>
 
-		<?php $qp_bg = ig_enna_quickpaths_bg_image(); ?>
-		<div class="ig-enna-quickpaths" style="background-image: url('<?php echo esc_url( $qp_bg ); ?>');">
+		<div class="ig-enna-quickpaths">
 			<?php
 			$idx = 0;
 			foreach ( (array) $cms['quickpaths'] as $p ) :
@@ -131,9 +130,12 @@ $url_colloquio   = $url_for( [ 'prenota-colloquio', 'colloquio' ],     '' );
 				$area  = isset( $p['area'] )  ? $p['area']  : '';
 				$title = isset( $p['title'] ) ? $p['title'] : '';
 				$desc  = isset( $p['desc'] )  ? $p['desc']  : '';
+				$img   = ig_enna_quickpath_image( $p );
 				$u     = $area ? add_query_arg( 'ig_area', $area, $url_opportunita ) : $url_opportunita;
 				?>
-				<a class="ig-enna-quickpath<?php echo $area ? ' ig-enna-quickpath--' . esc_attr( $area ) : ''; ?>" href="<?php echo esc_url( $u ); ?>">
+				<a class="ig-enna-quickpath<?php echo $area ? ' ig-enna-quickpath--' . esc_attr( $area ) : ''; ?>"
+					href="<?php echo esc_url( $u ); ?>"
+					style="background-image: url('<?php echo esc_url( $img ); ?>');">
 					<span class="ig-enna-quickpath__idx"><?php printf( '%02d', $idx ); ?></span>
 					<h3 class="ig-enna-quickpath__title"><?php echo esc_html( $title ); ?></h3>
 					<p class="ig-enna-quickpath__desc"><?php echo esc_html( $desc ); ?></p>

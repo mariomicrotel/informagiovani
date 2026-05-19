@@ -78,45 +78,19 @@ class IG_Enna_Admin_Home {
 				</table>
 
 				<!-- ========== PERCORSI RAPIDI ========== -->
-				<h2><?php esc_html_e( 'Percorsi rapidi', 'ig-enna' ); ?></h2>
+				<h2><?php esc_html_e( 'Percorsi rapidi (6 box)', 'ig-enna' ); ?></h2>
 				<p class="description">
-					<?php esc_html_e( 'Sotto l\'hero compaiono 6 box cliccabili su un\'unica immagine di sfondo continua. Il testo di ogni box è in overlay.', 'ig-enna' ); ?>
+					<?php esc_html_e( 'Ogni box ha la sua immagine di sfondo. Il testo (titolo, descrizione, CTA) è in overlay su un velo scuro per garantirne la leggibilità.', 'ig-enna' ); ?>
+					<br>
+					<?php esc_html_e( 'Dimensioni consigliate per ogni immagine: 1200×800 px (rapporto 3:2). Peso JPEG ottimizzato: 80-150 KB.', 'ig-enna' ); ?>
+					<br>
+					<?php esc_html_e( 'Se non carichi un\'immagine, viene usato un placeholder colorato dedicato all\'area.', 'ig-enna' ); ?>
 				</p>
-
-				<table class="form-table" role="presentation">
-					<tr>
-						<th scope="row"><label><?php esc_html_e( 'Immagine di sfondo griglia', 'ig-enna' ); ?></label></th>
-						<td>
-							<?php
-							$bg_id  = isset( $home['quickpaths_bg_image_id'] ) ? (int) $home['quickpaths_bg_image_id'] : 0;
-							$bg_url = ig_enna_quickpaths_bg_image();
-							?>
-							<div class="ig-enna-media-picker ig-enna-media-picker--wide" data-target="ig-qp-bg">
-								<div class="ig-enna-media-picker__preview ig-enna-media-picker__preview--wide"
-									style="background-image: url('<?php echo esc_url( $bg_url ); ?>');"
-									role="img"
-									aria-label="<?php echo esc_attr( $bg_id ? __( 'Immagine caricata', 'ig-enna' ) : __( 'Placeholder', 'ig-enna' ) ); ?>"></div>
-								<input type="hidden" id="ig-qp-bg" name="<?php echo esc_attr( self::OPTION ); ?>[quickpaths_bg_image_id]" value="<?php echo esc_attr( $bg_id ); ?>" />
-								<div class="ig-enna-media-picker__actions">
-									<button type="button" class="button ig-enna-media-picker__choose">
-										<?php echo $bg_id ? esc_html__( 'Cambia immagine', 'ig-enna' ) : esc_html__( 'Carica immagine', 'ig-enna' ); ?>
-									</button>
-									<button type="button" class="button-link delete ig-enna-media-picker__remove" <?php echo $bg_id ? '' : 'hidden'; ?>>
-										<?php esc_html_e( 'Rimuovi (usa placeholder)', 'ig-enna' ); ?>
-									</button>
-								</div>
-							</div>
-							<p class="description">
-								<?php esc_html_e( 'Dimensioni consigliate: 1920×960 px (rapporto 2:1). Peso JPEG: 250-400 KB. Le card sopra avranno un overlay scuro per garantire la leggibilità del testo bianco. Tieni i soggetti importanti nel terzo centrale (vengono cropp ati su mobile).', 'ig-enna' ); ?>
-							</p>
-						</td>
-					</tr>
-				</table>
-
-				<h3><?php esc_html_e( 'Testi dei 6 box', 'ig-enna' ); ?></h3>
+				<input type="hidden" name="<?php echo esc_attr( self::OPTION ); ?>[quickpaths_bg_image_id]" value="<?php echo esc_attr( isset( $home['quickpaths_bg_image_id'] ) ? (int) $home['quickpaths_bg_image_id'] : 0 ); ?>" />
 				<table class="widefat ig-enna-table-rep ig-enna-table-rep--quickpaths">
 					<thead>
 						<tr>
+							<th style="width:220px;"><?php esc_html_e( 'Immagine', 'ig-enna' ); ?></th>
 							<th style="width:160px;"><?php esc_html_e( 'Area', 'ig-enna' ); ?></th>
 							<th><?php esc_html_e( 'Titolo', 'ig-enna' ); ?></th>
 							<th><?php esc_html_e( 'Descrizione', 'ig-enna' ); ?></th>
@@ -124,14 +98,33 @@ class IG_Enna_Admin_Home {
 					</thead>
 					<tbody>
 						<?php for ( $i = 0; $i < 6; $i++ ) :
-							$row  = $home['quickpaths'][ $i ] ?? [ 'image_id' => 0, 'area' => '', 'title' => '', 'desc' => '' ];
-							$base = self::OPTION . '[quickpaths][' . $i . ']';
-							// Conserva image_id storico (non più editabile ma persistito per back-compat).
-							$img_id = isset( $row['image_id'] ) ? (int) $row['image_id'] : 0;
+							$row     = $home['quickpaths'][ $i ] ?? [ 'image_id' => 0, 'area' => '', 'title' => '', 'desc' => '' ];
+							$base    = self::OPTION . '[quickpaths][' . $i . ']';
+							$img_id  = isset( $row['image_id'] ) ? (int) $row['image_id'] : 0;
+							$img_url = ig_enna_quickpath_image( $row );
 						?>
 							<tr>
 								<td>
-									<input type="hidden" name="<?php echo esc_attr( $base . '[image_id]' ); ?>" value="<?php echo esc_attr( $img_id ); ?>" />
+									<div class="ig-enna-media-picker" data-target="<?php echo esc_attr( 'ig-qp-img-' . $i ); ?>">
+										<div class="ig-enna-media-picker__preview"
+											style="background-image: url('<?php echo esc_url( $img_url ); ?>');"
+											role="img"
+											aria-label="<?php echo esc_attr( $img_id ? __( 'Immagine caricata', 'ig-enna' ) : __( 'Placeholder', 'ig-enna' ) ); ?>"></div>
+										<input type="hidden"
+											id="<?php echo esc_attr( 'ig-qp-img-' . $i ); ?>"
+											name="<?php echo esc_attr( $base . '[image_id]' ); ?>"
+											value="<?php echo esc_attr( $img_id ); ?>" />
+										<div class="ig-enna-media-picker__actions">
+											<button type="button" class="button ig-enna-media-picker__choose">
+												<?php echo $img_id ? esc_html__( 'Cambia immagine', 'ig-enna' ) : esc_html__( 'Carica immagine', 'ig-enna' ); ?>
+											</button>
+											<button type="button" class="button-link delete ig-enna-media-picker__remove" <?php echo $img_id ? '' : 'hidden'; ?>>
+												<?php esc_html_e( 'Rimuovi', 'ig-enna' ); ?>
+											</button>
+										</div>
+									</div>
+								</td>
+								<td>
 									<select name="<?php echo esc_attr( $base . '[area]' ); ?>">
 										<option value=""><?php esc_html_e( '— Nessuna —', 'ig-enna' ); ?></option>
 										<?php foreach ( $areas as $slug => $label ) : ?>
