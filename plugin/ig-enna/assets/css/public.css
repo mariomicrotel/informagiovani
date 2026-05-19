@@ -280,6 +280,24 @@
 	white-space: nowrap;
 	border: 1px solid transparent;
 }
+/* Badge cliccabili: feedback visivo + cursor + transizione. */
+a.ig-enna-badge,
+.ig-enna-badge--link {
+	text-decoration: none;
+	cursor: pointer;
+	transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+}
+a.ig-enna-badge:hover,
+.ig-enna-badge--link:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 4px 10px rgba(12, 26, 44, .12);
+	filter: brightness(0.97);
+}
+a.ig-enna-badge:focus-visible,
+.ig-enna-badge--link:focus-visible {
+	outline: 2px solid var(--ig-primary, #143f7a);
+	outline-offset: 2px;
+}
 .ig-enna-code {
 	font-family: var(--ig-font-mono, ui-monospace, monospace);
 	font-size: 12px;

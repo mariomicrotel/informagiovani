@@ -19,16 +19,30 @@ $area_l  = IG_Enna_Frontend::area_label( $pid );
 $ts      = $d ? strtotime( ( $t ? $d . ' ' . $t : $d ) ) : 0;
 $modes   = IG_Enna_Evento_Meta::modes();
 $statuses= IG_Enna_Evento_Meta::statuses();
+
+// URL della lista eventi (per link sui badge).
+$ev_page  = get_page_by_path( 'lista-eventi' ) ?: get_page_by_path( 'eventi' );
+$ev_base  = $ev_page ? get_permalink( $ev_page ) : home_url( '/eventi/' );
 ?>
 <div class="ig-enna ig ig-enna-single ig-enna-single--evento">
 	<div class="ig-enna-single__head">
 		<h1 class="ig-enna-single__title"><?php echo esc_html( get_the_title( $ig_post ) ); ?></h1>
 		<div class="ig-enna-single__badges">
 			<?php if ( $area_s ) : ?>
-				<span class="ig-enna-badge ig-enna-badge--area-<?php echo esc_attr( $area_s ); ?>"><?php echo esc_html( $area_l ); ?></span>
+				<a class="ig-enna-badge ig-enna-badge--link ig-enna-badge--area-<?php echo esc_attr( $area_s ); ?>"
+					href="<?php echo esc_url( add_query_arg( 'ig_area', $area_s, $ev_base ) ); ?>"
+					rel="tag"
+					aria-label="<?php echo esc_attr( sprintf( __( 'Filtra eventi per area: %s', 'ig-enna' ), $area_l ) ); ?>">
+					<?php echo esc_html( $area_l ); ?>
+				</a>
 			<?php endif; ?>
 			<?php if ( $mode && isset( $modes[ $mode ] ) ) : ?>
-				<span class="ig-enna-badge ig-enna-badge--mode-<?php echo esc_attr( $mode ); ?>"><?php echo esc_html( $modes[ $mode ] ); ?></span>
+				<a class="ig-enna-badge ig-enna-badge--link ig-enna-badge--mode-<?php echo esc_attr( $mode ); ?>"
+					href="<?php echo esc_url( add_query_arg( 'ig_mode', $mode, $ev_base ) ); ?>"
+					rel="tag"
+					aria-label="<?php echo esc_attr( sprintf( __( 'Filtra eventi per modalità: %s', 'ig-enna' ), $modes[ $mode ] ) ); ?>">
+					<?php echo esc_html( $modes[ $mode ] ); ?>
+				</a>
 			<?php endif; ?>
 			<?php if ( $status && isset( $statuses[ $status ] ) ) : ?>
 				<span class="ig-enna-badge ig-enna-badge--evstate-<?php echo esc_attr( $status ); ?>"><?php echo esc_html( $statuses[ $status ] ); ?></span>

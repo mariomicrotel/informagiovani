@@ -126,6 +126,17 @@ class IG_Enna_Frontend {
 			$args['tax_query'] = $tax_query;
 		}
 
+		// Source class filter (postmeta _ig_enna_source_class).
+		$src = isset( $_GET['ig_src'] ) ? sanitize_key( wp_unslash( $_GET['ig_src'] ) ) : '';
+		$allowed_src = array_keys( IG_Enna_Scheda_Meta::source_classes() );
+		if ( $src && in_array( $src, $allowed_src, true ) ) {
+			$args['meta_query'] = isset( $args['meta_query'] ) ? $args['meta_query'] : [];
+			$args['meta_query'][] = [
+				'key'   => '_ig_enna_source_class',
+				'value' => $src,
+			];
+		}
+
 		// Urgency filter (via deadline meta).
 		$urg = isset( $_GET['ig_urg'] ) ? sanitize_key( $_GET['ig_urg'] ) : '';
 		if ( $urg ) {
@@ -283,6 +294,15 @@ class IG_Enna_Frontend {
 				'field'    => 'slug',
 				'terms'    => [ sanitize_title( wp_unslash( $_GET['ig_area'] ) ) ],
 			] ];
+		}
+
+		// Filtro modalità (online/presenza).
+		$ev_mode = isset( $_GET['ig_mode'] ) ? sanitize_key( wp_unslash( $_GET['ig_mode'] ) ) : '';
+		if ( $ev_mode && array_key_exists( $ev_mode, IG_Enna_Evento_Meta::modes() ) ) {
+			$args['meta_query'][] = [
+				'key'   => '_ig_enna_event_mode',
+				'value' => $ev_mode,
+			];
 		}
 
 		$query = new WP_Query( $args );

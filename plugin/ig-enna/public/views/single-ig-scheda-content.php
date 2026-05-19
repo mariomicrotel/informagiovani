@@ -15,19 +15,62 @@ $src_class = $meta['source_class'];
 $urg       = $meta['urgency'];
 $days      = $meta['days_left'];
 $src_lab   = IG_Enna_Scheda_Meta::source_classes();
+
+// URL della lista opportunità (per link sui badge).
+$opp_page = get_page_by_path( 'lista-opportunita' ) ?: get_page_by_path( 'opportunita' );
+$opp_base = $opp_page ? get_permalink( $opp_page ) : home_url( '/opportunita/' );
+
+// Tassonomia ig_target slug → label (per badge target).
+$target_terms = get_the_terms( $post_id, 'ig_target' );
+$target_terms = ( $target_terms && ! is_wp_error( $target_terms ) ) ? $target_terms : [];
+
+// Territorio term.
+$terr_terms = get_the_terms( $post_id, 'ig_territorio' );
+$terr_term  = ( $terr_terms && ! is_wp_error( $terr_terms ) ) ? $terr_terms[0] : null;
 ?>
 <div class="ig-enna ig ig-enna-single ig-enna-single--scheda">
 	<div class="ig-enna-single__head">
 		<h1 class="ig-enna-single__title"><?php echo esc_html( get_the_title( $ig_post ) ); ?></h1>
 		<div class="ig-enna-single__badges">
 			<?php if ( $area_slug ) : ?>
-				<span class="ig-enna-badge ig-enna-badge--area-<?php echo esc_attr( $area_slug ); ?>"><?php echo esc_html( $area_lab ); ?></span>
+				<a class="ig-enna-badge ig-enna-badge--link ig-enna-badge--area-<?php echo esc_attr( $area_slug ); ?>"
+					href="<?php echo esc_url( add_query_arg( 'ig_area', $area_slug, $opp_base ) ); ?>"
+					rel="tag"
+					aria-label="<?php echo esc_attr( sprintf( __( 'Filtra opportunità per area: %s', 'ig-enna' ), $area_lab ) ); ?>">
+					<?php echo esc_html( $area_lab ); ?>
+				</a>
 			<?php endif; ?>
 			<?php if ( $meta['tipo'] ) : ?>
-				<span class="ig-enna-badge ig-enna-badge--type"><?php echo esc_html( $meta['tipo'] ); ?></span>
+				<a class="ig-enna-badge ig-enna-badge--link ig-enna-badge--type"
+					href="<?php echo esc_url( add_query_arg( 'ig_q', $meta['tipo'], $opp_base ) ); ?>"
+					rel="tag"
+					aria-label="<?php echo esc_attr( sprintf( __( 'Cerca opportunità di tipo: %s', 'ig-enna' ), $meta['tipo'] ) ); ?>">
+					<?php echo esc_html( $meta['tipo'] ); ?>
+				</a>
 			<?php endif; ?>
 			<?php if ( $src_class && isset( $src_lab[ $src_class ] ) ) : ?>
-				<span class="ig-enna-badge ig-enna-badge--src-<?php echo esc_attr( $src_class ); ?>"><?php echo esc_html( $src_lab[ $src_class ] ); ?></span>
+				<a class="ig-enna-badge ig-enna-badge--link ig-enna-badge--src-<?php echo esc_attr( $src_class ); ?>"
+					href="<?php echo esc_url( add_query_arg( 'ig_src', $src_class, $opp_base ) ); ?>"
+					rel="tag"
+					aria-label="<?php echo esc_attr( sprintf( __( 'Filtra opportunità per fonte: %s', 'ig-enna' ), $src_lab[ $src_class ] ) ); ?>">
+					<?php echo esc_html( $src_lab[ $src_class ] ); ?>
+				</a>
+			<?php endif; ?>
+			<?php foreach ( $target_terms as $tt ) : ?>
+				<a class="ig-enna-badge ig-enna-badge--link ig-enna-badge--target"
+					href="<?php echo esc_url( add_query_arg( 'ig_target', $tt->slug, $opp_base ) ); ?>"
+					rel="tag"
+					aria-label="<?php echo esc_attr( sprintf( __( 'Filtra opportunità per target: %s', 'ig-enna' ), $tt->name ) ); ?>">
+					<?php echo esc_html( $tt->name ); ?>
+				</a>
+			<?php endforeach; ?>
+			<?php if ( $terr_term ) : ?>
+				<a class="ig-enna-badge ig-enna-badge--link ig-enna-badge--territ"
+					href="<?php echo esc_url( add_query_arg( 'ig_territorio', $terr_term->slug, $opp_base ) ); ?>"
+					rel="tag"
+					aria-label="<?php echo esc_attr( sprintf( __( 'Filtra opportunità per territorio: %s', 'ig-enna' ), $terr_term->name ) ); ?>">
+					<?php echo esc_html( $terr_term->name ); ?>
+				</a>
 			<?php endif; ?>
 			<?php if ( $meta['codice'] ) : ?>
 				<code class="ig-enna-code"><?php echo esc_html( $meta['codice'] ); ?></code>
