@@ -34,6 +34,7 @@ services:
     volumes:
       - igenna_wp_data:/var/www/html
       - ../plugin/ig-enna:/var/www/html/wp-content/plugins/ig-enna
+      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:ro
     networks:
       - igenna_net
 
