@@ -18,6 +18,7 @@ $src_lab   = IG_Enna_Scheda_Meta::source_classes();
 ?>
 <div class="ig-enna ig ig-enna-single ig-enna-single--scheda">
 	<div class="ig-enna-single__head">
+		<h1 class="ig-enna-single__title"><?php echo esc_html( get_the_title( $ig_post ) ); ?></h1>
 		<div class="ig-enna-single__badges">
 			<?php if ( $area_slug ) : ?>
 				<span class="ig-enna-badge ig-enna-badge--area-<?php echo esc_attr( $area_slug ); ?>"><?php echo esc_html( $area_lab ); ?></span>

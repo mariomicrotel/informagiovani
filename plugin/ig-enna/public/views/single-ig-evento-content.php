@@ -22,6 +22,7 @@ $statuses= IG_Enna_Evento_Meta::statuses();
 ?>
 <div class="ig-enna ig ig-enna-single ig-enna-single--evento">
 	<div class="ig-enna-single__head">
+		<h1 class="ig-enna-single__title"><?php echo esc_html( get_the_title( $ig_post ) ); ?></h1>
 		<div class="ig-enna-single__badges">
 			<?php if ( $area_s ) : ?>
 				<span class="ig-enna-badge ig-enna-badge--area-<?php echo esc_attr( $area_s ); ?>"><?php echo esc_html( $area_l ); ?></span>

@@ -1242,11 +1242,48 @@ body.ig-enna-plugin-page {
 .ig-enna-context .wp-block-template-part[data-slug*="related"],
 .ig-enna-context .wp-block-template-part[data-slug*="comments"] { display: none !important; }
 
-/* "Scritto da in" è spesso un wrapper paragraph del tema con classi non
-   univoche: nascondiamo anche eventuali residui prima/dopo il contenuto. */
-.ig-enna-context .wp-block-post-content + *:not(.ig-enna):not(footer):not(.ig-enna-footer):not(.ig-enna-footer *),
+/* Nascondi i wrapper group che contengono solo byline o query residue del
+   tema (es. "Scritto da X in Y", "Altri articoli" + lista). Usa :has(),
+   supportato da tutti i browser evergreen (Chrome/Edge 105+, Safari 15.4+,
+   Firefox 121+). Su browser più vecchi il fallback è il display:none diretto
+   sui figli (regole sopra). */
+.ig-enna-context .wp-block-group:has(> .wp-block-post-author-name),
+.ig-enna-context .wp-block-group:has(> .wp-block-post-terms),
+.ig-enna-context .wp-block-group:has(> .wp-block-post-date),
+.ig-enna-context .wp-block-group:has(> .wp-block-query),
+.ig-enna-context .wp-block-group:has(> .wp-block-post-template),
+.ig-enna-context .wp-block-group:has(> .wp-block-post-navigation-link),
+.ig-enna-context .wp-block-group:has(> nav.post-navigation),
+.ig-enna-context .wp-block-group:has(.wp-block-latest-posts),
+/* Sezione "Altri articoli" / "Articoli correlati" / "Post correlati":
+   è un wp-block-group che contiene un heading + query. */
+.ig-enna-context .wp-block-group:has(> .wp-block-heading + .wp-block-query),
+.ig-enna-context .wp-block-group:has(> .wp-block-heading + .wp-block-post-template),
+/* Heading isolato seguito da query (rimuove "Altri articoli" rimasto orfano
+   dopo che la query era già stata nascosta dalle regole sopra). */
+.ig-enna-context .wp-block-heading:has(+ .wp-block-query),
+.ig-enna-context .wp-block-heading:has(+ .wp-block-post-template),
+.ig-enna-context h2:has(+ .wp-block-query) { display: none !important; }
+
+/* Fallback: anche se :has() non è supportato, prova a colpire heading
+   "Altri articoli" tramite attributo lang+contenuto è impraticabile in CSS;
+   chi usa browser legacy vedrà la stringa, ma la query sotto resta vuota. */
 .ig-enna-context .entry-meta,
 .ig-enna-context .entry-footer { display: none !important; }
+
+/* ===== Titolo single CPT plugin ===== */
+.ig-enna-single__title {
+	font-size: 36px;
+	font-weight: 800;
+	line-height: 1.15;
+	letter-spacing: -.025em;
+	color: var(--ig-ink-900, #0c1a2c);
+	margin: 0 0 18px;
+	text-wrap: balance;
+}
+@media (max-width: 720px) {
+	.ig-enna-single__title { font-size: 28px; }
+}
 
 /* Azzeramento margine/padding del main e del suo inner group */
 .ig-enna-home-page main.wp-block-group,
