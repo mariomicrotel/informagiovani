@@ -249,8 +249,14 @@ class IG_Enna_Admin_Home {
 			.ig-enna-media-picker__remove { color: #b32d2e; cursor: pointer; }
 		</style>
 		<script>
-		(function ($) {
-			if (typeof wp === 'undefined' || ! wp.media) { return; }
+		jQuery(function ($) {
+			// Eseguo a DOM ready: wp.media è caricato nel footer (wp_enqueue_media)
+			// e a questo punto è disponibile.
+			if (typeof wp === 'undefined' || ! wp.media) {
+				if (window.console) console.warn('IG Enna: wp.media non caricato — il picker non funzionerà.');
+				return;
+			}
+
 			$(document).on('click', '.ig-enna-media-picker__choose', function (e) {
 				e.preventDefault();
 				var $picker  = $(this).closest('.ig-enna-media-picker');
@@ -276,14 +282,14 @@ class IG_Enna_Admin_Home {
 			});
 			$(document).on('click', '.ig-enna-media-picker__remove', function (e) {
 				e.preventDefault();
-				var $picker  = $(this).closest('.ig-enna-media-picker');
-				var $input   = $('#' + $picker.data('target'));
+				var $picker = $(this).closest('.ig-enna-media-picker');
+				var $input  = $('#' + $picker.data('target'));
 				$input.val('0');
 				$picker.find('.ig-enna-media-picker__preview').css('background-image', '');
 				$(this).prop('hidden', true);
 				$picker.find('.ig-enna-media-picker__choose').text(<?php echo wp_json_encode( __( 'Carica immagine', 'ig-enna' ) ); ?>);
 			});
-		})(jQuery);
+		});
 		</script>
 		<?php
 	}
