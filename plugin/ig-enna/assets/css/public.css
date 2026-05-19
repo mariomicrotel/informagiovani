@@ -719,91 +719,89 @@
 }
 
 /* Quickpaths */
-.ig-enna-quickpaths { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.ig-enna-quickpath {
-	background: #fff;
-	border: 1px solid var(--ig-border-soft, #eef1f5);
-	border-radius: var(--ig-radius-md, 12px);
-	overflow: hidden;
-	display: flex; flex-direction: column;
-	text-decoration: none;
-	color: inherit;
-	transition: box-shadow .25s, transform .25s, border-color .25s;
-}
-.ig-enna-quickpath:hover {
-	box-shadow: var(--ig-shadow-md, 0 10px 24px rgba(12,26,44,.10));
-	transform: translateY(-3px);
-	border-color: var(--ig-border, #d6dce5);
-}
-.ig-enna-quickpath:hover .ig-enna-quickpath__media-img { transform: scale(1.04); }
-
-/* Fascia immagine con overlay testo. */
-.ig-enna-quickpath__media {
-	position: relative;
-	min-height: 170px;
-	padding: 18px 20px;
-	display: flex; flex-direction: column; justify-content: space-between;
+/* ===== Percorsi rapidi: una sola immagine di sfondo, 6 card semi-trasparenti ===== */
+.ig-enna-quickpaths {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 16px;
+	padding: 20px;
+	border-radius: var(--ig-radius-lg, 16px);
 	background-color: #143f7a;
 	background-size: cover;
 	background-position: center;
-	color: #fff;
-	overflow: hidden;
+	background-repeat: no-repeat;
+	position: relative;
 }
-.ig-enna-quickpath__media::before {
+/* Velo scuro globale sull'immagine per uniformare il contrasto. */
+.ig-enna-quickpaths::before {
 	content: "";
 	position: absolute; inset: 0;
-	background: linear-gradient(180deg, rgba(12,26,44,.10) 0%, rgba(12,26,44,.55) 70%, rgba(12,26,44,.78) 100%);
-	z-index: 0;
+	background: linear-gradient(180deg, rgba(12,26,44,.25) 0%, rgba(12,26,44,.45) 100%);
+	border-radius: inherit;
+	pointer-events: none;
 }
+.ig-enna-quickpaths > * { position: relative; z-index: 1; }
+
+.ig-enna-quickpath {
+	display: flex; flex-direction: column; gap: 10px;
+	padding: 22px 22px 20px;
+	min-height: 200px;
+	border-radius: var(--ig-radius-md, 12px);
+	background: rgba(12, 26, 44, .42);
+	border: 1px solid rgba(255, 255, 255, .14);
+	backdrop-filter: blur(6px);
+	-webkit-backdrop-filter: blur(6px);
+	color: #fff;
+	text-decoration: none;
+	transition: background .25s, transform .25s, border-color .25s, box-shadow .25s;
+}
+.ig-enna-quickpath:hover {
+	background: rgba(12, 26, 44, .58);
+	border-color: rgba(255, 255, 255, .28);
+	transform: translateY(-3px);
+	box-shadow: 0 12px 28px rgba(0,0,0,.25);
+}
+
 .ig-enna-quickpath__idx {
-	position: relative; z-index: 1;
 	align-self: flex-end;
 	font-family: var(--ig-font-mono, ui-monospace, monospace);
-	font-size: 12px; font-weight: 700;
+	font-size: 11px; font-weight: 700; letter-spacing: .08em;
 	color: rgba(255,255,255,.85);
-	background: rgba(255,255,255,.15);
-	border: 1px solid rgba(255,255,255,.25);
-	padding: 3px 8px;
+	background: rgba(255,255,255,.12);
+	border: 1px solid rgba(255,255,255,.22);
+	padding: 3px 9px;
 	border-radius: 999px;
-	backdrop-filter: blur(2px);
 }
 .ig-enna-quickpath__title {
-	position: relative; z-index: 1;
 	font-size: 20px; font-weight: 700;
 	line-height: 1.2;
 	margin: 0;
 	color: #fff;
-	text-shadow: 0 2px 8px rgba(0,0,0,.35);
+	text-shadow: 0 1px 4px rgba(0,0,0,.45);
 	text-wrap: balance;
-}
-
-/* Corpo bianco: descrizione + CTA. */
-.ig-enna-quickpath__body {
-	padding: 16px 20px 20px;
-	display: flex; flex-direction: column; gap: 12px;
-	flex: 1;
 }
 .ig-enna-quickpath__desc {
 	font-size: 14px;
-	color: var(--ig-ink-500, #5b6779);
+	color: rgba(255,255,255,.85);
 	line-height: 1.5;
 	margin: 0;
 	flex: 1;
 }
 .ig-enna-quickpath__cta {
 	font-size: 14px; font-weight: 600;
-	color: var(--ig-primary, #143f7a);
+	color: #fbbf24; /* giallo logo */
 }
+.ig-enna-quickpath:hover .ig-enna-quickpath__cta { color: #fde68a; }
 
-/* Override CTA per area (riprende i colori del placeholder). */
-.ig-enna-quickpath--lavoro     .ig-enna-quickpath__cta { color: #143f7a; }
-.ig-enna-quickpath--formazione .ig-enna-quickpath__cta { color: #4c1d95; }
-.ig-enna-quickpath--impresa    .ig-enna-quickpath__cta { color: #c2410c; }
-.ig-enna-quickpath--estero     .ig-enna-quickpath__cta { color: #065f46; }
-.ig-enna-quickpath--concorso   .ig-enna-quickpath__cta { color: #a16207; }
-.ig-enna-quickpath--diritti    .ig-enna-quickpath__cta { color: #9d174d; }
-.ig-enna-quickpath--cultura    .ig-enna-quickpath__cta { color: #5b21b6; }
-.ig-enna-quickpath--civile     .ig-enna-quickpath__cta { color: #0f766e; }
+/* Accenti per area: bordo colorato sulla card all'hover. */
+.ig-enna-quickpath--lavoro:hover     { border-left: 4px solid #60a5fa; }
+.ig-enna-quickpath--formazione:hover { border-left: 4px solid #a78bfa; }
+.ig-enna-quickpath--impresa:hover    { border-left: 4px solid #fb923c; }
+.ig-enna-quickpath--estero:hover     { border-left: 4px solid #34d399; }
+.ig-enna-quickpath--concorso:hover   { border-left: 4px solid #facc15; }
+.ig-enna-quickpath--diritti:hover    { border-left: 4px solid #f472b6; }
+.ig-enna-quickpath--cultura:hover    { border-left: 4px solid #c4b5fd; }
+.ig-enna-quickpath--civile:hover     { border-left: 4px solid #5eead4; }
 
 @media (max-width: 880px) {
 	.ig-enna-quickpaths { grid-template-columns: 1fr 1fr; }

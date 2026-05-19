@@ -156,6 +156,7 @@ function ig_enna_default_home() {
 				__( 'Bonus cultura', 'ig-enna' ),
 			],
 		],
+		'quickpaths_bg_image_id' => 0,
 		'quickpaths' => [
 			[ 'area' => 'lavoro',     'image_id' => 0, 'title' => __( 'Cerco lavoro', 'ig-enna' ),              'desc' => __( 'Offerte, CPI, tirocini retribuiti e accompagnamento alla candidatura.', 'ig-enna' ) ],
 			[ 'area' => 'formazione', 'image_id' => 0, 'title' => __( 'Voglio formarmi', 'ig-enna' ),           'desc' => __( 'Corsi, borse di studio, ITS, dottorati e percorsi professionalizzanti.', 'ig-enna' ) ],
@@ -204,6 +205,22 @@ function ig_enna_default_home() {
  * @param array<string,mixed> $row Riga del quickpath ('image_id', 'area').
  * @return string URL assoluto.
  */
+/**
+ * URL dell'immagine di sfondo unica per la griglia "Percorsi rapidi".
+ * Se non è stato caricato nulla, ritorna il placeholder wide.
+ *
+ * @return string URL assoluto.
+ */
+function ig_enna_quickpaths_bg_image() {
+	$home = ig_enna_get_home();
+	$id   = isset( $home['quickpaths_bg_image_id'] ) ? (int) $home['quickpaths_bg_image_id'] : 0;
+	if ( $id > 0 ) {
+		$url = wp_get_attachment_image_url( $id, 'full' );
+		if ( $url ) { return $url; }
+	}
+	return IG_ENNA_URL . 'assets/images/quickpaths-bg.svg';
+}
+
 function ig_enna_quickpath_image( $row ) {
 	$id = isset( $row['image_id'] ) ? (int) $row['image_id'] : 0;
 	if ( $id > 0 ) {
@@ -247,6 +264,11 @@ function ig_enna_sanitize_home( $input ) {
 	$default = ig_enna_default_home();
 	if ( ! is_array( $input ) ) { return $default; }
 	$out = [];
+
+	// Immagine di sfondo unica della griglia.
+	$out['quickpaths_bg_image_id'] = isset( $input['quickpaths_bg_image_id'] )
+		? max( 0, (int) $input['quickpaths_bg_image_id'] )
+		: 0;
 
 	// Hero.
 	$hero = isset( $input['hero'] ) && is_array( $input['hero'] ) ? $input['hero'] : [];
