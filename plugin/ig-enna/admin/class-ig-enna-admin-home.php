@@ -11,7 +11,14 @@ class IG_Enna_Admin_Home {
 	const OPTION = 'ig_enna_home';
 
 	public static function init() {
-		add_action( 'admin_init', [ __CLASS__, 'register_settings' ] );
+		add_action( 'admin_init',          [ __CLASS__, 'register_settings' ] );
+		add_action( 'admin_enqueue_scripts', [ __CLASS__, 'enqueue_admin_assets' ] );
+	}
+
+	/** Carica wp.media solo sulla nostra pagina admin. */
+	public static function enqueue_admin_assets( $hook ) {
+		if ( strpos( (string) $hook, 'ig-enna-home' ) === false ) { return; }
+		wp_enqueue_media();
 	}
 
 	public static function register_settings() {
@@ -72,11 +79,15 @@ class IG_Enna_Admin_Home {
 
 				<!-- ========== PERCORSI RAPIDI ========== -->
 				<h2><?php esc_html_e( 'Percorsi rapidi (6 box)', 'ig-enna' ); ?></h2>
-				<p class="description"><?php esc_html_e( 'I box cliccabili sotto l\'hero. L\'area è lo slug della tassonomia (filtra le opportunità).', 'ig-enna' ); ?></p>
-				<table class="widefat ig-enna-table-rep">
+				<p class="description">
+					<?php esc_html_e( 'Ogni box ha un\'immagine di sfondo (fascia foto) con il testo in overlay. Dimensioni consigliate: 1200×600 px (rapporto 2:1).', 'ig-enna' ); ?>
+					<br>
+					<?php esc_html_e( 'Se non carichi un\'immagine, viene usato un placeholder colorato dedicato all\'area.', 'ig-enna' ); ?>
+				</p>
+				<table class="widefat ig-enna-table-rep ig-enna-table-rep--quickpaths">
 					<thead>
 						<tr>
-							<th style="width:60px;"><?php esc_html_e( 'Icona', 'ig-enna' ); ?></th>
+							<th style="width:200px;"><?php esc_html_e( 'Immagine', 'ig-enna' ); ?></th>
 							<th style="width:160px;"><?php esc_html_e( 'Area', 'ig-enna' ); ?></th>
 							<th><?php esc_html_e( 'Titolo', 'ig-enna' ); ?></th>
 							<th><?php esc_html_e( 'Descrizione', 'ig-enna' ); ?></th>
@@ -84,11 +95,32 @@ class IG_Enna_Admin_Home {
 					</thead>
 					<tbody>
 						<?php for ( $i = 0; $i < 6; $i++ ) :
-							$row = $home['quickpaths'][ $i ] ?? [ 'icon' => '', 'area' => '', 'title' => '', 'desc' => '' ];
-							$base = self::OPTION . '[quickpaths][' . $i . ']';
+							$row     = $home['quickpaths'][ $i ] ?? [ 'image_id' => 0, 'area' => '', 'title' => '', 'desc' => '' ];
+							$base    = self::OPTION . '[quickpaths][' . $i . ']';
+							$img_id  = isset( $row['image_id'] ) ? (int) $row['image_id'] : 0;
+							$img_url = ig_enna_quickpath_image( $row );
 						?>
 							<tr>
-								<td><input type="text" name="<?php echo esc_attr( $base . '[icon]' ); ?>" value="<?php echo esc_attr( $row['icon'] ); ?>" maxlength="4" style="width:50px;text-align:center;" /></td>
+								<td>
+									<div class="ig-enna-media-picker" data-target="<?php echo esc_attr( 'ig-qp-img-' . $i ); ?>">
+										<div class="ig-enna-media-picker__preview"
+											style="background-image: url('<?php echo esc_url( $img_url ); ?>');"
+											role="img"
+											aria-label="<?php echo esc_attr( $img_id ? __( 'Immagine caricata', 'ig-enna' ) : __( 'Placeholder', 'ig-enna' ) ); ?>"></div>
+										<input type="hidden"
+											id="<?php echo esc_attr( 'ig-qp-img-' . $i ); ?>"
+											name="<?php echo esc_attr( $base . '[image_id]' ); ?>"
+											value="<?php echo esc_attr( $img_id ); ?>" />
+										<div class="ig-enna-media-picker__actions">
+											<button type="button" class="button ig-enna-media-picker__choose">
+												<?php echo $img_id ? esc_html__( 'Cambia immagine', 'ig-enna' ) : esc_html__( 'Carica immagine', 'ig-enna' ); ?>
+											</button>
+											<button type="button" class="button-link delete ig-enna-media-picker__remove" <?php echo $img_id ? '' : 'hidden'; ?>>
+												<?php esc_html_e( 'Rimuovi', 'ig-enna' ); ?>
+											</button>
+										</div>
+									</div>
+								</td>
 								<td>
 									<select name="<?php echo esc_attr( $base . '[area]' ); ?>">
 										<option value=""><?php esc_html_e( '— Nessuna —', 'ig-enna' ); ?></option>
@@ -98,7 +130,7 @@ class IG_Enna_Admin_Home {
 									</select>
 								</td>
 								<td><input type="text" class="regular-text" name="<?php echo esc_attr( $base . '[title]' ); ?>" value="<?php echo esc_attr( $row['title'] ); ?>" /></td>
-								<td><textarea class="large-text" rows="2" name="<?php echo esc_attr( $base . '[desc]' ); ?>"><?php echo esc_textarea( $row['desc'] ); ?></textarea></td>
+								<td><textarea class="large-text" rows="3" name="<?php echo esc_attr( $base . '[desc]' ); ?>"><?php echo esc_textarea( $row['desc'] ); ?></textarea></td>
 							</tr>
 						<?php endfor; ?>
 					</tbody>
@@ -206,7 +238,53 @@ class IG_Enna_Admin_Home {
 			.ig-enna-table-rep { margin-top: 8px; }
 			.ig-enna-table-rep td, .ig-enna-table-rep th { vertical-align: middle; padding: 8px; }
 			.ig-enna-table-rep textarea { min-height: 44px; }
+			.ig-enna-media-picker { display: flex; flex-direction: column; gap: 8px; }
+			.ig-enna-media-picker__preview {
+				width: 180px; height: 90px;
+				background-size: cover; background-position: center;
+				background-color: #f0f0f1;
+				border-radius: 6px; border: 1px solid #c3c4c7;
+			}
+			.ig-enna-media-picker__actions { display: flex; gap: 8px; align-items: center; }
+			.ig-enna-media-picker__remove { color: #b32d2e; cursor: pointer; }
 		</style>
+		<script>
+		(function ($) {
+			if (typeof wp === 'undefined' || ! wp.media) { return; }
+			$(document).on('click', '.ig-enna-media-picker__choose', function (e) {
+				e.preventDefault();
+				var $picker  = $(this).closest('.ig-enna-media-picker');
+				var $input   = $('#' + $picker.data('target'));
+				var $preview = $picker.find('.ig-enna-media-picker__preview');
+				var $remove  = $picker.find('.ig-enna-media-picker__remove');
+
+				var frame = wp.media({
+					title:   <?php echo wp_json_encode( __( 'Scegli un\'immagine per il box', 'ig-enna' ) ); ?>,
+					button:  { text: <?php echo wp_json_encode( __( 'Usa questa immagine', 'ig-enna' ) ); ?> },
+					library: { type: 'image' },
+					multiple: false
+				});
+				frame.on('select', function () {
+					var att = frame.state().get('selection').first().toJSON();
+					var url = (att.sizes && att.sizes.large && att.sizes.large.url) ? att.sizes.large.url : att.url;
+					$input.val(att.id);
+					$preview.css('background-image', "url('" + url + "')");
+					$remove.prop('hidden', false);
+					$picker.find('.ig-enna-media-picker__choose').text(<?php echo wp_json_encode( __( 'Cambia immagine', 'ig-enna' ) ); ?>);
+				});
+				frame.open();
+			});
+			$(document).on('click', '.ig-enna-media-picker__remove', function (e) {
+				e.preventDefault();
+				var $picker  = $(this).closest('.ig-enna-media-picker');
+				var $input   = $('#' + $picker.data('target'));
+				$input.val('0');
+				$picker.find('.ig-enna-media-picker__preview').css('background-image', '');
+				$(this).prop('hidden', true);
+				$picker.find('.ig-enna-media-picker__choose').text(<?php echo wp_json_encode( __( 'Carica immagine', 'ig-enna' ) ); ?>);
+			});
+		})(jQuery);
+		</script>
 		<?php
 	}
 }

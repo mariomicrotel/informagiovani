@@ -723,39 +723,87 @@
 .ig-enna-quickpath {
 	background: #fff;
 	border: 1px solid var(--ig-border-soft, #eef1f5);
-	border-radius: var(--ig-radius-md, 10px);
-	padding: 24px;
-	min-height: 200px;
-	display: flex; flex-direction: column; gap: 12px;
+	border-radius: var(--ig-radius-md, 12px);
+	overflow: hidden;
+	display: flex; flex-direction: column;
 	text-decoration: none;
 	color: inherit;
-	transition: box-shadow .2s, transform .2s, border-color .2s;
+	transition: box-shadow .25s, transform .25s, border-color .25s;
 }
-.ig-enna-quickpath:hover { box-shadow: var(--ig-shadow-md, 0 4px 12px rgba(12,26,44,.08)); transform: translateY(-2px); border-color: var(--ig-border, #d6dce5); }
-.ig-enna-quickpath__head { display: flex; justify-content: space-between; align-items: flex-start; }
-.ig-enna-quickpath__icon {
-	width: 48px; height: 48px;
-	border-radius: 10px;
-	display: flex; align-items: center; justify-content: center;
-	font-size: 22px;
-	background: var(--ig-ink-75, #f3f5f8);
+.ig-enna-quickpath:hover {
+	box-shadow: var(--ig-shadow-md, 0 10px 24px rgba(12,26,44,.10));
+	transform: translateY(-3px);
+	border-color: var(--ig-border, #d6dce5);
 }
-.ig-enna-quickpath__idx { font-family: var(--ig-font-mono, ui-monospace, monospace); font-size: 12px; color: var(--ig-ink-400, #8a94a4); }
-.ig-enna-quickpath__title { font-size: 19px; font-weight: 700; line-height: 1.25; margin: 0; color: var(--ig-ink-900, #0c1a2c); }
-.ig-enna-quickpath__desc { font-size: 14px; color: var(--ig-ink-500, #5b6779); line-height: 1.5; margin: 0; flex: 1; }
-.ig-enna-quickpath__cta { font-size: 14px; font-weight: 600; }
-.ig-enna-quickpath--lavoro     .ig-enna-quickpath__icon { background: var(--ig-blue-100, #e3edfa);   color: var(--ig-blue-700, #143f7a); }
-.ig-enna-quickpath--lavoro     .ig-enna-quickpath__cta  { color: var(--ig-blue-700, #143f7a); }
-.ig-enna-quickpath--formazione .ig-enna-quickpath__icon { background: var(--ig-violet-100, #e4dcf7);color: var(--ig-violet-700, #5638a8); }
-.ig-enna-quickpath--formazione .ig-enna-quickpath__cta  { color: var(--ig-violet-700, #5638a8); }
-.ig-enna-quickpath--impresa    .ig-enna-quickpath__icon { background: var(--ig-teal-100, #d4f1ec);  color: var(--ig-teal-700, #0f8077); }
-.ig-enna-quickpath--impresa    .ig-enna-quickpath__cta  { color: var(--ig-teal-700, #0f8077); }
-.ig-enna-quickpath--estero     .ig-enna-quickpath__icon { background: var(--ig-amber-100, #fbeac6); color: var(--ig-amber-700, #b2700f); }
-.ig-enna-quickpath--estero     .ig-enna-quickpath__cta  { color: var(--ig-amber-700, #b2700f); }
-.ig-enna-quickpath--concorso   .ig-enna-quickpath__icon { background: #d8e8ff;                     color: #1b3a8a; }
-.ig-enna-quickpath--concorso   .ig-enna-quickpath__cta  { color: #1b3a8a; }
-.ig-enna-quickpath--diritti    .ig-enna-quickpath__icon { background: var(--ig-pink-100, #f6dde9); color: var(--ig-pink-700, #a13564); }
-.ig-enna-quickpath--diritti    .ig-enna-quickpath__cta  { color: var(--ig-pink-700, #a13564); }
+.ig-enna-quickpath:hover .ig-enna-quickpath__media-img { transform: scale(1.04); }
+
+/* Fascia immagine con overlay testo. */
+.ig-enna-quickpath__media {
+	position: relative;
+	min-height: 170px;
+	padding: 18px 20px;
+	display: flex; flex-direction: column; justify-content: space-between;
+	background-color: #143f7a;
+	background-size: cover;
+	background-position: center;
+	color: #fff;
+	overflow: hidden;
+}
+.ig-enna-quickpath__media::before {
+	content: "";
+	position: absolute; inset: 0;
+	background: linear-gradient(180deg, rgba(12,26,44,.10) 0%, rgba(12,26,44,.55) 70%, rgba(12,26,44,.78) 100%);
+	z-index: 0;
+}
+.ig-enna-quickpath__idx {
+	position: relative; z-index: 1;
+	align-self: flex-end;
+	font-family: var(--ig-font-mono, ui-monospace, monospace);
+	font-size: 12px; font-weight: 700;
+	color: rgba(255,255,255,.85);
+	background: rgba(255,255,255,.15);
+	border: 1px solid rgba(255,255,255,.25);
+	padding: 3px 8px;
+	border-radius: 999px;
+	backdrop-filter: blur(2px);
+}
+.ig-enna-quickpath__title {
+	position: relative; z-index: 1;
+	font-size: 20px; font-weight: 700;
+	line-height: 1.2;
+	margin: 0;
+	color: #fff;
+	text-shadow: 0 2px 8px rgba(0,0,0,.35);
+	text-wrap: balance;
+}
+
+/* Corpo bianco: descrizione + CTA. */
+.ig-enna-quickpath__body {
+	padding: 16px 20px 20px;
+	display: flex; flex-direction: column; gap: 12px;
+	flex: 1;
+}
+.ig-enna-quickpath__desc {
+	font-size: 14px;
+	color: var(--ig-ink-500, #5b6779);
+	line-height: 1.5;
+	margin: 0;
+	flex: 1;
+}
+.ig-enna-quickpath__cta {
+	font-size: 14px; font-weight: 600;
+	color: var(--ig-primary, #143f7a);
+}
+
+/* Override CTA per area (riprende i colori del placeholder). */
+.ig-enna-quickpath--lavoro     .ig-enna-quickpath__cta { color: #143f7a; }
+.ig-enna-quickpath--formazione .ig-enna-quickpath__cta { color: #4c1d95; }
+.ig-enna-quickpath--impresa    .ig-enna-quickpath__cta { color: #c2410c; }
+.ig-enna-quickpath--estero     .ig-enna-quickpath__cta { color: #065f46; }
+.ig-enna-quickpath--concorso   .ig-enna-quickpath__cta { color: #a16207; }
+.ig-enna-quickpath--diritti    .ig-enna-quickpath__cta { color: #9d174d; }
+.ig-enna-quickpath--cultura    .ig-enna-quickpath__cta { color: #5b21b6; }
+.ig-enna-quickpath--civile     .ig-enna-quickpath__cta { color: #0f766e; }
 
 @media (max-width: 880px) {
 	.ig-enna-quickpaths { grid-template-columns: 1fr 1fr; }

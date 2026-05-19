@@ -157,12 +157,12 @@ function ig_enna_default_home() {
 			],
 		],
 		'quickpaths' => [
-			[ 'area' => 'lavoro',     'icon' => '💼', 'title' => __( 'Cerco lavoro', 'ig-enna' ),              'desc' => __( 'Offerte, CPI, tirocini retribuiti e accompagnamento alla candidatura.', 'ig-enna' ) ],
-			[ 'area' => 'formazione', 'icon' => '🎓', 'title' => __( 'Voglio formarmi', 'ig-enna' ),           'desc' => __( 'Corsi, borse di studio, ITS, dottorati e percorsi professionalizzanti.', 'ig-enna' ) ],
-			[ 'area' => 'impresa',    'icon' => '💡', 'title' => __( 'Voglio aprire un\'impresa', 'ig-enna' ), 'desc' => __( 'Business plan, microcredito, bandi giovani e accompagnamento dedicato.', 'ig-enna' ) ],
-			[ 'area' => 'estero',     'icon' => '🌍', 'title' => __( 'Voglio andare all\'estero', 'ig-enna' ), 'desc' => __( 'Erasmus+, Corpo Europeo di Solidarietà, work&travel e mobilità internazionale.', 'ig-enna' ) ],
-			[ 'area' => 'concorso',   'icon' => '🏆', 'title' => __( 'Cerco un concorso', 'ig-enna' ),         'desc' => __( 'Concorsi di Comune, Regione, Stato ed enti partecipati a misura di NEET.', 'ig-enna' ) ],
-			[ 'area' => 'diritti',    'icon' => '❤️', 'title' => __( 'Ho bisogno di un servizio', 'ig-enna' ), 'desc' => __( 'Salute, casa, diritti, supporto psicologico, residenza, ISEE e bonus.', 'ig-enna' ) ],
+			[ 'area' => 'lavoro',     'image_id' => 0, 'title' => __( 'Cerco lavoro', 'ig-enna' ),              'desc' => __( 'Offerte, CPI, tirocini retribuiti e accompagnamento alla candidatura.', 'ig-enna' ) ],
+			[ 'area' => 'formazione', 'image_id' => 0, 'title' => __( 'Voglio formarmi', 'ig-enna' ),           'desc' => __( 'Corsi, borse di studio, ITS, dottorati e percorsi professionalizzanti.', 'ig-enna' ) ],
+			[ 'area' => 'impresa',    'image_id' => 0, 'title' => __( 'Voglio aprire un\'impresa', 'ig-enna' ), 'desc' => __( 'Business plan, microcredito, bandi giovani e accompagnamento dedicato.', 'ig-enna' ) ],
+			[ 'area' => 'estero',     'image_id' => 0, 'title' => __( 'Voglio andare all\'estero', 'ig-enna' ), 'desc' => __( 'Erasmus+, Corpo Europeo di Solidarietà, work&travel e mobilità internazionale.', 'ig-enna' ) ],
+			[ 'area' => 'concorso',   'image_id' => 0, 'title' => __( 'Cerco un concorso', 'ig-enna' ),         'desc' => __( 'Concorsi di Comune, Regione, Stato ed enti partecipati a misura di NEET.', 'ig-enna' ) ],
+			[ 'area' => 'diritti',    'image_id' => 0, 'title' => __( 'Ho bisogno di un servizio', 'ig-enna' ), 'desc' => __( 'Salute, casa, diritti, supporto psicologico, residenza, ISEE e bonus.', 'ig-enna' ) ],
 		],
 		'howit' => [
 			[ 'title' => __( 'Cerca un\'opportunità', 'ig-enna' ),     'desc' => __( 'Esplora schede informative su lavoro, corsi, concorsi e bandi filtrate per età, interessi e territorio.', 'ig-enna' ) ],
@@ -196,6 +196,26 @@ function ig_enna_default_home() {
  *
  * @return array<string,mixed>
  */
+/**
+ * URL dell'immagine per un box "Percorso rapido". Se l'utente ha
+ * caricato un'immagine via media library la usa; altrimenti restituisce
+ * il placeholder SVG dell'area.
+ *
+ * @param array<string,mixed> $row Riga del quickpath ('image_id', 'area').
+ * @return string URL assoluto.
+ */
+function ig_enna_quickpath_image( $row ) {
+	$id = isset( $row['image_id'] ) ? (int) $row['image_id'] : 0;
+	if ( $id > 0 ) {
+		$url = wp_get_attachment_image_url( $id, 'large' );
+		if ( $url ) { return $url; }
+	}
+	$area    = isset( $row['area'] ) ? sanitize_title( $row['area'] ) : '';
+	$allowed = [ 'lavoro', 'formazione', 'impresa', 'estero', 'diritti', 'cultura', 'civile', 'concorso' ];
+	$slug    = in_array( $area, $allowed, true ) ? $area : 'lavoro';
+	return IG_ENNA_URL . 'assets/images/quickpaths/' . $slug . '.svg';
+}
+
 function ig_enna_get_home() {
 	$saved   = get_option( 'ig_enna_home', [] );
 	$default = ig_enna_default_home();
@@ -256,10 +276,10 @@ function ig_enna_sanitize_home( $input ) {
 		$title = isset( $row['title'] ) ? sanitize_text_field( $row['title'] ) : '';
 		if ( $title === '' ) { continue; }
 		$out['quickpaths'][] = [
-			'area'  => isset( $row['area'] )  ? sanitize_title( $row['area'] )       : '',
-			'icon'  => isset( $row['icon'] )  ? sanitize_text_field( $row['icon'] )  : '',
-			'title' => $title,
-			'desc'  => isset( $row['desc'] )  ? sanitize_textarea_field( $row['desc'] ) : '',
+			'area'     => isset( $row['area'] )     ? sanitize_title( $row['area'] )         : '',
+			'image_id' => isset( $row['image_id'] ) ? max( 0, (int) $row['image_id'] )       : 0,
+			'title'    => $title,
+			'desc'     => isset( $row['desc'] )     ? sanitize_textarea_field( $row['desc'] ) : '',
 		];
 	}
 	if ( ! $out['quickpaths'] ) { $out['quickpaths'] = $default['quickpaths']; }
