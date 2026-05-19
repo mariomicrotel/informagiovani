@@ -9,6 +9,7 @@ $org    = ig_enna_get_setting( 'org_name', 'Informagiovani Enna' );
 $phone  = '0935 40 04 00';
 $email  = ig_enna_get_setting( 'contact_email', '' );
 $home   = home_url( '/' );
+$cms    = ig_enna_get_home(); // contenuti editabili da Informagiovani → Home page
 
 // URL pagine convenzionali (ricercate via slug; fallback al primo permalink utile).
 $url_for = function ( $slugs, $fallback = '' ) {
@@ -42,18 +43,13 @@ $url_colloquio   = $url_for( [ 'prenota-colloquio', 'colloquio' ],     '' );
 		<div class="ig-enna-hero__inner">
 			<div class="ig-enna-hero__copy">
 				<div class="ig-enna-hero__chip">
-					<?php esc_html_e( 'Servizio del Comune di Enna', 'ig-enna' ); ?>
+					<?php echo esc_html( $cms['hero']['chip'] ); ?>
 				</div>
 				<h1 class="ig-enna-hero__title">
-					<?php
-					echo wp_kses_post( __(
-						'Il punto di accesso alle <em>opportunità</em> per i giovani di Enna',
-						'ig-enna'
-					) );
-					?>
+					<?php echo wp_kses_post( $cms['hero']['title_html'] ); ?>
 				</h1>
 				<p class="ig-enna-hero__lead">
-					<?php esc_html_e( 'Lavoro, formazione, impresa, estero, concorsi, eventi e servizi utili — verificati dagli operatori dello sportello, in un\'unica piattaforma.', 'ig-enna' ); ?>
+					<?php echo esc_html( $cms['hero']['lead'] ); ?>
 				</p>
 
 				<form class="ig-enna-hero__search" method="get" action="<?php echo esc_url( $url_opportunita ); ?>">
@@ -61,20 +57,14 @@ $url_colloquio   = $url_for( [ 'prenota-colloquio', 'colloquio' ],     '' );
 						<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>
 					</svg>
 					<input type="search" name="ig_q"
-						placeholder="<?php esc_attr_e( 'Cerca lavoro, corsi, concorsi, bonus, eventi…', 'ig-enna' ); ?>" />
+						placeholder="<?php echo esc_attr( $cms['hero']['search_placeholder'] ); ?>" />
 					<button type="submit" class="ig-enna-btn ig-enna-btn--primary"><?php esc_html_e( 'Cerca', 'ig-enna' ); ?></button>
 				</form>
 
 				<div class="ig-enna-hero__suggestions">
 					<span><?php esc_html_e( 'Ricerche popolari:', 'ig-enna' ); ?></span>
 					<?php
-					$pop = [
-						__( 'Servizio civile', 'ig-enna' ),
-						__( 'Erasmus+', 'ig-enna' ),
-						__( 'Resto al Sud', 'ig-enna' ),
-						__( 'Concorsi Enna', 'ig-enna' ),
-						__( 'Bonus cultura', 'ig-enna' ),
-					];
+					$pop = (array) $cms['hero']['popular'];
 					foreach ( $pop as $term ) :
 						$u = add_query_arg( 'ig_q', urlencode( $term ), $url_opportunita ); ?>
 						<a href="<?php echo esc_url( $u ); ?>"><?php echo esc_html( $term ); ?></a>
@@ -134,26 +124,22 @@ $url_colloquio   = $url_for( [ 'prenota-colloquio', 'colloquio' ],     '' );
 
 		<div class="ig-enna-quickpaths">
 			<?php
-			$quickpaths = [
-				[ 'lavoro',     '💼', __( 'Cerco lavoro', 'ig-enna' ),                 __( 'Offerte, CPI, tirocini retribuiti e accompagnamento alla candidatura.', 'ig-enna' ) ],
-				[ 'formazione', '🎓', __( 'Voglio formarmi', 'ig-enna' ),              __( 'Corsi, borse di studio, ITS, dottorati e percorsi professionalizzanti.', 'ig-enna' ) ],
-				[ 'impresa',    '💡', __( 'Voglio aprire un\'impresa', 'ig-enna' ),    __( 'Business plan, microcredito, bandi giovani e accompagnamento dedicato.', 'ig-enna' ) ],
-				[ 'estero',     '🌍', __( 'Voglio andare all\'estero', 'ig-enna' ),    __( 'Erasmus+, Corpo Europeo di Solidarietà, work&travel e mobilità internazionale.', 'ig-enna' ) ],
-				[ 'concorso',   '🏆', __( 'Cerco un concorso', 'ig-enna' ),            __( 'Concorsi di Comune, Regione, Stato ed enti partecipati a misura di NEET.', 'ig-enna' ) ],
-				[ 'diritti',    '❤️', __( 'Ho bisogno di un servizio', 'ig-enna' ),    __( 'Salute, casa, diritti, supporto psicologico, residenza, ISEE e bonus.', 'ig-enna' ) ],
-			];
 			$idx = 0;
-			foreach ( $quickpaths as $p ) :
+			foreach ( (array) $cms['quickpaths'] as $p ) :
 				$idx++;
-				$u = add_query_arg( 'ig_area', $p[0], $url_opportunita );
+				$area  = isset( $p['area'] )  ? $p['area']  : '';
+				$icon  = isset( $p['icon'] )  ? $p['icon']  : '';
+				$title = isset( $p['title'] ) ? $p['title'] : '';
+				$desc  = isset( $p['desc'] )  ? $p['desc']  : '';
+				$u     = $area ? add_query_arg( 'ig_area', $area, $url_opportunita ) : $url_opportunita;
 				?>
-				<a class="ig-enna-quickpath ig-enna-quickpath--<?php echo esc_attr( $p[0] ); ?>" href="<?php echo esc_url( $u ); ?>">
+				<a class="ig-enna-quickpath<?php echo $area ? ' ig-enna-quickpath--' . esc_attr( $area ) : ''; ?>" href="<?php echo esc_url( $u ); ?>">
 					<div class="ig-enna-quickpath__head">
-						<div class="ig-enna-quickpath__icon"><?php echo esc_html( $p[1] ); ?></div>
+						<div class="ig-enna-quickpath__icon"><?php echo esc_html( $icon ); ?></div>
 						<div class="ig-enna-quickpath__idx"><?php printf( '%02d', $idx ); ?></div>
 					</div>
-					<h3 class="ig-enna-quickpath__title"><?php echo esc_html( $p[2] ); ?></h3>
-					<p class="ig-enna-quickpath__desc"><?php echo esc_html( $p[3] ); ?></p>
+					<h3 class="ig-enna-quickpath__title"><?php echo esc_html( $title ); ?></h3>
+					<p class="ig-enna-quickpath__desc"><?php echo esc_html( $desc ); ?></p>
 					<span class="ig-enna-quickpath__cta"><?php esc_html_e( 'Esplora →', 'ig-enna' ); ?></span>
 				</a>
 			<?php endforeach; ?>
@@ -312,45 +298,24 @@ $url_colloquio   = $url_for( [ 'prenota-colloquio', 'colloquio' ],     '' );
 	<!-- ===================== COME FUNZIONA ===================== -->
 	<section class="ig-enna-section ig-enna-howit ig-enna-section--band ig-enna-section--band-sky">
 		<div class="ig-enna-howit__intro">
-			<div class="ig-enna-eyebrow"><?php esc_html_e( 'In 4 passi', 'ig-enna' ); ?></div>
-			<h2><?php
-				echo wp_kses_post( __( 'Come funziona il <em>servizio</em>', 'ig-enna' ) );
-			?></h2>
-			<p><?php esc_html_e( 'Da un\'idea generica a un percorso costruito su misura con i tuoi operatori dello sportello. Tutto in un\'unica piattaforma, gratuita e pubblica.', 'ig-enna' ); ?></p>
+			<div class="ig-enna-eyebrow"><?php echo esc_html( $cms['howit_intro']['eyebrow'] ); ?></div>
+			<h2><?php echo wp_kses_post( $cms['howit_intro']['title_html'] ); ?></h2>
+			<p><?php echo esc_html( $cms['howit_intro']['lead'] ); ?></p>
 			<?php if ( $url_area ) : ?>
-				<a class="ig-enna-btn ig-enna-btn--primary" href="<?php echo esc_url( $url_area ); ?>"><?php esc_html_e( 'Crea il tuo profilo', 'ig-enna' ); ?></a>
+				<a class="ig-enna-btn ig-enna-btn--primary" href="<?php echo esc_url( $url_area ); ?>"><?php echo esc_html( $cms['howit_intro']['cta_label'] ); ?></a>
 			<?php endif; ?>
 		</div>
 
 		<ol class="ig-enna-howit__steps">
-			<li>
-				<span class="ig-enna-howit__num">01</span>
-				<div>
-					<h4><?php esc_html_e( 'Cerca un\'opportunità', 'ig-enna' ); ?></h4>
-					<p><?php esc_html_e( 'Esplora schede informative su lavoro, corsi, concorsi e bandi filtrate per età, interessi e territorio.', 'ig-enna' ); ?></p>
-				</div>
-			</li>
-			<li>
-				<span class="ig-enna-howit__num">02</span>
-				<div>
-					<h4><?php esc_html_e( 'Salva ciò che ti interessa', 'ig-enna' ); ?></h4>
-					<p><?php esc_html_e( 'Tieni traccia di scadenze, requisiti e documenti. Ricevi promemoria automatici prima della chiusura.', 'ig-enna' ); ?></p>
-				</div>
-			</li>
-			<li>
-				<span class="ig-enna-howit__num">03</span>
-				<div>
-					<h4><?php esc_html_e( 'Prenota un colloquio', 'ig-enna' ); ?></h4>
-					<p><?php esc_html_e( 'Parla con un operatore in presenza, in videochiamata o al telefono. Lo sportello è gratuito.', 'ig-enna' ); ?></p>
-				</div>
-			</li>
-			<li>
-				<span class="ig-enna-howit__num">04</span>
-				<div>
-					<h4><?php esc_html_e( 'Costruisci il tuo percorso', 'ig-enna' ); ?></h4>
-					<p><?php esc_html_e( 'Insieme agli operatori definisci obiettivi, azioni e tappe. Tieni tutto nella tua area personale.', 'ig-enna' ); ?></p>
-				</div>
-			</li>
+			<?php $sn = 0; foreach ( (array) $cms['howit'] as $step ) : $sn++; ?>
+				<li>
+					<span class="ig-enna-howit__num"><?php printf( '%02d', $sn ); ?></span>
+					<div>
+						<h4><?php echo esc_html( isset( $step['title'] ) ? $step['title'] : '' ); ?></h4>
+						<p><?php echo esc_html( isset( $step['desc'] ) ? $step['desc'] : '' ); ?></p>
+					</div>
+				</li>
+			<?php endforeach; ?>
 		</ol>
 	</section>
 
@@ -358,9 +323,9 @@ $url_colloquio   = $url_for( [ 'prenota-colloquio', 'colloquio' ],     '' );
 	<section class="ig-enna-section">
 		<div class="ig-enna-cta">
 			<div class="ig-enna-cta__copy">
-				<div class="ig-enna-eyebrow ig-enna-eyebrow--light"><?php esc_html_e( 'Orientamento personalizzato', 'ig-enna' ); ?></div>
-				<h2><?php esc_html_e( 'Hai bisogno di un confronto?', 'ig-enna' ); ?></h2>
-				<p><?php esc_html_e( 'Parla con uno dei nostri operatori. Insieme analizziamo la tua situazione, definiamo un percorso e ti accompagniamo nelle candidature.', 'ig-enna' ); ?></p>
+				<div class="ig-enna-eyebrow ig-enna-eyebrow--light"><?php echo esc_html( $cms['cta']['eyebrow'] ); ?></div>
+				<h2><?php echo esc_html( $cms['cta']['title'] ); ?></h2>
+				<p><?php echo esc_html( $cms['cta']['lead'] ); ?></p>
 				<div class="ig-enna-cta__actions">
 					<?php if ( $url_colloquio ) : ?>
 						<a class="ig-enna-btn ig-enna-btn--secondary" href="<?php echo esc_url( $url_colloquio ); ?>">
@@ -375,12 +340,15 @@ $url_colloquio   = $url_for( [ 'prenota-colloquio', 'colloquio' ],     '' );
 				</div>
 			</div>
 			<div class="ig-enna-cta__modes">
-				<div class="ig-enna-cta__modes-label"><?php esc_html_e( 'Modalità colloquio', 'ig-enna' ); ?></div>
+				<div class="ig-enna-cta__modes-label"><?php echo esc_html( $cms['cta']['modes_label'] ); ?></div>
 				<ul>
-					<li><strong>👤 <?php esc_html_e( 'In presenza', 'ig-enna' ); ?></strong><span><?php esc_html_e( 'Sportello in Piazza Garibaldi, 1', 'ig-enna' ); ?></span></li>
-					<li><strong>🎥 <?php esc_html_e( 'Videochiamata', 'ig-enna' ); ?></strong><span><?php esc_html_e( 'Google Meet o Zoom · 30 min', 'ig-enna' ); ?></span></li>
-					<li><strong>📞 <?php esc_html_e( 'Telefono', 'ig-enna' ); ?></strong><span><?php echo esc_html( $phone ); ?></span></li>
-					<li><strong>✉️ <?php esc_html_e( 'Email', 'ig-enna' ); ?></strong><span><?php echo esc_html( $email ?: __( 'Risposta entro 48 ore', 'ig-enna' ) ); ?></span></li>
+					<?php foreach ( (array) $cms['cta']['modes'] as $m ) :
+						$mlabel  = isset( $m['label'] )  ? $m['label']  : '';
+						$mdetail = isset( $m['detail'] ) ? $m['detail'] : '';
+						$micon   = isset( $m['icon'] )   ? $m['icon']   : '';
+					?>
+						<li><strong><?php echo esc_html( $micon . ' ' . $mlabel ); ?></strong><span><?php echo esc_html( $mdetail ); ?></span></li>
+					<?php endforeach; ?>
 				</ul>
 			</div>
 		</div>

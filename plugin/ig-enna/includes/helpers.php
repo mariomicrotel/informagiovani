@@ -133,3 +133,181 @@ function ig_enna_get_setting( $key, $fallback = null ) {
 	$opts = wp_parse_args( get_option( 'ig_enna_settings', [] ), ig_enna_default_settings() );
 	return array_key_exists( $key, $opts ) ? $opts[ $key ] : $fallback;
 }
+
+/**
+ * Contenuti default della home page (corrispondenti agli hardcoded
+ * originali). Usati dalla pagina admin "Home page" e da home.php
+ * come fallback se l'opzione non è ancora salvata.
+ *
+ * @return array<string,mixed>
+ */
+function ig_enna_default_home() {
+	return [
+		'hero' => [
+			'chip'               => __( 'Servizio del Comune di Enna', 'ig-enna' ),
+			'title_html'         => __( 'Il punto di accesso alle <em>opportunità</em> per i giovani di Enna', 'ig-enna' ),
+			'lead'               => __( 'Lavoro, formazione, impresa, estero, concorsi, eventi e servizi utili — verificati dagli operatori dello sportello, in un\'unica piattaforma.', 'ig-enna' ),
+			'search_placeholder' => __( 'Cerca lavoro, corsi, concorsi, bonus, eventi…', 'ig-enna' ),
+			'popular'            => [
+				__( 'Servizio civile', 'ig-enna' ),
+				__( 'Erasmus+', 'ig-enna' ),
+				__( 'Resto al Sud', 'ig-enna' ),
+				__( 'Concorsi Enna', 'ig-enna' ),
+				__( 'Bonus cultura', 'ig-enna' ),
+			],
+		],
+		'quickpaths' => [
+			[ 'area' => 'lavoro',     'icon' => '💼', 'title' => __( 'Cerco lavoro', 'ig-enna' ),              'desc' => __( 'Offerte, CPI, tirocini retribuiti e accompagnamento alla candidatura.', 'ig-enna' ) ],
+			[ 'area' => 'formazione', 'icon' => '🎓', 'title' => __( 'Voglio formarmi', 'ig-enna' ),           'desc' => __( 'Corsi, borse di studio, ITS, dottorati e percorsi professionalizzanti.', 'ig-enna' ) ],
+			[ 'area' => 'impresa',    'icon' => '💡', 'title' => __( 'Voglio aprire un\'impresa', 'ig-enna' ), 'desc' => __( 'Business plan, microcredito, bandi giovani e accompagnamento dedicato.', 'ig-enna' ) ],
+			[ 'area' => 'estero',     'icon' => '🌍', 'title' => __( 'Voglio andare all\'estero', 'ig-enna' ), 'desc' => __( 'Erasmus+, Corpo Europeo di Solidarietà, work&travel e mobilità internazionale.', 'ig-enna' ) ],
+			[ 'area' => 'concorso',   'icon' => '🏆', 'title' => __( 'Cerco un concorso', 'ig-enna' ),         'desc' => __( 'Concorsi di Comune, Regione, Stato ed enti partecipati a misura di NEET.', 'ig-enna' ) ],
+			[ 'area' => 'diritti',    'icon' => '❤️', 'title' => __( 'Ho bisogno di un servizio', 'ig-enna' ), 'desc' => __( 'Salute, casa, diritti, supporto psicologico, residenza, ISEE e bonus.', 'ig-enna' ) ],
+		],
+		'howit' => [
+			[ 'title' => __( 'Cerca un\'opportunità', 'ig-enna' ),     'desc' => __( 'Esplora schede informative su lavoro, corsi, concorsi e bandi filtrate per età, interessi e territorio.', 'ig-enna' ) ],
+			[ 'title' => __( 'Salva ciò che ti interessa', 'ig-enna' ),'desc' => __( 'Tieni traccia di scadenze, requisiti e documenti. Ricevi promemoria automatici prima della chiusura.', 'ig-enna' ) ],
+			[ 'title' => __( 'Prenota un colloquio', 'ig-enna' ),      'desc' => __( 'Parla con un operatore in presenza, in videochiamata o al telefono. Lo sportello è gratuito.', 'ig-enna' ) ],
+			[ 'title' => __( 'Costruisci il tuo percorso', 'ig-enna' ),'desc' => __( 'Insieme agli operatori definisci obiettivi, azioni e tappe. Tieni tutto nella tua area personale.', 'ig-enna' ) ],
+		],
+		'howit_intro' => [
+			'eyebrow' => __( 'In 4 passi', 'ig-enna' ),
+			'title_html' => __( 'Come funziona il <em>servizio</em>', 'ig-enna' ),
+			'lead'   => __( 'Da un\'idea generica a un percorso costruito su misura con i tuoi operatori dello sportello. Tutto in un\'unica piattaforma, gratuita e pubblica.', 'ig-enna' ),
+			'cta_label' => __( 'Crea il tuo profilo', 'ig-enna' ),
+		],
+		'cta' => [
+			'eyebrow' => __( 'Orientamento personalizzato', 'ig-enna' ),
+			'title'   => __( 'Hai bisogno di un confronto?', 'ig-enna' ),
+			'lead'    => __( 'Parla con uno dei nostri operatori. Insieme analizziamo la tua situazione, definiamo un percorso e ti accompagniamo nelle candidature.', 'ig-enna' ),
+			'modes_label' => __( 'Modalità colloquio', 'ig-enna' ),
+			'modes' => [
+				[ 'icon' => '👤', 'label' => __( 'In presenza',   'ig-enna' ), 'detail' => __( 'Sportello in Piazza Garibaldi, 1', 'ig-enna' ) ],
+				[ 'icon' => '🎥', 'label' => __( 'Videochiamata', 'ig-enna' ), 'detail' => __( 'Google Meet o Zoom · 30 min',    'ig-enna' ) ],
+				[ 'icon' => '📞', 'label' => __( 'Telefono',      'ig-enna' ), 'detail' => '0935 40 04 00' ],
+				[ 'icon' => '✉️', 'label' => __( 'Email',         'ig-enna' ), 'detail' => __( 'Risposta entro 48 ore', 'ig-enna' ) ],
+			],
+		],
+	];
+}
+
+/**
+ * Restituisce i contenuti home, mergiando i valori salvati con i default.
+ *
+ * @return array<string,mixed>
+ */
+function ig_enna_get_home() {
+	$saved   = get_option( 'ig_enna_home', [] );
+	$default = ig_enna_default_home();
+	if ( ! is_array( $saved ) ) { return $default; }
+	// Merge profondo per ogni sezione, preservando struttura.
+	$out = $default;
+	foreach ( $default as $section => $value ) {
+		if ( ! isset( $saved[ $section ] ) ) { continue; }
+		// Array di item ripetuti (quickpaths, howit, popular, cta.modes): sovrascrivi se l'utente ha salvato qualcosa.
+		if ( in_array( $section, [ 'quickpaths', 'howit' ], true ) && is_array( $saved[ $section ] ) ) {
+			$out[ $section ] = $saved[ $section ];
+			continue;
+		}
+		// Sezioni associative: merge field-per-field.
+		if ( is_array( $value ) && is_array( $saved[ $section ] ) ) {
+			$out[ $section ] = array_merge( $value, $saved[ $section ] );
+		}
+	}
+	return $out;
+}
+
+/**
+ * Sanitize per option ig_enna_home. Mantiene la struttura del default.
+ *
+ * @param mixed $input
+ * @return array<string,mixed>
+ */
+function ig_enna_sanitize_home( $input ) {
+	$default = ig_enna_default_home();
+	if ( ! is_array( $input ) ) { return $default; }
+	$out = [];
+
+	// Hero.
+	$hero = isset( $input['hero'] ) && is_array( $input['hero'] ) ? $input['hero'] : [];
+	$out['hero'] = [
+		'chip'               => isset( $hero['chip'] )               ? sanitize_text_field( $hero['chip'] )               : $default['hero']['chip'],
+		'title_html'         => isset( $hero['title_html'] )         ? wp_kses_post( $hero['title_html'] )                 : $default['hero']['title_html'],
+		'lead'               => isset( $hero['lead'] )               ? sanitize_textarea_field( $hero['lead'] )            : $default['hero']['lead'],
+		'search_placeholder' => isset( $hero['search_placeholder'] ) ? sanitize_text_field( $hero['search_placeholder'] ) : $default['hero']['search_placeholder'],
+		'popular'            => [],
+	];
+	if ( isset( $hero['popular'] ) ) {
+		$lines = is_array( $hero['popular'] )
+			? $hero['popular']
+			: preg_split( '/\r\n|\r|\n/', (string) $hero['popular'] );
+		foreach ( (array) $lines as $line ) {
+			$v = sanitize_text_field( $line );
+			if ( $v !== '' ) { $out['hero']['popular'][] = $v; }
+		}
+	}
+	if ( ! $out['hero']['popular'] ) { $out['hero']['popular'] = $default['hero']['popular']; }
+
+	// Quickpaths.
+	$out['quickpaths'] = [];
+	$qp_in = isset( $input['quickpaths'] ) && is_array( $input['quickpaths'] ) ? $input['quickpaths'] : [];
+	foreach ( $qp_in as $row ) {
+		if ( ! is_array( $row ) ) { continue; }
+		$title = isset( $row['title'] ) ? sanitize_text_field( $row['title'] ) : '';
+		if ( $title === '' ) { continue; }
+		$out['quickpaths'][] = [
+			'area'  => isset( $row['area'] )  ? sanitize_title( $row['area'] )       : '',
+			'icon'  => isset( $row['icon'] )  ? sanitize_text_field( $row['icon'] )  : '',
+			'title' => $title,
+			'desc'  => isset( $row['desc'] )  ? sanitize_textarea_field( $row['desc'] ) : '',
+		];
+	}
+	if ( ! $out['quickpaths'] ) { $out['quickpaths'] = $default['quickpaths']; }
+
+	// Howit steps.
+	$out['howit'] = [];
+	$ho_in = isset( $input['howit'] ) && is_array( $input['howit'] ) ? $input['howit'] : [];
+	foreach ( $ho_in as $row ) {
+		if ( ! is_array( $row ) ) { continue; }
+		$title = isset( $row['title'] ) ? sanitize_text_field( $row['title'] ) : '';
+		if ( $title === '' ) { continue; }
+		$out['howit'][] = [
+			'title' => $title,
+			'desc'  => isset( $row['desc'] ) ? sanitize_textarea_field( $row['desc'] ) : '',
+		];
+	}
+	if ( ! $out['howit'] ) { $out['howit'] = $default['howit']; }
+
+	// Howit intro.
+	$hi = isset( $input['howit_intro'] ) && is_array( $input['howit_intro'] ) ? $input['howit_intro'] : [];
+	$out['howit_intro'] = [
+		'eyebrow'    => isset( $hi['eyebrow'] )    ? sanitize_text_field( $hi['eyebrow'] )    : $default['howit_intro']['eyebrow'],
+		'title_html' => isset( $hi['title_html'] ) ? wp_kses_post( $hi['title_html'] )        : $default['howit_intro']['title_html'],
+		'lead'       => isset( $hi['lead'] )       ? sanitize_textarea_field( $hi['lead'] )   : $default['howit_intro']['lead'],
+		'cta_label'  => isset( $hi['cta_label'] )  ? sanitize_text_field( $hi['cta_label'] )  : $default['howit_intro']['cta_label'],
+	];
+
+	// CTA.
+	$cta = isset( $input['cta'] ) && is_array( $input['cta'] ) ? $input['cta'] : [];
+	$out['cta'] = [
+		'eyebrow'     => isset( $cta['eyebrow'] )     ? sanitize_text_field( $cta['eyebrow'] )     : $default['cta']['eyebrow'],
+		'title'       => isset( $cta['title'] )       ? sanitize_text_field( $cta['title'] )       : $default['cta']['title'],
+		'lead'        => isset( $cta['lead'] )        ? sanitize_textarea_field( $cta['lead'] )    : $default['cta']['lead'],
+		'modes_label' => isset( $cta['modes_label'] ) ? sanitize_text_field( $cta['modes_label'] ) : $default['cta']['modes_label'],
+		'modes'       => [],
+	];
+	$modes_in = isset( $cta['modes'] ) && is_array( $cta['modes'] ) ? $cta['modes'] : [];
+	foreach ( $modes_in as $row ) {
+		if ( ! is_array( $row ) ) { continue; }
+		$label = isset( $row['label'] ) ? sanitize_text_field( $row['label'] ) : '';
+		if ( $label === '' ) { continue; }
+		$out['cta']['modes'][] = [
+			'icon'   => isset( $row['icon'] )   ? sanitize_text_field( $row['icon'] )   : '',
+			'label'  => $label,
+			'detail' => isset( $row['detail'] ) ? sanitize_text_field( $row['detail'] ) : '',
+		];
+	}
+	if ( ! $out['cta']['modes'] ) { $out['cta']['modes'] = $default['cta']['modes']; }
+
+	return $out;
+}

@@ -57,6 +57,7 @@ class IG_Enna_Plugin {
 		if ( is_admin() ) {
 			add_action( 'admin_menu', [ 'IG_Enna_Admin_Menu', 'register' ] );
 			IG_Enna_Settings::init();
+			IG_Enna_Admin_Home::init();
 			IG_Enna_Admin_Tickets::init();
 			IG_Enna_Admin_Appointments::init();
 			IG_Enna_Admin_Colloqui::init();

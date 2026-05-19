@@ -51,6 +51,7 @@ require_once IG_ENNA_DIR . 'includes/class-ig-enna-gdpr.php';
 require_once IG_ENNA_DIR . 'includes/class-ig-enna-seed.php';
 require_once IG_ENNA_DIR . 'admin/class-ig-enna-admin-menu.php';
 require_once IG_ENNA_DIR . 'admin/class-ig-enna-settings.php';
+require_once IG_ENNA_DIR . 'admin/class-ig-enna-admin-home.php';
 require_once IG_ENNA_DIR . 'admin/class-ig-enna-admin-tickets.php';
 require_once IG_ENNA_DIR . 'admin/class-ig-enna-admin-appointments.php';
 require_once IG_ENNA_DIR . 'admin/class-ig-enna-admin-colloqui.php';

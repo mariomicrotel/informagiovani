@@ -33,6 +33,15 @@ class IG_Enna_Admin_Menu {
 
 		add_submenu_page(
 			self::SLUG,
+			__( 'Home page', 'ig-enna' ),
+			__( 'Home page', 'ig-enna' ),
+			$cap,
+			'ig-enna-home',
+			[ 'IG_Enna_Admin_Home', 'render_page' ]
+		);
+
+		add_submenu_page(
+			self::SLUG,
 			__( 'Schede informative', 'ig-enna' ),
 			__( 'Schede informative', 'ig-enna' ),
 			$cap,
