@@ -1210,6 +1210,44 @@
 .ig-enna-plugin-page .wp-block-template-part[data-slug="footer"] { display: none !important; }
 .ig-enna-plugin-page .wp-site-blocks { padding-top: 0 !important; }
 
+/* Sfondo leggero pagine plugin: SVG con elementi del logo (sole, anelli,
+   onde) a opacità 5-10%. Non interferisce con la lettura. */
+body.ig-enna-plugin-page {
+	background-color: #fbfcfd;
+	background-image: url("/wp-content/plugins/ig-enna/assets/images/page-bg.svg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center top;
+	background-size: cover;
+}
+
+/* Su single CPT del plugin (scheda/evento/news) nascondi gli elementi
+   residui del tema TT25: byline "Scritto da...", post-navigation,
+   liste articoli correlati ("Altri articoli"), tag/categorie del tema. */
+.ig-enna-context .wp-block-post-author,
+.ig-enna-context .wp-block-post-author-name,
+.ig-enna-context .wp-block-post-author-biography,
+.ig-enna-context .wp-block-post-author-bio,
+.ig-enna-context .wp-block-post-author-avatar,
+.ig-enna-context .wp-block-post-date,
+.ig-enna-context .wp-block-post-terms,
+.ig-enna-context .wp-block-post-navigation-link,
+.ig-enna-context .post-navigation,
+.ig-enna-context nav.post-navigation,
+.ig-enna-context .wp-block-latest-posts,
+.ig-enna-context .wp-block-query,
+.ig-enna-context .wp-block-post-template,
+.ig-enna-context .wp-block-template-part[data-slug*="trail"],
+.ig-enna-context .wp-block-template-part[data-slug*="meta"],
+.ig-enna-context .wp-block-template-part[data-slug*="related"],
+.ig-enna-context .wp-block-template-part[data-slug*="comments"] { display: none !important; }
+
+/* "Scritto da in" è spesso un wrapper paragraph del tema con classi non
+   univoche: nascondiamo anche eventuali residui prima/dopo il contenuto. */
+.ig-enna-context .wp-block-post-content + *:not(.ig-enna):not(footer):not(.ig-enna-footer):not(.ig-enna-footer *),
+.ig-enna-context .entry-meta,
+.ig-enna-context .entry-footer { display: none !important; }
+
 /* Azzeramento margine/padding del main e del suo inner group */
 .ig-enna-home-page main.wp-block-group,
 .ig-enna-home-page main[class*="wp-block"] {
