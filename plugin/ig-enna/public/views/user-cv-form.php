@@ -289,6 +289,9 @@ $languages = $cv['languages'] ?: [ [
 
 		<div class="ig-enna-cv-form__actions">
 			<button type="submit" class="ig-enna-btn ig-enna-btn--primary"><?php esc_html_e( 'Salva CV', 'ig-enna' ); ?></button>
+			<a class="ig-enna-btn ig-enna-btn--secondary" href="<?php echo esc_url( add_query_arg( [ 'ig_tab' => 'cv', 'view' => 'print' ] ) ); ?>" target="_blank" rel="noopener">
+				📄 <?php esc_html_e( 'Anteprima e stampa / PDF', 'ig-enna' ); ?>
+			</a>
 		</div>
 	</form>
 </section>

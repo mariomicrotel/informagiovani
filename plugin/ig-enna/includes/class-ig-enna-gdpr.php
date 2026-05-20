@@ -33,6 +33,10 @@ class IG_Enna_GDPR {
 			'exporter_friendly_name' => __( 'Newsletter Informagiovani', 'ig-enna' ),
 			'callback'               => [ __CLASS__, 'export_newsletter' ],
 		];
+		$exporters['ig-enna-cv'] = [
+			'exporter_friendly_name' => __( 'CV Informagiovani', 'ig-enna' ),
+			'callback'               => [ __CLASS__, 'export_cv' ],
+		];
 		return $exporters;
 	}
 
@@ -56,6 +60,10 @@ class IG_Enna_GDPR {
 		$erasers['ig-enna-newsletter'] = [
 			'eraser_friendly_name' => __( 'Newsletter Informagiovani', 'ig-enna' ),
 			'callback'             => [ __CLASS__, 'erase_newsletter' ],
+		];
+		$erasers['ig-enna-cv'] = [
+			'eraser_friendly_name' => __( 'CV Informagiovani', 'ig-enna' ),
+			'callback'             => [ __CLASS__, 'erase_cv' ],
 		];
 		return $erasers;
 	}
@@ -242,6 +250,46 @@ class IG_Enna_GDPR {
 		$t = $wpdb->prefix . 'ig_enna_user_saves';
 		$n = (int) $wpdb->query( $wpdb->prepare( "DELETE FROM {$t} WHERE user_id = %d", $uid ) );
 		return self::ok_eraser( $n > 0 );
+	}
+
+	public static function export_cv( $email, $page = 1 ) {
+		$uid = self::user_id_from_email( $email );
+		if ( ! $uid ) { return self::ok( [] ); }
+		$cv = get_user_meta( $uid, IG_Enna_CV::META_KEY, true );
+		if ( ! is_array( $cv ) || empty( $cv ) ) { return self::ok( [] ); }
+
+		$rows = [];
+		$p    = isset( $cv['personal'] ) ? (array) $cv['personal'] : [];
+		foreach ( $p as $k => $v ) {
+			if ( $v === '' || $v === null ) { continue; }
+			$rows[] = [ 'name' => 'personal.' . $k, 'value' => is_array( $v ) ? wp_json_encode( $v ) : (string) $v ];
+		}
+		foreach ( [ 'profile', 'digital_skills', 'communication_skills', 'organisational_skills', 'other_skills', 'driving_licence', 'updated_at' ] as $k ) {
+			if ( ! empty( $cv[ $k ] ) ) {
+				$rows[] = [ 'name' => $k, 'value' => (string) $cv[ $k ] ];
+			}
+		}
+		// Sezioni ripetibili serializzate JSON (per leggibilità).
+		foreach ( [ 'experience', 'education', 'languages' ] as $k ) {
+			if ( ! empty( $cv[ $k ] ) && is_array( $cv[ $k ] ) ) {
+				$rows[] = [ 'name' => $k, 'value' => wp_json_encode( $cv[ $k ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE ) ];
+			}
+		}
+
+		return self::ok( [ [
+			'group_id'    => 'ig-enna-cv',
+			'group_label' => __( 'CV Informagiovani', 'ig-enna' ),
+			'item_id'     => 'cv-' . $uid,
+			'data'        => $rows,
+		] ] );
+	}
+
+	public static function erase_cv( $email, $page = 1 ) {
+		$uid = self::user_id_from_email( $email );
+		if ( ! $uid ) { return self::ok_eraser( 0 ); }
+		$existed = (bool) get_user_meta( $uid, IG_Enna_CV::META_KEY, true );
+		delete_user_meta( $uid, IG_Enna_CV::META_KEY );
+		return self::ok_eraser( $existed );
 	}
 
 	public static function erase_newsletter( $email, $page = 1 ) {

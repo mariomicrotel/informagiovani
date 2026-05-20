@@ -1421,3 +1421,126 @@ body.ig-enna-plugin-page {
 	border-top: 1px solid var(--ig-border-soft, #eef1f5);
 	margin-top: 8px;
 }
+
+/* ============================================================
+   CV STAMPABILE — vista read-only formato Europass
+   ============================================================ */
+.ig-enna-cv-print {
+	max-width: 820px;
+	margin: 0 auto;
+	padding: 32px 36px 48px;
+	background: #fff;
+	color: #1f2937;
+	font-size: 14px;
+	line-height: 1.5;
+}
+.ig-enna-cv-print__no-print {
+	display: flex; flex-direction: column; gap: 10px;
+	margin-bottom: 24px;
+	padding: 14px 16px;
+	background: #f0f6fc;
+	border: 1px solid #d6e1ec;
+	border-radius: 8px;
+}
+.ig-enna-cv-print__no-print .ig-enna-btn { align-self: flex-start; }
+.ig-enna-cv-print__hint { font-size: 12px; color: #5b6779; margin: 0; }
+
+.ig-enna-cv-print__head {
+	border-bottom: 3px solid #143f7a;
+	padding-bottom: 16px;
+	margin-bottom: 22px;
+}
+.ig-enna-cv-print__name {
+	font-size: 28px; font-weight: 800; line-height: 1.1;
+	margin: 0 0 8px;
+	color: #143f7a;
+}
+.ig-enna-cv-print__profile { font-size: 14px; color: #4b5563; margin: 0; max-width: 640px; }
+
+.ig-enna-cv-print__section { margin-bottom: 22px; page-break-inside: avoid; }
+.ig-enna-cv-print__section h2 {
+	font-size: 16px; font-weight: 700;
+	color: #143f7a;
+	text-transform: uppercase;
+	letter-spacing: .04em;
+	border-bottom: 1px solid #d6dce5;
+	padding-bottom: 6px;
+	margin: 0 0 12px;
+}
+
+.ig-enna-cv-print__dl {
+	display: grid;
+	grid-template-columns: 200px 1fr;
+	gap: 6px 16px;
+	margin: 0;
+}
+.ig-enna-cv-print__dl dt { font-weight: 600; color: #374151; }
+.ig-enna-cv-print__dl dd { margin: 0; color: #1f2937; }
+
+.ig-enna-cv-print__entry {
+	display: grid;
+	grid-template-columns: 180px 1fr;
+	gap: 4px 20px;
+	margin-bottom: 16px;
+	page-break-inside: avoid;
+}
+.ig-enna-cv-print__entry-period {
+	font-size: 13px; font-weight: 600; color: #6b7280;
+}
+.ig-enna-cv-print__entry-body h3 {
+	font-size: 15px; font-weight: 700;
+	margin: 0 0 2px; color: #143f7a;
+}
+.ig-enna-cv-print__entry-org { font-weight: 600; color: #374151; margin: 0 0 4px; font-size: 13px; }
+.ig-enna-cv-print__entry-meta { color: #6b7280; font-size: 12px; margin: 0 0 4px; }
+.ig-enna-cv-print__entry-desc { color: #1f2937; font-size: 13px; margin: 4px 0 0; }
+
+.ig-enna-cv-print__lang-tbl {
+	width: 100%; border-collapse: collapse; font-size: 13px;
+}
+.ig-enna-cv-print__lang-tbl th,
+.ig-enna-cv-print__lang-tbl td {
+	border: 1px solid #d6dce5;
+	padding: 6px 8px;
+	text-align: center;
+}
+.ig-enna-cv-print__lang-tbl th { background: #f1f6fc; font-weight: 600; color: #143f7a; }
+.ig-enna-cv-print__lang-tbl td:first-child { text-align: left; font-weight: 600; }
+.ig-enna-cv-print__lang-legend { font-size: 12px; color: #6b7280; margin: 8px 0 0; font-style: italic; }
+
+.ig-enna-cv-print__foot {
+	margin-top: 32px;
+	padding-top: 12px;
+	border-top: 1px solid #d6dce5;
+	font-size: 11px;
+	color: #6b7280;
+	text-align: center;
+}
+
+/* === @media PRINT: nasconde header sito, footer, controlli interattivi === */
+@media print {
+	body.ig-enna-plugin-page { background: #fff !important; }
+	body.ig-enna-plugin-page .ig-enna-site-header,
+	body.ig-enna-plugin-page .ig-enna-footer,
+	body.ig-enna-plugin-page .ig-enna-area__head,
+	body.ig-enna-plugin-page .ig-enna-tabs,
+	body.ig-enna-plugin-page #wpadminbar,
+	.ig-enna-cv-print__no-print { display: none !important; }
+
+	.ig-enna-cv-print { padding: 0; max-width: 100%; }
+	.ig-enna-cv-print a { color: inherit; text-decoration: none; }
+	/* Forza colori (compatibilità Chrome) */
+	*, *::before, *::after {
+		-webkit-print-color-adjust: exact !important;
+		print-color-adjust: exact !important;
+	}
+	@page { margin: 18mm 15mm; }
+}
+
+/* Responsive: <720px → layout a colonna singola */
+@media (max-width: 720px) {
+	.ig-enna-cv-print__dl { grid-template-columns: 1fr; }
+	.ig-enna-cv-print__dl dt { color: #143f7a; margin-top: 6px; }
+	.ig-enna-cv-print__entry { grid-template-columns: 1fr; gap: 4px; }
+	.ig-enna-cv-print__entry-period { font-size: 12px; color: #143f7a; }
+}

@@ -65,7 +65,9 @@ class IG_Enna_CV {
 	}
 
 	/**
-	 * Restituisce il CV dell'utente, merging con i default.
+	 * Restituisce il CV dell'utente. Se non è mai stato salvato, ritorna
+	 * una struttura pre-popolata con i dati WP user + profilo plugin
+	 * (autofill al primo accesso). Se salvato, fa merge con i default.
 	 *
 	 * @return array<string,mixed>
 	 */
@@ -73,10 +75,12 @@ class IG_Enna_CV {
 		$user_id = (int) $user_id;
 		if ( ! $user_id ) { return self::default_structure(); }
 		$saved = get_user_meta( $user_id, self::META_KEY, true );
-		if ( ! is_array( $saved ) ) { $saved = []; }
+		// Mai compilato: usa autofill da WP user + profilo plugin.
+		if ( ! is_array( $saved ) || empty( $saved ) ) {
+			return self::default_from_user( $user_id );
+		}
 		$default = self::default_structure();
-		// Merge superficiale per chiave (le repeatable sono sostituite intere).
-		$out = $default;
+		$out     = $default;
 		foreach ( $default as $k => $v ) {
 			if ( ! isset( $saved[ $k ] ) ) { continue; }
 			if ( is_array( $v ) && is_array( $saved[ $k ] ) ) {
@@ -91,6 +95,73 @@ class IG_Enna_CV {
 			}
 		}
 		return $out;
+	}
+
+	/**
+	 * Pre-popola la struttura CV con i dati noti dell'utente WP + profilo
+	 * plugin (IG_Enna_User_Profile). Usato come fallback su utente che non
+	 * ha ancora salvato il CV.
+	 *
+	 * @return array<string,mixed>
+	 */
+	public static function default_from_user( $user_id ) {
+		$user = get_userdata( (int) $user_id );
+		$out  = self::default_structure();
+		if ( ! $user ) { return $out; }
+
+		$out['personal']['first_name'] = (string) ( $user->first_name ?: '' );
+		$out['personal']['last_name']  = (string) ( $user->last_name  ?: '' );
+		$out['personal']['email']      = (string) ( $user->user_email ?: '' );
+
+		// Profilo plugin (campi ig_phone, ig_city, ig_age → birth_date NON
+		// direttamente, ma manteniamo ciò che è disponibile).
+		if ( class_exists( 'IG_Enna_User_Profile' ) ) {
+			$profile = IG_Enna_User_Profile::get( (int) $user_id );
+			if ( is_array( $profile ) ) {
+				if ( ! empty( $profile['ig_phone'] ) )    { $out['personal']['phone'] = sanitize_text_field( $profile['ig_phone'] ); }
+				if ( ! empty( $profile['ig_city'] ) )     { $out['personal']['city']  = sanitize_text_field( $profile['ig_city'] ); }
+				if ( ! empty( $profile['ig_interests'] ) && is_array( $profile['ig_interests'] ) ) {
+					// Le aree di interesse vengono inserite nel profilo professionale come hint.
+					$out['profile'] = sprintf(
+						/* translators: %s = lista interessi */
+						__( 'Aree di interesse: %s', 'ig-enna' ),
+						implode( ', ', array_map( 'sanitize_text_field', $profile['ig_interests'] ) )
+					);
+				}
+				if ( ! empty( $profile['ig_competenze'] ) && is_array( $profile['ig_competenze'] ) ) {
+					$out['digital_skills'] = sanitize_textarea_field( implode( ', ', $profile['ig_competenze'] ) );
+				}
+				if ( ! empty( $profile['ig_lingue'] ) ) {
+					// Stringa libera; convertita in una riga lingua "informale".
+					$out['communication_skills'] = sanitize_textarea_field( $profile['ig_lingue'] );
+				}
+				if ( ! empty( $profile['ig_studio_titolo'] ) ) {
+					$row = [
+						'from' => '',
+						'to'   => ! empty( $profile['ig_studio_anno'] ) ? sanitize_text_field( $profile['ig_studio_anno'] ) . '-06' : '',
+						'current' => 0,
+						'qualification' => sanitize_text_field( $profile['ig_studio_titolo'] ),
+						'school'   => '',
+						'city'     => '',
+						'subjects' => '',
+						'grade'    => ! empty( $profile['ig_studio_voto'] ) ? sanitize_text_field( $profile['ig_studio_voto'] ) : '',
+					];
+					$out['education'][] = $row;
+				}
+			}
+		}
+		return $out;
+	}
+
+	/** Helper: età anagrafica calcolata da birth_date (YYYY-MM-DD). */
+	public static function age_from_birth( $birth_date ) {
+		if ( ! $birth_date ) { return null; }
+		$ts = strtotime( $birth_date );
+		if ( ! $ts ) { return null; }
+		$years = (int) date( 'Y', current_time( 'timestamp' ) ) - (int) date( 'Y', $ts );
+		$mday  = (int) date( 'md', current_time( 'timestamp' ) ) - (int) date( 'md', $ts );
+		if ( $mday < 0 ) { $years--; }
+		return max( 0, $years );
 	}
 
 	/**

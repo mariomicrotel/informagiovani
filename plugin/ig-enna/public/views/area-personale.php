@@ -328,8 +328,13 @@ $notices = IG_Enna_Auth::pop_notices();
 			</section>
 
 		<?php elseif ( $tab === 'cv' ) :
-			$cv = IG_Enna_CV::get( $user->ID );
-			include IG_ENNA_DIR . 'public/views/user-cv-form.php';
+			$cv      = IG_Enna_CV::get( $user->ID );
+			$cv_view = isset( $_GET['view'] ) ? sanitize_key( wp_unslash( $_GET['view'] ) ) : '';
+			if ( $cv_view === 'print' ) {
+				include IG_ENNA_DIR . 'public/views/user-cv-print.php';
+			} else {
+				include IG_ENNA_DIR . 'public/views/user-cv-form.php';
+			}
 		?>
 
 		<?php elseif ( $tab === 'profilo' ) : ?>
