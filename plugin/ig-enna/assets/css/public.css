@@ -1372,3 +1372,52 @@ body.ig-enna-plugin-page {
 }
 .ig-enna-booking-page h1.wp-block-post-title,
 .ig-enna-booking-page .entry-title { display: none !important; }
+
+/* ============================================================
+   FORM CV (formato Europass) — area personale > Il mio CV
+   ============================================================ */
+.ig-enna-cv-form__head { margin-bottom: 24px; }
+.ig-enna-cv-form__head h2 { font-size: 24px; font-weight: 700; margin: 0 0 6px; }
+.ig-enna-cv-form__hint { font-size: 14px; color: var(--ig-ink-500, #5b6779); margin: 0 0 4px; }
+.ig-enna-cv-form__updated { font-size: 13px; color: var(--ig-ink-400, #8a94a4); font-style: italic; margin: 0; }
+
+.ig-enna-cv__fs {
+	border: 1px solid var(--ig-border-soft, #eef1f5);
+	border-radius: var(--ig-radius-md, 10px);
+	padding: 20px 22px;
+	margin: 0 0 20px;
+	background: #fff;
+}
+.ig-enna-cv__fs > legend {
+	font-size: 16px; font-weight: 700;
+	color: var(--ig-ink-900, #0c1a2c);
+	padding: 0 10px;
+	margin-left: -6px;
+}
+
+.ig-enna-cv__rows { display: flex; flex-direction: column; gap: 16px; margin-bottom: 12px; }
+.ig-enna-cv__row {
+	background: var(--ig-ink-50, #f7f9fc);
+	border: 1px solid var(--ig-border-soft, #eef1f5);
+	border-radius: 8px;
+	padding: 16px;
+	display: flex; flex-direction: column; gap: 12px;
+}
+.ig-enna-cv__row-actions { display: flex; justify-content: flex-end; }
+
+.ig-enna-cv__lang-grid {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	gap: 10px;
+	margin-top: 8px;
+}
+@media (max-width: 720px) {
+	.ig-enna-cv__lang-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.ig-enna-cv-form__actions {
+	display: flex; justify-content: flex-end;
+	padding-top: 12px;
+	border-top: 1px solid var(--ig-border-soft, #eef1f5);
+	margin-top: 8px;
+}

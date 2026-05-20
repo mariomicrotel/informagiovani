@@ -11,6 +11,7 @@ class IG_Enna_Auth {
 	const PROFILE_NONCE  = 'ig_enna_profile';
 	const TICKET_NONCE   = 'ig_enna_ticket';
 	const BOOKING_NONCE  = 'ig_enna_booking';
+	const CV_NONCE       = 'ig_enna_cv';
 
 	public static function init() {
 		// Handler form (POST) prima che WP scriva headers.
@@ -18,6 +19,7 @@ class IG_Enna_Auth {
 		add_action( 'init', [ __CLASS__, 'handle_profile' ] );
 		add_action( 'init', [ __CLASS__, 'handle_ticket' ] );
 		add_action( 'init', [ __CLASS__, 'handle_booking' ] );
+		add_action( 'init', [ __CLASS__, 'handle_cv' ] );
 
 		// Assegna ruolo di default ai nuovi utenti registrati.
 		add_action( 'register_form', [ __CLASS__, 'add_consent_to_default_form' ] );
@@ -231,6 +233,32 @@ class IG_Enna_Auth {
 			self::add_notice( 'error', __( 'Impossibile salvare la richiesta. Riprova.', 'ig-enna' ) );
 		}
 		wp_safe_redirect( remove_query_arg( [ 'ig_enna_action', '_ig_nonce' ] ) );
+		exit;
+	}
+
+	/**
+	 * Handler POST del form CV (Europass) in area personale.
+	 */
+	public static function handle_cv() {
+		if ( empty( $_POST['ig_enna_action'] ) || $_POST['ig_enna_action'] !== 'cv_save' ) {
+			return;
+		}
+		if ( ! is_user_logged_in() ) {
+			return;
+		}
+		if ( ! isset( $_POST['_ig_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_ig_nonce'] ) ), self::CV_NONCE ) ) {
+			self::add_notice( 'error', __( 'Sessione scaduta. Riprova.', 'ig-enna' ) );
+			return;
+		}
+		$payload = isset( $_POST['ig_cv'] ) && is_array( $_POST['ig_cv'] )
+			? wp_unslash( $_POST['ig_cv'] )
+			: [];
+		$ok = IG_Enna_CV::save( get_current_user_id(), $payload );
+		self::add_notice( $ok ? 'success' : 'error',
+			$ok ? __( 'CV salvato.', 'ig-enna' ) : __( 'Errore salvando il CV.', 'ig-enna' )
+		);
+		$redir = add_query_arg( 'ig_tab', 'cv', remove_query_arg( [ 'ig_enna_action', '_ig_nonce' ] ) );
+		wp_safe_redirect( $redir );
 		exit;
 	}
 

@@ -108,6 +108,7 @@ $notices = IG_Enna_Auth::pop_notices();
 				'salvati'    => __( 'Salvati', 'ig-enna' ),
 				'richieste'  => __( 'Richieste', 'ig-enna' ),
 				'percorsi'   => __( 'Percorsi', 'ig-enna' ),
+				'cv'         => __( 'Il mio CV', 'ig-enna' ),
 				'profilo'    => __( 'Profilo', 'ig-enna' ),
 			];
 			foreach ( $tabs as $k => $label ) :
@@ -325,6 +326,11 @@ $notices = IG_Enna_Auth::pop_notices();
 					</div>
 				<?php endif; ?>
 			</section>
+
+		<?php elseif ( $tab === 'cv' ) :
+			$cv = IG_Enna_CV::get( $user->ID );
+			include IG_ENNA_DIR . 'public/views/user-cv-form.php';
+		?>
 
 		<?php elseif ( $tab === 'profilo' ) : ?>
 			<section class="ig-enna-area__panel">

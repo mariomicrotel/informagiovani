@@ -39,6 +39,7 @@ require_once IG_ENNA_DIR . 'includes/class-ig-enna-percorso-meta.php';
 require_once IG_ENNA_DIR . 'includes/class-ig-enna-admin-list.php';
 require_once IG_ENNA_DIR . 'includes/class-ig-enna-user-profile.php';
 require_once IG_ENNA_DIR . 'includes/class-ig-enna-user-saves.php';
+require_once IG_ENNA_DIR . 'includes/class-ig-enna-cv.php';
 require_once IG_ENNA_DIR . 'includes/class-ig-enna-tickets.php';
 require_once IG_ENNA_DIR . 'includes/class-ig-enna-appointments.php';
 require_once IG_ENNA_DIR . 'includes/class-ig-enna-colloqui.php';
