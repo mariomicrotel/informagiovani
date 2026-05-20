@@ -1555,3 +1555,95 @@ body.ig-enna-plugin-page {
 	.ig-enna-cv-print__entry { grid-template-columns: 1fr; gap: 4px; }
 	.ig-enna-cv-print__entry-period { font-size: 12px; color: #143f7a; }
 }
+
+/* ============================================================
+   HOME — Blocco news in evidenza (3 card)
+   ============================================================ */
+.ig-enna-home-news {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 20px;
+}
+@media (max-width: 980px) { .ig-enna-home-news { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px) { .ig-enna-home-news { grid-template-columns: 1fr; } }
+
+.ig-enna-home-news__card {
+	background: #fff;
+	border: 1px solid var(--ig-border-soft, #eef1f5);
+	border-radius: var(--ig-radius-md, 12px);
+	overflow: hidden;
+	display: flex; flex-direction: column;
+	transition: box-shadow .2s, transform .2s, border-color .2s;
+}
+.ig-enna-home-news__card:hover {
+	box-shadow: 0 12px 28px rgba(12,26,44,.10);
+	transform: translateY(-3px);
+	border-color: var(--ig-border, #d6dce5);
+}
+
+.ig-enna-home-news__media {
+	display: block;
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	background: #f0f6fc;
+	position: relative;
+}
+.ig-enna-home-news__media img {
+	width: 100%; height: 100%;
+	object-fit: cover;
+	display: block;
+	transition: transform .35s ease;
+}
+.ig-enna-home-news__card:hover .ig-enna-home-news__media img { transform: scale(1.04); }
+
+/* Fallback senza thumbnail: gradient con icona giornale al centro. */
+.ig-enna-home-news__media-fallback {
+	width: 100%; height: 100%;
+	display: flex; align-items: center; justify-content: center;
+	color: rgba(255,255,255,.85);
+	background: linear-gradient(135deg, #143f7a 0%, #1e88e5 100%);
+}
+.ig-enna-home-news__media-fallback--lavoro     { background: linear-gradient(135deg, #1e88e5, #143f7a); }
+.ig-enna-home-news__media-fallback--formazione { background: linear-gradient(135deg, #8b5cf6, #4c1d95); }
+.ig-enna-home-news__media-fallback--impresa    { background: linear-gradient(135deg, #fb923c, #c2410c); }
+.ig-enna-home-news__media-fallback--estero     { background: linear-gradient(135deg, #10b981, #065f46); }
+.ig-enna-home-news__media-fallback--diritti    { background: linear-gradient(135deg, #f472b6, #9d174d); }
+.ig-enna-home-news__media-fallback--cultura    { background: linear-gradient(135deg, #a78bfa, #5b21b6); }
+.ig-enna-home-news__media-fallback--civile     { background: linear-gradient(135deg, #14b8a6, #0f766e); }
+.ig-enna-home-news__media-fallback--concorso   { background: linear-gradient(135deg, #facc15, #a16207); }
+
+.ig-enna-home-news__body {
+	padding: 16px 20px 20px;
+	display: flex; flex-direction: column; gap: 10px;
+	flex: 1;
+}
+.ig-enna-home-news__meta {
+	display: flex; align-items: center; gap: 10px;
+	font-size: 12px; color: var(--ig-ink-500, #5b6779);
+	flex-wrap: wrap;
+}
+.ig-enna-home-news__title {
+	font-size: 18px; font-weight: 700;
+	line-height: 1.3;
+	margin: 0;
+	text-wrap: balance;
+}
+.ig-enna-home-news__title a {
+	color: var(--ig-ink-900, #0c1a2c);
+	text-decoration: none;
+}
+.ig-enna-home-news__title a:hover { color: var(--ig-primary, #143f7a); }
+.ig-enna-home-news__excerpt {
+	font-size: 14px;
+	color: var(--ig-ink-500, #5b6779);
+	line-height: 1.5;
+	margin: 0;
+	flex: 1;
+}
+.ig-enna-home-news__link {
+	font-size: 14px; font-weight: 600;
+	color: var(--ig-primary, #143f7a);
+	text-decoration: none;
+	margin-top: 4px;
+}
+.ig-enna-home-news__link:hover { color: #1e88e5; }

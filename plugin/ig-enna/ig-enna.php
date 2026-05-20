@@ -15,7 +15,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'IG_ENNA_VERSION',     '0.2.0' );
+define( 'IG_ENNA_VERSION',     '0.2.1' );
 define( 'IG_ENNA_DB_VERSION',  '1' );
 define( 'IG_ENNA_FILE',        __FILE__ );
 define( 'IG_ENNA_BASENAME',    plugin_basename( __FILE__ ) );

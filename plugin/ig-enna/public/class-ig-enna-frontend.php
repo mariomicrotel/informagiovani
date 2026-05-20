@@ -215,6 +215,15 @@ class IG_Enna_Frontend {
 			'meta_query'     => [ [ 'key' => '_ig_enna_event_date', 'value' => $today, 'compare' => '>=', 'type' => 'DATE' ] ],
 		] );
 
+		// News in evidenza: 3 più recenti.
+		$news = new WP_Query( [
+			'post_type'      => 'ig_news',
+			'post_status'    => 'publish',
+			'posts_per_page' => 3,
+			'orderby'        => 'date',
+			'order'          => 'DESC',
+		] );
+
 		// KPI per il box numeri.
 		$kpi = [
 			'opportunita_attive' => (int) wp_count_posts( 'ig_scheda' )->publish,

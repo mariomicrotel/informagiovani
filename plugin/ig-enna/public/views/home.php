@@ -25,6 +25,7 @@ $url_area        = $url_for( [ 'area-personale', 'area' ],            wp_login_u
 $url_partner     = $url_for( [ 'partner' ],                            '' );
 $url_newsletter  = $url_for( [ 'iscriviti', 'newsletter' ],            '' );
 $url_colloquio   = $url_for( [ 'prenota-colloquio', 'colloquio' ],     '' );
+$url_news        = $url_for( [ 'news-blog', 'news' ],                  home_url( '/news/' ) );
 ?>
 <div class="ig-enna ig ig-enna-home">
 
@@ -317,6 +318,66 @@ $url_colloquio   = $url_for( [ 'prenota-colloquio', 'colloquio' ],     '' );
 			<?php endforeach; ?>
 		</ol>
 	</section>
+
+	<!-- ===================== NEWS IN EVIDENZA ===================== -->
+	<?php if ( $news->have_posts() ) : ?>
+	<section class="ig-enna-section">
+		<div class="ig-enna-section__head">
+			<div>
+				<div class="ig-enna-eyebrow"><?php esc_html_e( 'Dallo sportello', 'ig-enna' ); ?></div>
+				<h2><?php esc_html_e( 'Ultime news', 'ig-enna' ); ?></h2>
+			</div>
+			<a class="ig-enna-section__link" href="<?php echo esc_url( $url_news ); ?>">
+				<?php esc_html_e( 'Vai a tutte le news →', 'ig-enna' ); ?>
+			</a>
+		</div>
+
+		<div class="ig-enna-home-news">
+			<?php while ( $news->have_posts() ) : $news->the_post();
+				$pid       = get_the_ID();
+				$thumb_id  = get_post_thumbnail_id( $pid );
+				$thumb_url = $thumb_id ? wp_get_attachment_image_url( $thumb_id, 'medium_large' ) : '';
+				$terms     = get_the_terms( $pid, 'ig_area' );
+				$area_term = ( $terms && ! is_wp_error( $terms ) ) ? $terms[0] : null;
+				$excerpt   = get_the_excerpt() ?: wp_trim_words( wp_strip_all_tags( get_the_content() ), 24 );
+			?>
+				<article class="ig-enna-home-news__card">
+					<a href="<?php the_permalink(); ?>" class="ig-enna-home-news__media" aria-hidden="true" tabindex="-1">
+						<?php if ( $thumb_url ) : ?>
+							<img src="<?php echo esc_url( $thumb_url ); ?>" alt="" loading="lazy" />
+						<?php else : ?>
+							<div class="ig-enna-home-news__media-fallback<?php echo $area_term ? ' ig-enna-home-news__media-fallback--' . esc_attr( $area_term->slug ) : ''; ?>" aria-hidden="true">
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="44" height="44">
+									<path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/>
+									<path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/>
+								</svg>
+							</div>
+						<?php endif; ?>
+					</a>
+					<div class="ig-enna-home-news__body">
+						<div class="ig-enna-home-news__meta">
+							<?php if ( $area_term ) : ?>
+								<a class="ig-enna-badge ig-enna-badge--link ig-enna-badge--area-<?php echo esc_attr( $area_term->slug ); ?>"
+									href="<?php echo esc_url( add_query_arg( 'ig_area', $area_term->slug, $url_news ) ); ?>"
+									rel="tag">
+									<?php echo esc_html( $area_term->name ); ?>
+								</a>
+							<?php endif; ?>
+							<time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date( 'd M Y' ) ); ?></time>
+						</div>
+						<h3 class="ig-enna-home-news__title">
+							<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+						</h3>
+						<p class="ig-enna-home-news__excerpt"><?php echo esc_html( wp_trim_words( $excerpt, 24 ) ); ?></p>
+						<a class="ig-enna-home-news__link" href="<?php the_permalink(); ?>">
+							<?php esc_html_e( 'Leggi l\'articolo', 'ig-enna' ); ?> →
+						</a>
+					</div>
+				</article>
+			<?php endwhile; wp_reset_postdata(); ?>
+		</div>
+	</section>
+	<?php endif; ?>
 
 	<!-- ===================== CTA ORIENTAMENTO ===================== -->
 	<section class="ig-enna-section">
