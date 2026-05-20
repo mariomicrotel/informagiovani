@@ -70,6 +70,9 @@
  *  Input / Select
  * ===================================== */
 .ig-enna-input, .ig-enna-select {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
 	height: 38px; padding: 0 12px;
 	background: #fff;
 	border: 1px solid var(--ig-border, #d6dce5);
@@ -77,6 +80,14 @@
 	font-family: inherit; font-size: 14px;
 	color: var(--ig-ink-900, #0c1a2c);
 	min-width: 0;
+}
+/* Textarea: altezza auto con min ragionevole + padding verticale. */
+textarea.ig-enna-input {
+	height: auto;
+	min-height: 96px;
+	padding: 10px 12px;
+	line-height: 1.5;
+	resize: vertical;
 }
 .ig-enna-input--search { width: 100%; }
 .ig-enna-input:focus, .ig-enna-select:focus {
