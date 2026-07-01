@@ -21,6 +21,12 @@ class IG_Enna_Auth {
 		add_action( 'init', [ __CLASS__, 'handle_booking' ] );
 		add_action( 'init', [ __CLASS__, 'handle_cv' ] );
 
+		// Blocca l'accesso a /wp-admin/ per gli iscritti pubblici e
+		// nasconde la admin bar sul frontend.
+		add_action( 'admin_init',       [ __CLASS__, 'block_admin_for_public' ] );
+		add_filter( 'show_admin_bar',   [ __CLASS__, 'hide_admin_bar_for_public' ] );
+		add_filter( 'login_redirect',   [ __CLASS__, 'login_redirect_public' ], 10, 3 );
+
 		// Assegna ruolo di default ai nuovi utenti registrati.
 		add_action( 'register_form', [ __CLASS__, 'add_consent_to_default_form' ] );
 	}
@@ -234,6 +240,68 @@ class IG_Enna_Auth {
 		}
 		wp_safe_redirect( remove_query_arg( [ 'ig_enna_action', '_ig_nonce' ] ) );
 		exit;
+	}
+
+	/**
+	 * True se l'utente è un iscritto pubblico (subscriber senza
+	 * capability operative del plugin). Gli admin/editor e i ruoli
+	 * ig_enna_* (staff dello sportello) restano esclusi da questo check.
+	 *
+	 * @param int|WP_User|null $user
+	 * @return bool
+	 */
+	public static function is_public_subscriber( $user = null ) {
+		if ( null === $user ) { $user = wp_get_current_user(); }
+		elseif ( is_numeric( $user ) ) { $user = get_userdata( (int) $user ); }
+		if ( ! $user || ! ( $user instanceof WP_User ) || 0 === $user->ID ) { return false; }
+		// Se ha capability di edit posts o management admin, è staff.
+		if ( user_can( $user, 'edit_posts' ) || user_can( $user, 'manage_options' ) ) { return false; }
+		// Se ha una capability del plugin (staff), non è pubblico.
+		foreach ( ig_enna_capabilities() as $cap ) {
+			if ( user_can( $user, $cap ) ) { return false; }
+		}
+		return true;
+	}
+
+	/**
+	 * Redirect verso l'area personale del sito se un utente pubblico
+	 * (subscriber) apre /wp-admin/. Bypassato per AJAX/REST/cron per non
+	 * rompere admin-ajax.php lecito (es. Heartbeat da area personale).
+	 */
+	public static function block_admin_for_public() {
+		if ( wp_doing_ajax() || wp_doing_cron() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+			return;
+		}
+		if ( ! is_user_logged_in() ) { return; }
+		if ( ! self::is_public_subscriber() ) { return; }
+
+		$area = get_page_by_path( 'area-personale' );
+		$dest = $area ? get_permalink( $area ) : home_url( '/' );
+		wp_safe_redirect( $dest );
+		exit;
+	}
+
+	/** Nasconde la admin bar in frontend per iscritti pubblici. */
+	public static function hide_admin_bar_for_public( $show ) {
+		if ( is_user_logged_in() && self::is_public_subscriber() ) {
+			return false;
+		}
+		return $show;
+	}
+
+	/**
+	 * Al login riuscito, se l'utente è un iscritto pubblico portalo
+	 * direttamente all'area personale invece che al profilo admin.
+	 */
+	public static function login_redirect_public( $redirect_to, $requested_redirect_to, $user ) {
+		if ( is_wp_error( $user ) || ! ( $user instanceof WP_User ) ) {
+			return $redirect_to;
+		}
+		if ( ! self::is_public_subscriber( $user ) ) {
+			return $redirect_to;
+		}
+		$area = get_page_by_path( 'area-personale' );
+		return $area ? get_permalink( $area ) : home_url( '/' );
 	}
 
 	/**
