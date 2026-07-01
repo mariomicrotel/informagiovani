@@ -45,6 +45,12 @@ services:
       - igenna_wp_data:/var/www/html
       - ../plugin/ig-enna:/var/www/html/wp-content/plugins/ig-enna
       - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:ro
+    # Dev: al boot forza owner www-data sul plugin bind-mount e uploads,
+    # cosi' il WP Plugin Upgrader riesce a scrivere/eliminare file
+    # durante upload zip via admin. Il default 9p mount di Docker Desktop
+    # su Windows presenta i file come root:root, bloccando Apache.
+    command: >
+      sh -c "chown -R www-data:www-data /var/www/html/wp-content/plugins/ig-enna /var/www/html/wp-content/uploads 2>/dev/null || true; apache2-foreground"
     networks:
       - igenna_net
 
