@@ -208,11 +208,13 @@ class IG_Enna_Auth {
 			$notes_lines[] = $topic;
 		}
 
+		$start_ts = strtotime( $date . ' ' . $time . ':00' );
+		$end_ts   = $start_ts + 30 * MINUTE_IN_SECONDS;
 		$id = IG_Enna_Appointments::create( [
 			'user_id'     => $user_id,
 			'operator_id' => 0,
-			'slot_start'  => $date . ' ' . $time . ':00',
-			'slot_end'    => $date . ' ' . $time . ':00',
+			'slot_start'  => gmdate( 'Y-m-d H:i:s', $start_ts ),
+			'slot_end'    => gmdate( 'Y-m-d H:i:s', $end_ts ),
 			'mode'        => $mode,
 			'status'      => 'requested',
 			'notes'       => implode( "\n", $notes_lines ),

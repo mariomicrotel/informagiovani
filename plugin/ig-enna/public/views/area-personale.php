@@ -203,11 +203,105 @@ $notices = IG_Enna_Auth::pop_notices();
 			</section>
 
 		<?php elseif ( $tab === 'richieste' ) :
-			$my_tickets = IG_Enna_Tickets::query( [ 'user_id' => $user->ID, 'limit' => 50 ] );
-			$areas      = get_terms( [ 'taxonomy' => 'ig_area', 'hide_empty' => false ] );
+			$my_tickets   = IG_Enna_Tickets::query( [ 'user_id' => $user->ID, 'limit' => 50 ] );
+			$areas        = get_terms( [ 'taxonomy' => 'ig_area', 'hide_empty' => false ] );
+			$my_appts     = IG_Enna_Appointments::query( [ 'user_id' => $user->ID, 'limit' => 20, 'orderby' => 'slot_start DESC' ] );
+			$appt_statuses = IG_Enna_Appointments::statuses();
+			$appt_modes    = IG_Enna_Appointments::modes();
+			$min_date      = current_time( 'Y-m-d' );
 			?>
 			<section class="ig-enna-area__panel">
-				<h3 class="ig-enna-section-title"><?php esc_html_e( 'Nuova richiesta', 'ig-enna' ); ?></h3>
+
+				<!-- ============ PRENOTA COLLOQUIO ============ -->
+				<h3 class="ig-enna-section-title">🗓 <?php esc_html_e( 'Prenota un colloquio con un operatore', 'ig-enna' ); ?></h3>
+				<p class="description" style="margin-top:-6px;margin-bottom:12px;">
+					<?php esc_html_e( 'Indica quando ti va bene, in presenza o online. Un operatore ti contatterà per confermare lo slot entro 48h lavorative.', 'ig-enna' ); ?>
+				</p>
+				<form method="post" action="" class="ig-enna-form ig-enna-inline-booking">
+					<?php wp_nonce_field( IG_Enna_Auth::BOOKING_NONCE, '_ig_nonce' ); ?>
+					<input type="hidden" name="ig_enna_action" value="booking_create" />
+
+					<div class="ig-enna-form-row">
+						<label><span><?php esc_html_e( 'Data preferita', 'ig-enna' ); ?> *</span>
+							<input class="ig-enna-input" type="date" name="date" required min="<?php echo esc_attr( $min_date ); ?>" />
+						</label>
+						<label><span><?php esc_html_e( 'Fascia oraria', 'ig-enna' ); ?> *</span>
+							<select class="ig-enna-select" name="time" required>
+								<option value=""><?php esc_html_e( '— Seleziona —', 'ig-enna' ); ?></option>
+								<?php foreach ( [ '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '15:00', '15:30', '16:00', '16:30', '17:00' ] as $slot ) : ?>
+									<option value="<?php echo esc_attr( $slot ); ?>"><?php echo esc_html( $slot ); ?></option>
+								<?php endforeach; ?>
+							</select>
+						</label>
+					</div>
+
+					<div class="ig-enna-form-row">
+						<label><span><?php esc_html_e( 'Modalità', 'ig-enna' ); ?> *</span>
+							<select class="ig-enna-select" name="mode" required>
+								<option value="presenza"><?php esc_html_e( '👤 In presenza (Piazza Garibaldi 1)', 'ig-enna' ); ?></option>
+								<option value="online"><?php esc_html_e( '🎥 Online (Google Meet o Zoom · 30 min)', 'ig-enna' ); ?></option>
+							</select>
+						</label>
+						<label><span><?php esc_html_e( 'Area', 'ig-enna' ); ?></span>
+							<select class="ig-enna-select" name="area_slug">
+								<option value=""><?php esc_html_e( '— Argomento generico —', 'ig-enna' ); ?></option>
+								<?php foreach ( $areas as $t ) : ?>
+									<option value="<?php echo esc_attr( $t->slug ); ?>"><?php echo esc_html( $t->name ); ?></option>
+								<?php endforeach; ?>
+							</select>
+						</label>
+					</div>
+
+					<label><span><?php esc_html_e( 'Di cosa vuoi parlare? (facoltativo)', 'ig-enna' ); ?></span>
+						<textarea class="ig-enna-input" name="topic" rows="2" placeholder="<?php esc_attr_e( 'Es. sto cercando un tirocinio nel settore turistico, vorrei un consiglio su bando…', 'ig-enna' ); ?>"></textarea>
+					</label>
+
+					<label class="ig-enna-checkbox">
+						<input type="checkbox" name="ig_consent_priv" required />
+						<span><?php esc_html_e( 'Ho letto l\'informativa privacy e acconsento al trattamento dei dati.', 'ig-enna' ); ?></span>
+					</label>
+
+					<button class="ig-enna-btn ig-enna-btn--primary" type="submit">
+						<?php esc_html_e( '🗓 Prenota colloquio', 'ig-enna' ); ?>
+					</button>
+				</form>
+
+				<?php if ( $my_appts ) : ?>
+					<h4 class="ig-enna-section-title" style="margin-top:24px;font-size:14px;"><?php esc_html_e( 'I tuoi colloqui prenotati', 'ig-enna' ); ?></h4>
+					<ul class="ig-enna-mini-appts">
+						<?php foreach ( $my_appts as $ap ) :
+							$ts = strtotime( $ap['slot_start'] );
+							$status = $ap['status'];
+							$mode   = $ap['mode'];
+						?>
+							<li>
+								<div class="ig-enna-mini-appts__when">
+									<strong><?php echo $ts ? esc_html( date_i18n( 'd M Y', $ts ) ) : ''; ?></strong>
+									<small><?php echo $ts ? esc_html( date_i18n( 'H:i', $ts ) ) : ''; ?></small>
+								</div>
+								<div class="ig-enna-mini-appts__body">
+									<span class="ig-enna-badge ig-enna-badge--apstate-<?php echo esc_attr( $status ); ?>">
+										<?php echo esc_html( $appt_statuses[ $status ] ?? $status ); ?>
+									</span>
+									<span class="ig-enna-badge ig-enna-badge--mode-<?php echo esc_attr( $mode ); ?>">
+										<?php echo esc_html( $appt_modes[ $mode ] ?? $mode ); ?>
+									</span>
+									<?php if ( ! empty( $ap['notes'] ) ) : ?>
+										<p class="ig-enna-mini-appts__notes"><?php echo esc_html( wp_trim_words( $ap['notes'], 20 ) ); ?></p>
+									<?php endif; ?>
+								</div>
+							</li>
+						<?php endforeach; ?>
+					</ul>
+				<?php endif; ?>
+
+				<hr style="margin: 32px 0; border: 0; border-top: 1px solid #e2e8f0;">
+
+				<!-- ============ TICKET SCRITTO ============ -->
+				<h3 class="ig-enna-section-title">📨 <?php esc_html_e( 'Oppure invia una richiesta scritta', 'ig-enna' ); ?></h3>
+				<p class="description" style="margin-top:-6px;margin-bottom:12px;">
+					<?php esc_html_e( 'Se preferisci una risposta scritta senza colloquio (documentazione, chiarimento veloce…), usa questo modulo.', 'ig-enna' ); ?>
+				</p>
 				<form method="post" action="" class="ig-enna-form ig-enna-ticket-form">
 					<?php wp_nonce_field( IG_Enna_Auth::TICKET_NONCE, '_ig_nonce' ); ?>
 					<input type="hidden" name="ig_enna_action" value="ticket_create" />
