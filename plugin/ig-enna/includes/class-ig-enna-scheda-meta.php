@@ -23,17 +23,19 @@ class IG_Enna_Scheda_Meta {
 		];
 	}
 
-	/** Tipologie predefinite (allineate ai prefissi protocollo). */
+	/**
+	 * Tipologie disponibili (built-in + custom aggiunte via admin).
+	 * Delega al registry IG_Enna_Scheda_Types.
+	 */
 	public static function types() {
-		return [
-			'Bando'      => __( 'Bando',      'ig-enna' ),
-			'Concorso'   => __( 'Concorso',   'ig-enna' ),
-			'Programma'  => __( 'Programma',  'ig-enna' ),
-			'Master'     => __( 'Master',     'ig-enna' ),
-			'Mobilità'   => __( 'Mobilità',   'ig-enna' ),
-			'Contributo' => __( 'Contributo', 'ig-enna' ),
-			'Altro'      => __( 'Altro',      'ig-enna' ),
-		];
+		if ( ! class_exists( 'IG_Enna_Scheda_Types' ) ) {
+			return [ 'Altro' => __( 'Altro', 'ig-enna' ) ];
+		}
+		$out = [];
+		foreach ( IG_Enna_Scheda_Types::all() as $key => $cfg ) {
+			$out[ $key ] = $cfg['label'] ?? $key;
+		}
+		return $out;
 	}
 
 	/**
@@ -44,6 +46,18 @@ class IG_Enna_Scheda_Meta {
 	 * @return array<string,array{contributo:array, durata:array, short:array, deadline_label:array}>
 	 */
 	public static function field_configs() {
+		if ( class_exists( 'IG_Enna_Scheda_Types' ) ) {
+			$out = [];
+			foreach ( IG_Enna_Scheda_Types::all() as $key => $cfg ) {
+				$out[ $key ] = $cfg['field_config'] ?? [];
+			}
+			return $out;
+		}
+		return self::field_configs_legacy();
+	}
+
+	/** Fallback config statiche se il registry non è caricato (attivazione). */
+	private static function field_configs_legacy() {
 		return [
 			'Bando' => [
 				'contributo'     => [ 'label' => __( 'Contributo economico', 'ig-enna' ),  'placeholder' => __( 'es. fino a 30.000 €', 'ig-enna' ), 'hint' => __( 'Importo massimo del beneficio economico previsto.', 'ig-enna' ) ],
@@ -360,11 +374,11 @@ class IG_Enna_Scheda_Meta {
 		if ( $value === '' ) { return ''; }
 		$types = self::types();
 		if ( array_key_exists( $value, $types ) ) { return $value; }
-		// Back-compat: valori legacy da seed vecchio (case-insensitive match).
+		// Back-compat: valori legacy o custom con case diverso.
 		foreach ( array_keys( $types ) as $k ) {
 			if ( strcasecmp( $k, $value ) === 0 ) { return $k; }
 		}
-		// Valore libero non riconosciuto → 'Altro' per non perdere il dato.
+		// Non riconosciuto tra built-in + custom → mappa su Altro per non perdere il dato.
 		return 'Altro';
 	}
 

@@ -50,6 +50,15 @@ class IG_Enna_Admin_Menu {
 
 		add_submenu_page(
 			self::SLUG,
+			__( 'Tipologie schede', 'ig-enna' ),
+			__( '↳ Tipologie', 'ig-enna' ),
+			$cap,
+			IG_Enna_Admin_Types::PAGE_SLUG,
+			[ 'IG_Enna_Admin_Types', 'render' ]
+		);
+
+		add_submenu_page(
+			self::SLUG,
 			__( 'Eventi', 'ig-enna' ),
 			__( 'Eventi', 'ig-enna' ),
 			$cap,

@@ -30,6 +30,35 @@ class IG_Enna_Scheda_Protocol {
 	 * @return array<string,array{prefix:string,workflow:string,reminder_days:int,notify:string,checklist:string[]}>
 	 */
 	public static function protocols() {
+		if ( class_exists( 'IG_Enna_Scheda_Types' ) ) {
+			$out = [];
+			foreach ( IG_Enna_Scheda_Types::all() as $key => $cfg ) {
+				$k = strtolower( trim( (string) $key ) );
+				$out[ $k ] = [
+					'prefix'        => $cfg['prefix']        ?? 'IG',
+					'workflow'      => $cfg['workflow']      ?? 'draft',
+					'reminder_days' => (int) ( $cfg['reminder_days'] ?? 7 ),
+					'notify'        => $cfg['notify']        ?? 'ig_enna_editor_schede',
+					'checklist'     => (array) ( $cfg['checklist'] ?? [] ),
+				];
+			}
+			// Assicura chiave 'default' (Altro).
+			if ( ! isset( $out['default'] ) && isset( $out['altro'] ) ) {
+				$out['default'] = $out['altro'];
+			}
+			if ( ! isset( $out['default'] ) ) {
+				$out['default'] = [
+					'prefix' => 'IG', 'workflow' => 'draft', 'reminder_days' => 7,
+					'notify' => 'ig_enna_editor_schede', 'checklist' => [ 'Titolo chiaro', 'Fonte verificata' ],
+				];
+			}
+			return $out;
+		}
+		return self::protocols_legacy();
+	}
+
+	/** Fallback protocolli statici (usato solo se registry non caricato). */
+	private static function protocols_legacy() {
 		return [
 			'bando' => [
 				'prefix'        => 'BAND',
