@@ -76,7 +76,7 @@ $notices = IG_Enna_Auth::pop_notices();
 		$profile = IG_Enna_User_Profile::get( $user->ID );
 		$pct     = IG_Enna_User_Profile::completion( $user->ID );
 		$saved_ids = IG_Enna_User_Saves::ids_for_user( $user->ID, 'scheda' );
-		$tab     = isset( $_GET['ig_tab'] ) ? sanitize_key( $_GET['ig_tab'] ) : 'panoramica';
+		$tab     = isset( $_GET['ig_tab'] ) ? sanitize_key( $_GET['ig_tab'] ) : 'per_te';
 		$base    = get_permalink();
 	?>
 
@@ -104,6 +104,7 @@ $notices = IG_Enna_Auth::pop_notices();
 		<nav class="ig-enna-tabs" aria-label="<?php esc_attr_e( 'Sezioni area personale', 'ig-enna' ); ?>">
 			<?php
 			$tabs = [
+				'per_te'     => __( '✨ Per te', 'ig-enna' ),
 				'panoramica' => __( 'Panoramica', 'ig-enna' ),
 				'salvati'    => __( 'Salvati', 'ig-enna' ),
 				'richieste'  => __( 'Richieste', 'ig-enna' ),
@@ -120,7 +121,11 @@ $notices = IG_Enna_Auth::pop_notices();
 			<?php endforeach; ?>
 		</nav>
 
-		<?php if ( $tab === 'panoramica' ) : ?>
+		<?php if ( $tab === 'per_te' ) :
+			include IG_ENNA_DIR . 'public/views/user-suggestions.php';
+		?>
+
+		<?php elseif ( $tab === 'panoramica' ) : ?>
 			<section class="ig-enna-area__panel">
 				<div class="ig-enna-stats">
 					<div class="ig-enna-stat">

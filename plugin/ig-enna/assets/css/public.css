@@ -1673,3 +1673,128 @@ body.ig-enna-plugin-page {
 	border-left-color: #d97706;
 	color: #7a4d0a;
 }
+
+/* ============================================================
+   AREA PERSONALE — Tab "Per te" (suggerimenti personalizzati)
+   ============================================================ */
+.ig-enna-per-te__head { margin-bottom: 20px; }
+.ig-enna-per-te__head h2 { font-size: 24px; margin: 0 0 6px; }
+.ig-enna-per-te__sub { color: var(--ig-ink-500, #5b6779); font-size: 14px; margin: 0; }
+
+.ig-enna-per-te__banner {
+	display: flex; justify-content: space-between; align-items: center; gap: 16px;
+	background: linear-gradient(135deg, #fef7e6 0%, #fef0d5 100%);
+	border: 1px solid #f3d183;
+	border-left: 4px solid #d97706;
+	border-radius: 10px;
+	padding: 14px 18px;
+	margin: 0 0 20px;
+}
+.ig-enna-per-te__banner p { margin: 4px 0 0; font-size: 13px; color: #7a4d0a; }
+.ig-enna-per-te__banner strong { color: #7a4d0a; }
+
+.ig-enna-per-te__criteria {
+	display: flex; align-items: center; gap: 8px;
+	flex-wrap: wrap;
+	margin: 0 0 24px;
+	font-size: 13px;
+}
+.ig-enna-per-te__criteria-label { font-weight: 600; color: var(--ig-ink-500, #5b6779); }
+.ig-enna-chip {
+	display: inline-flex; align-items: center; gap: 4px;
+	background: #f0f6fc;
+	border: 1px solid #d6e1ec;
+	color: #143f7a;
+	padding: 4px 10px;
+	border-radius: 999px;
+	font-weight: 600;
+	font-size: 12px;
+}
+
+.ig-enna-per-te__section-title {
+	font-size: 16px; font-weight: 700;
+	margin: 24px 0 12px;
+	color: var(--ig-ink-900, #0c1a2c);
+}
+
+.ig-enna-per-te__list {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 14px;
+}
+@media (max-width: 720px) { .ig-enna-per-te__list { grid-template-columns: 1fr; } }
+
+.ig-enna-per-te__card {
+	background: #fff;
+	border: 1px solid var(--ig-border-soft, #eef1f5);
+	border-radius: 10px;
+	padding: 14px 16px;
+	display: flex; flex-direction: column; gap: 8px;
+	transition: box-shadow .2s, border-color .2s;
+}
+.ig-enna-per-te__card:hover {
+	border-color: var(--ig-border, #d6dce5);
+	box-shadow: 0 4px 12px rgba(12,26,44,.08);
+}
+.ig-enna-per-te__card-badges { display: flex; flex-wrap: wrap; gap: 4px; }
+.ig-enna-per-te__card-title { font-size: 15px; font-weight: 700; line-height: 1.3; margin: 0; }
+.ig-enna-per-te__card-title a { color: var(--ig-ink-900, #0c1a2c); text-decoration: none; }
+.ig-enna-per-te__card-title a:hover { color: var(--ig-primary, #143f7a); }
+.ig-enna-per-te__card-lead { font-size: 13px; color: var(--ig-ink-500, #5b6779); margin: 0; line-height: 1.5; }
+
+.ig-enna-per-te__why {
+	background: #f7f9fc;
+	border-left: 3px solid #4c9aff;
+	border-radius: 6px;
+	padding: 6px 10px;
+	font-size: 12px;
+	display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+}
+.ig-enna-per-te__why-label { font-weight: 600; color: #143f7a; }
+.ig-enna-per-te__why-tag {
+	display: inline-block;
+	background: #e3edfa;
+	color: #143f7a;
+	padding: 2px 8px;
+	border-radius: 999px;
+	font-weight: 500;
+}
+.ig-enna-per-te__why-inline { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.ig-enna-per-te__why-inline .ig-enna-per-te__why-tag { font-size: 11px; }
+
+.ig-enna-per-te__events { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.ig-enna-per-te__events li {
+	display: flex; gap: 14px; align-items: center;
+	background: #fff;
+	border: 1px solid var(--ig-border-soft, #eef1f5);
+	border-radius: 8px;
+	padding: 10px 14px;
+}
+.ig-enna-per-te__event-date {
+	flex: 0 0 auto;
+	display: flex; flex-direction: column; align-items: center; justify-content: center;
+	width: 54px; height: 54px;
+	background: #f0f6fc; color: #143f7a;
+	border-radius: 8px;
+	font-weight: 700;
+}
+.ig-enna-per-te__event-day { font-size: 20px; line-height: 1; }
+.ig-enna-per-te__event-mon { font-size: 10px; letter-spacing: .05em; margin-top: 2px; }
+.ig-enna-per-te__event-body { flex: 1; }
+.ig-enna-per-te__event-title { font-weight: 600; color: var(--ig-ink-900,#0c1a2c); text-decoration: none; }
+.ig-enna-per-te__event-title:hover { color: var(--ig-primary, #143f7a); }
+.ig-enna-per-te__event-meta { font-size: 12px; color: var(--ig-ink-500, #5b6779); margin-top: 2px; }
+
+.ig-enna-per-te__news { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.ig-enna-per-te__news li {
+	display: flex; align-items: center; gap: 8px;
+	padding: 8px 0;
+	border-bottom: 1px solid var(--ig-border-soft, #eef1f5);
+	font-size: 14px;
+}
+.ig-enna-per-te__news li:last-child { border-bottom: 0; }
+.ig-enna-per-te__news li a { flex: 1; color: var(--ig-ink-900, #0c1a2c); text-decoration: none; font-weight: 500; }
+.ig-enna-per-te__news li a:hover { color: var(--ig-primary, #143f7a); }
+.ig-enna-per-te__news li small { color: #94a3b8; font-size: 12px; }
+
+.ig-enna-per-te__foot { margin-top: 24px; text-align: center; }
