@@ -3,7 +3,7 @@
  * Plugin Name:       Informagiovani Enna Manager
  * Plugin URI:        https://comune.enna.it/
  * Description:       Gestione completa dell'Informagiovani del Comune di Enna: schede informative, eventi, ticket, appuntamenti, colloqui, partner, area personale e backend gestionale.
- * Version:           0.3.0
+ * Version:           0.4.0
  * Requires at least: 6.0
  * Requires PHP:      8.0
  * Author:            Comune di Enna
@@ -15,7 +15,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'IG_ENNA_VERSION',     '0.3.0' );
+define( 'IG_ENNA_VERSION',     '0.4.0' );
 define( 'IG_ENNA_DB_VERSION',  '2' );
 define( 'IG_ENNA_FILE',        __FILE__ );
 define( 'IG_ENNA_BASENAME',    plugin_basename( __FILE__ ) );
@@ -33,6 +33,7 @@ require_once IG_ENNA_DIR . 'includes/class-ig-enna-shortcodes.php';
 require_once IG_ENNA_DIR . 'includes/class-ig-enna-activator.php';
 require_once IG_ENNA_DIR . 'includes/class-ig-enna-deactivator.php';
 require_once IG_ENNA_DIR . 'includes/class-ig-enna-scheda-meta.php';
+require_once IG_ENNA_DIR . 'includes/class-ig-enna-scheda-protocol.php';
 require_once IG_ENNA_DIR . 'includes/class-ig-enna-evento-meta.php';
 require_once IG_ENNA_DIR . 'includes/class-ig-enna-partner-meta.php';
 require_once IG_ENNA_DIR . 'includes/class-ig-enna-percorso-meta.php';

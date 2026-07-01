@@ -32,6 +32,7 @@ class IG_Enna_Plugin {
 
 		// Meta + admin list (FASE 2 / 6).
 		IG_Enna_Scheda_Meta::init();
+		IG_Enna_Scheda_Protocol::init();
 		IG_Enna_Evento_Meta::init();
 		IG_Enna_Partner_Meta::init();
 		IG_Enna_Percorso_Meta::init();
