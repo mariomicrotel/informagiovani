@@ -15,7 +15,7 @@ class IG_Enna_Public {
 	private const PLUGIN_SHORTCODES = [
 		'ig_enna_home', 'ig_enna_prenota_colloquio', 'ig_enna_opportunita',
 		'ig_enna_eventi', 'ig_enna_partner', 'ig_enna_newsletter', 'ig_enna_area_personale',
-		'ig_enna_news',
+		'ig_enna_news', 'ig_enna_iscrizione_evento',
 	];
 
 	/** CPT i cui single e archivi mostrano l'header/footer plugin. */

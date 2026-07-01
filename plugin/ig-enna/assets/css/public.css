@@ -1647,3 +1647,29 @@ body.ig-enna-plugin-page {
 	margin-top: 4px;
 }
 .ig-enna-home-news__link:hover { color: #1e88e5; }
+
+/* ============================================================
+   FORM ISCRIZIONE EVENTI
+   ============================================================ */
+.ig-enna-event-signup { max-width: 720px; margin: 0 auto; }
+.ig-enna-event-signup__head { margin-bottom: 20px; }
+.ig-enna-event-signup__head h2 { font-size: 24px; margin: 0 0 6px; }
+.ig-enna-event-signup__head p { color: var(--ig-ink-500, #5b6779); font-size: 14px; margin: 0; }
+
+.ig-enna-event-form__preview {
+	background: #f0f6fc;
+	border: 1px solid #d6e1ec;
+	border-left: 4px solid var(--ig-primary, #143f7a);
+	border-radius: 8px;
+	padding: 12px 14px;
+	margin: -6px 0 14px;
+	font-size: 13px;
+	line-height: 1.6;
+	color: var(--ig-ink-700, #2c3a4f);
+}
+.ig-enna-event-form__preview.is-full {
+	background: #fef7e6;
+	border-color: #f3d183;
+	border-left-color: #d97706;
+	color: #7a4d0a;
+}

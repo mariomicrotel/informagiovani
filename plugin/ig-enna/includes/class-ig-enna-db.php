@@ -83,12 +83,17 @@ class IG_Enna_DB {
 			id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
 			event_id BIGINT(20) UNSIGNED NOT NULL,
 			user_id BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
+			name VARCHAR(150) NOT NULL DEFAULT '',
+			email VARCHAR(190) NOT NULL DEFAULT '',
+			phone VARCHAR(40) NOT NULL DEFAULT '',
+			notes TEXT NULL,
 			status VARCHAR(20) NOT NULL DEFAULT 'registered',
 			created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id),
 			KEY event_id (event_id),
 			KEY user_id (user_id),
-			KEY status (status)
+			KEY status (status),
+			KEY email (email)
 		) {$charset};";
 
 		$sql[] = "CREATE TABLE {$p}user_saves (

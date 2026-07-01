@@ -123,6 +123,12 @@ class IG_Enna_Seed {
 				'short'   => '[ig_enna_newsletter]',
 			],
 			[
+				'slug'    => 'iscrizione-evento',
+				'title'   => 'Iscriviti a un evento',
+				'intro'   => "Partecipa gratuitamente ai workshop, agli incontri di orientamento e agli eventi organizzati dall'Informagiovani di Enna e dai partner.\n\nScegli l'evento dal menu a tendina qui sotto, compila i tuoi dati e conferma. Ti manderemo un'email di riepilogo con tutti i dettagli su data, luogo (o link videocall) e materiali da portare.",
+				'short'   => '[ig_enna_iscrizione_evento]',
+			],
+			[
 				'slug'    => 'partner',
 				'title'   => 'Partner',
 				'intro'   => "Gli enti, le associazioni e le organizzazioni che collaborano con l'Informagiovani di Enna per offrire servizi, formazione e opportunità ai giovani del territorio.\n\nSe la tua organizzazione opera nel campo dell'orientamento, della formazione, dell'inclusione o dell'imprenditorialità giovanile e vuole entrare nella rete partner, scrivi a info@informagiovani-enna.it.",

@@ -11,7 +11,8 @@ class IG_Enna_Auth {
 	const PROFILE_NONCE  = 'ig_enna_profile';
 	const TICKET_NONCE   = 'ig_enna_ticket';
 	const BOOKING_NONCE  = 'ig_enna_booking';
-	const CV_NONCE       = 'ig_enna_cv';
+	const CV_NONCE        = 'ig_enna_cv';
+	const EVENT_REG_NONCE = 'ig_enna_event_reg';
 
 	public static function init() {
 		// Handler form (POST) prima che WP scriva headers.
@@ -20,6 +21,7 @@ class IG_Enna_Auth {
 		add_action( 'init', [ __CLASS__, 'handle_ticket' ] );
 		add_action( 'init', [ __CLASS__, 'handle_booking' ] );
 		add_action( 'init', [ __CLASS__, 'handle_cv' ] );
+		add_action( 'init', [ __CLASS__, 'handle_event_registration' ] );
 
 		// Blocca l'accesso a /wp-admin/ per gli iscritti pubblici e
 		// nasconde la admin bar sul frontend.
@@ -302,6 +304,58 @@ class IG_Enna_Auth {
 		}
 		$area = get_page_by_path( 'area-personale' );
 		return $area ? get_permalink( $area ) : home_url( '/' );
+	}
+
+	/**
+	 * Handler POST form iscrizione a un evento.
+	 */
+	public static function handle_event_registration() {
+		if ( empty( $_POST['ig_enna_action'] ) || $_POST['ig_enna_action'] !== 'event_register' ) {
+			return;
+		}
+		if ( ! isset( $_POST['_ig_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_ig_nonce'] ) ), self::EVENT_REG_NONCE ) ) {
+			self::add_notice( 'error', __( 'Sessione scaduta. Riprova.', 'ig-enna' ) );
+			return;
+		}
+		if ( empty( $_POST['ig_consent_priv'] ) ) {
+			self::add_notice( 'error', __( 'Serve il consenso al trattamento dei dati.', 'ig-enna' ) );
+			return;
+		}
+
+		$data = [
+			'event_id' => isset( $_POST['event_id'] ) ? (int) $_POST['event_id']                            : 0,
+			'user_id'  => is_user_logged_in() ? get_current_user_id() : 0,
+			'name'     => isset( $_POST['name'] )     ? sanitize_text_field( wp_unslash( $_POST['name'] ) )    : '',
+			'email'    => isset( $_POST['email'] )    ? sanitize_email( wp_unslash( $_POST['email'] ) )        : '',
+			'phone'    => isset( $_POST['phone'] )    ? sanitize_text_field( wp_unslash( $_POST['phone'] ) )   : '',
+			'notes'    => isset( $_POST['notes'] )    ? sanitize_textarea_field( wp_unslash( $_POST['notes'] ) ) : '',
+		];
+
+		$res = IG_Enna_Event_Registrations::create( $data );
+		if ( is_wp_error( $res ) ) {
+			self::add_notice( 'error', $res->get_error_message() );
+		} elseif ( $res === false ) {
+			self::add_notice( 'error', __( 'Dati incompleti o non validi. Verifica evento, nome ed email.', 'ig-enna' ) );
+		} else {
+			$row = IG_Enna_Event_Registrations::get( $res );
+			$evt = get_post( $data['event_id'] );
+			$title = $evt ? $evt->post_title : '';
+			$msg = ( $row && $row['status'] === 'waitlist' )
+				? sprintf(
+					/* translators: %s = titolo evento */
+					__( 'Iscrizione ricevuta a "%s". L\'evento e\' pieno: sei in lista d\'attesa, ti scriveremo se si libera un posto.', 'ig-enna' ),
+					$title
+				)
+				: sprintf(
+					/* translators: %s = titolo evento */
+					__( 'Iscrizione confermata a "%s". Riceverai un\'email di riepilogo.', 'ig-enna' ),
+					$title
+				);
+			self::add_notice( 'success', $msg );
+		}
+
+		wp_safe_redirect( remove_query_arg( [ 'ig_enna_action', '_ig_nonce' ] ) );
+		exit;
 	}
 
 	/**
