@@ -23,6 +23,73 @@ class IG_Enna_Scheda_Meta {
 		];
 	}
 
+	/** Tipologie predefinite (allineate ai prefissi protocollo). */
+	public static function types() {
+		return [
+			'Bando'      => __( 'Bando',      'ig-enna' ),
+			'Concorso'   => __( 'Concorso',   'ig-enna' ),
+			'Programma'  => __( 'Programma',  'ig-enna' ),
+			'Master'     => __( 'Master',     'ig-enna' ),
+			'Mobilità'   => __( 'Mobilità',   'ig-enna' ),
+			'Contributo' => __( 'Contributo', 'ig-enna' ),
+			'Altro'      => __( 'Altro',      'ig-enna' ),
+		];
+	}
+
+	/**
+	 * Config dinamica dei campi per tipologia: cambia label, placeholder
+	 * e hint del campo "Contributo", "Durata", "Sintesi", "Etichetta scadenza"
+	 * in base al tipo selezionato. Il campo Deadline resta invariato (data).
+	 *
+	 * @return array<string,array{contributo:array, durata:array, short:array, deadline_label:array}>
+	 */
+	public static function field_configs() {
+		return [
+			'Bando' => [
+				'contributo'     => [ 'label' => __( 'Contributo economico', 'ig-enna' ),  'placeholder' => __( 'es. fino a 30.000 €', 'ig-enna' ), 'hint' => __( 'Importo massimo del beneficio economico previsto.', 'ig-enna' ) ],
+				'durata'         => [ 'label' => __( 'Durata progetto', 'ig-enna' ),       'placeholder' => __( 'es. 18 mesi', 'ig-enna' ),         'hint' => '' ],
+				'short'          => [ 'placeholder' => __( 'Es. Bando per giovani imprenditori del Sud, contributo fino a 30k…', 'ig-enna' ) ],
+				'deadline_label' => [ 'placeholder' => __( 'es. 17 marzo 2026 · 12:00', 'ig-enna' ) ],
+			],
+			'Concorso' => [
+				'contributo'     => [ 'label' => __( 'Stipendio', 'ig-enna' ),             'placeholder' => __( 'es. 32.000 €/anno lordi', 'ig-enna' ), 'hint' => __( 'Retribuzione lorda annua o mensile.', 'ig-enna' ) ],
+				'durata'         => [ 'label' => __( 'Tipo contratto', 'ig-enna' ),         'placeholder' => __( 'es. contratto indeterminato', 'ig-enna' ), 'hint' => '' ],
+				'short'          => [ 'placeholder' => __( 'Es. Concorso pubblico per 100 funzionari informatici…', 'ig-enna' ) ],
+				'deadline_label' => [ 'placeholder' => __( 'es. 30 giorni dalla pubblicazione in GU', 'ig-enna' ) ],
+			],
+			'Programma' => [
+				'contributo'     => [ 'label' => __( 'Indennità mensile', 'ig-enna' ),      'placeholder' => __( 'es. 500 € / mese', 'ig-enna' ),      'hint' => __( 'Rimborso o indennità di partecipazione al programma.', 'ig-enna' ) ],
+				'durata'         => [ 'label' => __( 'Durata programma', 'ig-enna' ),      'placeholder' => __( 'es. fino a 12 mesi', 'ig-enna' ),   'hint' => '' ],
+				'short'          => [ 'placeholder' => __( 'Es. Percorsi personalizzati per giovani NEET…', 'ig-enna' ) ],
+				'deadline_label' => [ 'placeholder' => __( 'Sportello sempre aperto', 'ig-enna' ) ],
+			],
+			'Master' => [
+				'contributo'     => [ 'label' => __( 'Costo iscrizione', 'ig-enna' ),      'placeholder' => __( 'es. 3.500 € (borse parziali disponibili)', 'ig-enna' ), 'hint' => __( 'Tassa di iscrizione al master, indicare eventuali borse.', 'ig-enna' ) ],
+				'durata'         => [ 'label' => __( 'Durata master', 'ig-enna' ),         'placeholder' => __( 'es. 12 mesi · 60 CFU', 'ig-enna' ), 'hint' => '' ],
+				'short'          => [ 'placeholder' => __( 'Es. Master annuale in Comunicazione Digitale…', 'ig-enna' ) ],
+				'deadline_label' => [ 'placeholder' => __( 'es. 30 settembre 2026', 'ig-enna' ) ],
+			],
+			'Mobilità' => [
+				'contributo'     => [ 'label' => __( 'Copertura spese', 'ig-enna' ),        'placeholder' => __( 'es. Vitto/alloggio + 100 € / mese', 'ig-enna' ), 'hint' => __( 'Cosa copre l\'esperienza all\'estero (viaggio, alloggio, pocket money).', 'ig-enna' ) ],
+				'durata'         => [ 'label' => __( 'Durata esperienza', 'ig-enna' ),     'placeholder' => __( 'es. 2-12 mesi', 'ig-enna' ),          'hint' => '' ],
+				'short'          => [ 'placeholder' => __( 'Es. Volontariato Corpo Europeo di Solidarietà in Portogallo…', 'ig-enna' ) ],
+				'deadline_label' => [ 'placeholder' => __( 'Aperto tutto l\'anno', 'ig-enna' ) ],
+			],
+			'Contributo' => [
+				'contributo'     => [ 'label' => __( 'Importo massimo', 'ig-enna' ),       'placeholder' => __( 'es. 500 € / mese', 'ig-enna' ),      'hint' => __( 'Contributo economico massimo erogabile.', 'ig-enna' ) ],
+				'durata'         => [ 'label' => __( 'Durata erogazione', 'ig-enna' ),     'placeholder' => __( 'es. 12 mesi', 'ig-enna' ),           'hint' => '' ],
+				'short'          => [ 'placeholder' => __( 'Es. Reddito di libertà per donne in percorso di autonomia…', 'ig-enna' ) ],
+				'deadline_label' => [ 'placeholder' => __( 'Sportello aperto', 'ig-enna' ) ],
+			],
+			'Altro' => [
+				'contributo'     => [ 'label' => __( 'Contributo / valore', 'ig-enna' ),   'placeholder' => __( 'es. valore del beneficio', 'ig-enna' ), 'hint' => '' ],
+				'durata'         => [ 'label' => __( 'Durata', 'ig-enna' ),                 'placeholder' => __( 'es. 6 mesi', 'ig-enna' ),               'hint' => '' ],
+				'short'          => [ 'placeholder' => __( 'Sintesi breve (1-2 frasi)…', 'ig-enna' ) ],
+				'deadline_label' => [ 'placeholder' => __( 'es. 31 dicembre 2026', 'ig-enna' ) ],
+			],
+		];
+	}
+
 	/** Classi di fonte (allineate al design system). */
 	public static function source_classes() {
 		return [
@@ -97,29 +164,39 @@ class IG_Enna_Scheda_Meta {
 		$deadline_label  = get_post_meta( $post->ID, '_ig_enna_deadline_label', true );
 		$contributo      = get_post_meta( $post->ID, '_ig_enna_contributo', true );
 		$durata          = get_post_meta( $post->ID, '_ig_enna_durata', true );
+		$types           = self::types();
+		$configs         = self::field_configs();
+		$active          = isset( $configs[ $tipo ] ) ? $tipo : 'Altro';
+		$active_cfg      = $configs[ $active ];
 		?>
 		<div class="ig-enna-meta-grid">
 			<p>
 				<label for="ig_enna_codice"><strong><?php esc_html_e( 'Codice scheda', 'ig-enna' ); ?></strong></label>
 				<input type="text" id="ig_enna_codice" name="ig_enna_codice"
 					value="<?php echo esc_attr( $codice ); ?>"
-					placeholder="es. ERA-2026-117"
+					placeholder="auto: BAND-2026-001"
 					class="widefat ig-enna-input" />
-				<span class="description"><?php esc_html_e( 'Identificativo univoco visualizzato nelle liste pubbliche e admin.', 'ig-enna' ); ?></span>
+				<span class="description"><?php esc_html_e( 'Assegnato automaticamente in base alla tipologia se lasciato vuoto (vedi metabox "Protocollo automatico").', 'ig-enna' ); ?></span>
+			</p>
+
+			<p>
+				<label for="ig_enna_tipo"><strong><?php esc_html_e( 'Tipo', 'ig-enna' ); ?></strong></label>
+				<select id="ig_enna_tipo" name="ig_enna_tipo" class="widefat ig-enna-input">
+					<option value=""><?php esc_html_e( '— Seleziona tipologia —', 'ig-enna' ); ?></option>
+					<?php foreach ( $types as $val => $label ) : ?>
+						<option value="<?php echo esc_attr( $val ); ?>" <?php selected( $tipo, $val ); ?>><?php echo esc_html( $label ); ?></option>
+					<?php endforeach; ?>
+				</select>
+				<span class="description">
+					<?php esc_html_e( 'La scelta condiziona i campi sotto (etichette e suggerimenti) e determina il codice progressivo (BAND/CONC/PROG/MAST/MOBI/CONT/IG).', 'ig-enna' ); ?>
+				</span>
 			</p>
 
 			<p>
 				<label for="ig_enna_short"><strong><?php esc_html_e( 'Sintesi breve', 'ig-enna' ); ?></strong></label>
 				<textarea id="ig_enna_short" name="ig_enna_short" rows="2" class="widefat ig-enna-input"
-					maxlength="280" placeholder="<?php esc_attr_e( 'Una o due frasi per le anteprime (max 280 caratteri).', 'ig-enna' ); ?>"><?php echo esc_textarea( $short ); ?></textarea>
-			</p>
-
-			<p>
-				<label for="ig_enna_tipo"><strong><?php esc_html_e( 'Tipo', 'ig-enna' ); ?></strong></label>
-				<input type="text" id="ig_enna_tipo" name="ig_enna_tipo"
-					value="<?php echo esc_attr( $tipo ); ?>"
-					placeholder="<?php esc_attr_e( 'es. Tirocinio, Concorso, Bando impresa, Bonus…', 'ig-enna' ); ?>"
-					class="widefat ig-enna-input" />
+					maxlength="280" placeholder="<?php echo esc_attr( $active_cfg['short']['placeholder'] ); ?>"><?php echo esc_textarea( $short ); ?></textarea>
+				<span class="description"><?php esc_html_e( 'Max 280 caratteri. Usato nelle card anteprima.', 'ig-enna' ); ?></span>
 			</p>
 
 			<div class="ig-enna-meta-row">
@@ -133,28 +210,55 @@ class IG_Enna_Scheda_Meta {
 					<label for="ig_enna_deadline_label"><strong><?php esc_html_e( 'Etichetta scadenza', 'ig-enna' ); ?></strong></label>
 					<input type="text" id="ig_enna_deadline_label" name="ig_enna_deadline_label"
 						value="<?php echo esc_attr( $deadline_label ); ?>"
-						placeholder="<?php esc_attr_e( 'es. 17 marzo 2026 · 12:00', 'ig-enna' ); ?>"
+						placeholder="<?php echo esc_attr( $active_cfg['deadline_label']['placeholder'] ); ?>"
 						class="widefat ig-enna-input" />
 				</p>
 			</div>
 
 			<div class="ig-enna-meta-row">
 				<p>
-					<label for="ig_enna_contributo"><strong><?php esc_html_e( 'Contributo', 'ig-enna' ); ?></strong></label>
+					<label for="ig_enna_contributo"><strong id="ig_enna_contributo_label"><?php echo esc_html( $active_cfg['contributo']['label'] ); ?></strong></label>
 					<input type="text" id="ig_enna_contributo" name="ig_enna_contributo"
 						value="<?php echo esc_attr( $contributo ); ?>"
-						placeholder="<?php esc_attr_e( 'es. 550–700€ al mese', 'ig-enna' ); ?>"
+						placeholder="<?php echo esc_attr( $active_cfg['contributo']['placeholder'] ); ?>"
 						class="widefat ig-enna-input" />
+					<span class="description" id="ig_enna_contributo_hint"><?php echo esc_html( $active_cfg['contributo']['hint'] ); ?></span>
 				</p>
 				<p>
-					<label for="ig_enna_durata"><strong><?php esc_html_e( 'Durata', 'ig-enna' ); ?></strong></label>
+					<label for="ig_enna_durata"><strong id="ig_enna_durata_label"><?php echo esc_html( $active_cfg['durata']['label'] ); ?></strong></label>
 					<input type="text" id="ig_enna_durata" name="ig_enna_durata"
 						value="<?php echo esc_attr( $durata ); ?>"
-						placeholder="<?php esc_attr_e( 'es. 2–12 mesi', 'ig-enna' ); ?>"
+						placeholder="<?php echo esc_attr( $active_cfg['durata']['placeholder'] ); ?>"
 						class="widefat ig-enna-input" />
 				</p>
 			</div>
 		</div>
+		<script>
+		(function () {
+			var configs = <?php echo wp_json_encode( $configs ); ?>;
+			var sel     = document.getElementById('ig_enna_tipo');
+			if (!sel) return;
+			function apply(tipo) {
+				var cfg = configs[tipo] || configs['Altro'];
+				if (!cfg) return;
+				var contributoLabel = document.getElementById('ig_enna_contributo_label');
+				var contributoInput = document.getElementById('ig_enna_contributo');
+				var contributoHint  = document.getElementById('ig_enna_contributo_hint');
+				var durataLabel     = document.getElementById('ig_enna_durata_label');
+				var durataInput     = document.getElementById('ig_enna_durata');
+				var shortInput      = document.getElementById('ig_enna_short');
+				var deadlineLabel   = document.getElementById('ig_enna_deadline_label');
+				if (contributoLabel) contributoLabel.textContent = cfg.contributo.label;
+				if (contributoInput) contributoInput.placeholder = cfg.contributo.placeholder;
+				if (contributoHint)  contributoHint.textContent  = cfg.contributo.hint || '';
+				if (durataLabel)     durataLabel.textContent     = cfg.durata.label;
+				if (durataInput)     durataInput.placeholder     = cfg.durata.placeholder;
+				if (shortInput)      shortInput.placeholder      = cfg.short.placeholder;
+				if (deadlineLabel)   deadlineLabel.placeholder   = cfg.deadline_label.placeholder;
+			}
+			sel.addEventListener('change', function () { apply(sel.value || 'Altro'); });
+		})();
+		</script>
 		<?php
 	}
 
@@ -225,7 +329,7 @@ class IG_Enna_Scheda_Meta {
 		$fields = [
 			'_ig_enna_codice'         => 'sanitize_text_field',
 			'_ig_enna_short'          => 'sanitize_textarea_field',
-			'_ig_enna_tipo'           => 'sanitize_text_field',
+			'_ig_enna_tipo'           => [ __CLASS__, 'sanitize_type' ],
 			'_ig_enna_deadline'       => [ __CLASS__, 'sanitize_date' ],
 			'_ig_enna_deadline_label' => 'sanitize_text_field',
 			'_ig_enna_contributo'     => 'sanitize_text_field',
@@ -249,6 +353,19 @@ class IG_Enna_Scheda_Meta {
 				update_post_meta( $post_id, $meta_key, $value );
 			}
 		}
+	}
+
+	public static function sanitize_type( $value ) {
+		$value = sanitize_text_field( $value );
+		if ( $value === '' ) { return ''; }
+		$types = self::types();
+		if ( array_key_exists( $value, $types ) ) { return $value; }
+		// Back-compat: valori legacy da seed vecchio (case-insensitive match).
+		foreach ( array_keys( $types ) as $k ) {
+			if ( strcasecmp( $k, $value ) === 0 ) { return $k; }
+		}
+		// Valore libero non riconosciuto → 'Altro' per non perdere il dato.
+		return 'Altro';
 	}
 
 	public static function sanitize_date( $value ) {
