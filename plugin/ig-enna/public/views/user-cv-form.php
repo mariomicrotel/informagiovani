@@ -44,6 +44,47 @@ $languages = $cv['languages'] ?: [ [
 		<?php endif; ?>
 	</header>
 
+	<?php
+	$avatar_url_cv = IG_Enna_Avatar::get_url( get_current_user_id(), 'medium' );
+	$avatar_id_cv  = IG_Enna_Avatar::get_id( get_current_user_id() );
+	?>
+	<div class="ig-enna-cv__avatar-block">
+		<div class="ig-enna-cv__avatar-preview">
+			<?php if ( $avatar_url_cv ) : ?>
+				<img src="<?php echo esc_url( $avatar_url_cv ); ?>" alt="<?php esc_attr_e( 'Foto CV', 'ig-enna' ); ?>" />
+			<?php else : ?>
+				<div class="ig-enna-cv__avatar-placeholder" aria-hidden="true">
+					<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+						<circle cx="12" cy="8" r="4"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
+					</svg>
+				</div>
+			<?php endif; ?>
+		</div>
+		<div class="ig-enna-cv__avatar-side">
+			<strong><?php esc_html_e( 'Foto sul CV', 'ig-enna' ); ?></strong>
+			<p><?php esc_html_e( 'La foto viene mostrata anche nell\'anteprima Europass. È la stessa del tuo profilo.', 'ig-enna' ); ?></p>
+			<form method="post" action="" enctype="multipart/form-data" class="ig-enna-avatar-form">
+				<?php wp_nonce_field( IG_Enna_Auth::AVATAR_NONCE, '_ig_nonce' ); ?>
+				<input type="hidden" name="ig_enna_action" value="avatar_upload" />
+				<input type="hidden" name="redirect_tab" value="cv" />
+				<label class="ig-enna-avatar-panel__file">
+					<span class="ig-enna-btn ig-enna-btn--secondary ig-enna-btn--sm">
+						<?php echo $avatar_id_cv ? esc_html__( '📷 Cambia foto', 'ig-enna' ) : esc_html__( '📷 Carica foto', 'ig-enna' ); ?>
+					</span>
+					<input type="file" name="avatar" accept="image/jpeg,image/png,image/webp" onchange="this.form.submit()" />
+				</label>
+			</form>
+			<?php if ( $avatar_id_cv ) : ?>
+				<form method="post" action="" style="display:inline-block;margin-left:8px;">
+					<?php wp_nonce_field( IG_Enna_Auth::AVATAR_NONCE, '_ig_nonce' ); ?>
+					<input type="hidden" name="ig_enna_action" value="avatar_delete" />
+					<input type="hidden" name="redirect_tab" value="cv" />
+					<button type="submit" class="ig-enna-btn ig-enna-btn--ghost ig-enna-btn--sm"><?php esc_html_e( '🗑 Rimuovi', 'ig-enna' ); ?></button>
+				</form>
+			<?php endif; ?>
+		</div>
+	</div>
+
 	<form method="post" action="" class="ig-enna-form ig-enna-cv">
 		<?php wp_nonce_field( IG_Enna_Auth::CV_NONCE, '_ig_nonce' ); ?>
 		<input type="hidden" name="ig_enna_action" value="cv_save" />

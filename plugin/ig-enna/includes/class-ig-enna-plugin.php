@@ -42,6 +42,7 @@ class IG_Enna_Plugin {
 
 		// Auth + REST (FASE 4).
 		IG_Enna_Auth::init();
+		IG_Enna_Avatar::init();
 		IG_Enna_REST::init();
 
 		// Audit + Newsletter + Notifiche (FASE 7).

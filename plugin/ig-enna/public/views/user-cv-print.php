@@ -41,11 +41,19 @@ $fmt_period = function( $row ) {
 	</aside>
 
 	<!-- ===== HEADER ===== -->
-	<header class="ig-enna-cv-print__head">
-		<h1 class="ig-enna-cv-print__name"><?php echo esc_html( $full_name ?: __( 'Curriculum vitae', 'ig-enna' ) ); ?></h1>
-		<?php if ( $cv['profile'] ) : ?>
-			<p class="ig-enna-cv-print__profile"><?php echo esc_html( $cv['profile'] ); ?></p>
+	<?php $avatar_url_print = IG_Enna_Avatar::get_url( get_current_user_id(), 'medium' ); ?>
+	<header class="ig-enna-cv-print__head<?php echo $avatar_url_print ? ' has-avatar' : ''; ?>">
+		<?php if ( $avatar_url_print ) : ?>
+			<div class="ig-enna-cv-print__avatar">
+				<img src="<?php echo esc_url( $avatar_url_print ); ?>" alt="" />
+			</div>
 		<?php endif; ?>
+		<div class="ig-enna-cv-print__head-body">
+			<h1 class="ig-enna-cv-print__name"><?php echo esc_html( $full_name ?: __( 'Curriculum vitae', 'ig-enna' ) ); ?></h1>
+			<?php if ( $cv['profile'] ) : ?>
+				<p class="ig-enna-cv-print__profile"><?php echo esc_html( $cv['profile'] ); ?></p>
+			<?php endif; ?>
+		</div>
 	</header>
 
 	<!-- ===== ANAGRAFICA ===== -->

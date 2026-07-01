@@ -342,8 +342,53 @@ $notices = IG_Enna_Auth::pop_notices();
 			}
 		?>
 
-		<?php elseif ( $tab === 'profilo' ) : ?>
+		<?php elseif ( $tab === 'profilo' ) :
+			$avatar_url = IG_Enna_Avatar::get_url( $user->ID, 'medium' );
+			$avatar_id  = IG_Enna_Avatar::get_id( $user->ID );
+		?>
 			<section class="ig-enna-area__panel">
+
+				<h3 class="ig-enna-section-title"><?php esc_html_e( 'Foto profilo', 'ig-enna' ); ?></h3>
+				<div class="ig-enna-avatar-panel">
+					<div class="ig-enna-avatar-panel__preview">
+						<?php if ( $avatar_url ) : ?>
+							<img src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php esc_attr_e( 'Foto profilo attuale', 'ig-enna' ); ?>" />
+						<?php else : ?>
+							<div class="ig-enna-avatar-panel__placeholder" aria-hidden="true">
+								<svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+									<circle cx="12" cy="8" r="4"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
+								</svg>
+							</div>
+						<?php endif; ?>
+					</div>
+					<div class="ig-enna-avatar-panel__body">
+						<form method="post" action="" enctype="multipart/form-data" class="ig-enna-form ig-enna-avatar-form">
+							<?php wp_nonce_field( IG_Enna_Auth::AVATAR_NONCE, '_ig_nonce' ); ?>
+							<input type="hidden" name="ig_enna_action" value="avatar_upload" />
+							<input type="hidden" name="redirect_tab" value="profilo" />
+							<label class="ig-enna-avatar-panel__file">
+								<span class="ig-enna-btn ig-enna-btn--secondary ig-enna-btn--sm">
+									<?php echo $avatar_id ? esc_html__( '📷 Cambia foto', 'ig-enna' ) : esc_html__( '📷 Carica foto', 'ig-enna' ); ?>
+								</span>
+								<input type="file" name="avatar" accept="image/jpeg,image/png,image/webp" onchange="this.form.submit()" />
+							</label>
+							<p class="ig-enna-avatar-panel__hint">
+								<?php esc_html_e( 'JPG, PNG o WEBP, max 5 MB. La foto compare anche nel tuo CV Europass.', 'ig-enna' ); ?>
+							</p>
+						</form>
+						<?php if ( $avatar_id ) : ?>
+							<form method="post" action="" onsubmit="return confirm('<?php echo esc_js( __( 'Rimuovere la foto profilo?', 'ig-enna' ) ); ?>')">
+								<?php wp_nonce_field( IG_Enna_Auth::AVATAR_NONCE, '_ig_nonce' ); ?>
+								<input type="hidden" name="ig_enna_action" value="avatar_delete" />
+								<input type="hidden" name="redirect_tab" value="profilo" />
+								<button type="submit" class="ig-enna-btn ig-enna-btn--ghost ig-enna-btn--sm ig-enna-avatar-panel__remove">
+									<?php esc_html_e( '🗑 Rimuovi foto', 'ig-enna' ); ?>
+								</button>
+							</form>
+						<?php endif; ?>
+					</div>
+				</div>
+
 				<form method="post" action="" class="ig-enna-form">
 					<?php wp_nonce_field( IG_Enna_Auth::PROFILE_NONCE, '_ig_nonce' ); ?>
 					<input type="hidden" name="ig_enna_action" value="profile" />

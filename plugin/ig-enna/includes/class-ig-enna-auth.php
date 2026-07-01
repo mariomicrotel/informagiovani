@@ -13,6 +13,7 @@ class IG_Enna_Auth {
 	const BOOKING_NONCE  = 'ig_enna_booking';
 	const CV_NONCE        = 'ig_enna_cv';
 	const EVENT_REG_NONCE = 'ig_enna_event_reg';
+	const AVATAR_NONCE    = 'ig_enna_avatar';
 
 	public static function init() {
 		// Handler form (POST) prima che WP scriva headers.
@@ -22,6 +23,7 @@ class IG_Enna_Auth {
 		add_action( 'init', [ __CLASS__, 'handle_booking' ] );
 		add_action( 'init', [ __CLASS__, 'handle_cv' ] );
 		add_action( 'init', [ __CLASS__, 'handle_event_registration' ] );
+		add_action( 'init', [ __CLASS__, 'handle_avatar' ] );
 
 		// Blocca l'accesso a /wp-admin/ per gli iscritti pubblici e
 		// nasconde la admin bar sul frontend.
@@ -304,6 +306,42 @@ class IG_Enna_Auth {
 		}
 		$area = get_page_by_path( 'area-personale' );
 		return $area ? get_permalink( $area ) : home_url( '/' );
+	}
+
+	/**
+	 * Handler POST upload/rimozione foto profilo.
+	 */
+	public static function handle_avatar() {
+		if ( empty( $_POST['ig_enna_action'] ) ) { return; }
+		$action = $_POST['ig_enna_action'];
+		if ( ! in_array( $action, [ 'avatar_upload', 'avatar_delete' ], true ) ) { return; }
+		if ( ! is_user_logged_in() ) { return; }
+		if ( ! isset( $_POST['_ig_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_ig_nonce'] ) ), self::AVATAR_NONCE ) ) {
+			self::add_notice( 'error', __( 'Sessione scaduta. Riprova.', 'ig-enna' ) );
+			return;
+		}
+		$uid = get_current_user_id();
+
+		if ( $action === 'avatar_delete' ) {
+			IG_Enna_Avatar::delete( $uid );
+			self::add_notice( 'success', __( 'Foto profilo rimossa.', 'ig-enna' ) );
+		} else {
+			if ( empty( $_FILES['avatar'] ) || empty( $_FILES['avatar']['tmp_name'] ) ) {
+				self::add_notice( 'error', __( 'Seleziona un file immagine.', 'ig-enna' ) );
+			} else {
+				$res = IG_Enna_Avatar::handle_upload( $uid, $_FILES['avatar'] );
+				if ( is_wp_error( $res ) ) {
+					self::add_notice( 'error', $res->get_error_message() );
+				} else {
+					self::add_notice( 'success', __( 'Foto profilo aggiornata.', 'ig-enna' ) );
+				}
+			}
+		}
+
+		$redir = add_query_arg( 'ig_tab', isset( $_POST['redirect_tab'] ) ? sanitize_key( $_POST['redirect_tab'] ) : 'profilo',
+			remove_query_arg( [ 'ig_enna_action', '_ig_nonce' ] ) );
+		wp_safe_redirect( $redir );
+		exit;
 	}
 
 	/**
